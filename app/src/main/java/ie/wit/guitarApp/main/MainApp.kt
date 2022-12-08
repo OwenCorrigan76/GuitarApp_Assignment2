@@ -1,7 +1,7 @@
 package ie.wit.guitarApp.main
 
 import android.app.Application
-import ie.wit.guitarApp.models.GuitarMemStore
+import ie.wit.guitarApp.models.GuitarManager
 import ie.wit.guitarApp.models.GuitarStore
 import timber.log.Timber
 
@@ -12,7 +12,7 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        guitarStore = GuitarMemStore()
+       // guitarStore = GuitarManager()
         Timber.i("Guitar Application Started")
     }
 }

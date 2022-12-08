@@ -1,4 +1,4 @@
-package ie.wit.guitarApp.fragments
+package ie.wit.guitarApp.ui.guitar
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
@@ -6,7 +6,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.Resources
 import android.icu.util.Calendar
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
@@ -15,8 +14,12 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.squareup.picasso.Picasso
@@ -25,7 +28,6 @@ import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.halpers.showImagePicker
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
-import timber.log.Timber
 import timber.log.Timber.i
 
 class GuitarFragment : Fragment() {
@@ -35,7 +37,7 @@ class GuitarFragment : Fragment() {
     private val fragBinding get() = _fragBinding!!
     val guitars = GuitarModel()
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
-
+    private lateinit var guitarViewModel: GuitarViewModel
     //lateinit var navController: NavController
     val today = Calendar.getInstance()
     val year = today.get(Calendar.YEAR)
@@ -45,7 +47,7 @@ class GuitarFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
-        setHasOptionsMenu(true)
+        // setHasOptionsMenu(true)
         // registerImagePickerCallback()
 
         //navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
@@ -59,7 +61,13 @@ class GuitarFragment : Fragment() {
         _fragBinding = FragmentGuitarBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.action_guitar)
-
+        setupMenu()
+        guitarViewModel =
+            ViewModelProvider(this).get(GuitarViewModel::class.java)
+        //val textView: TextView = root.findViewById(R.id.text_home)
+        guitarViewModel.text.observe(viewLifecycleOwner, Observer {
+            //textView.text = it
+        })
         fragBinding.progressBar.max = 10000
         fragBinding.valuePicker.minValue = 500
         fragBinding.valuePicker.maxValue = 10000
@@ -120,6 +128,24 @@ class GuitarFragment : Fragment() {
         return root;
     }
 
+    private fun setupMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onPrepareMenu(menu: Menu) {
+                // Handle for example visibility of menu items
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_guitar, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Validate and handle the selected menu item
+                return NavigationUI.onNavDestinationSelected(menuItem,
+                    requireView().findNavController())
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() =
@@ -143,13 +169,15 @@ class GuitarFragment : Fragment() {
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate,
 
-                )
+                    )
             )
             i("add Button Pressed: ${guitars.guitarMake + guitars.guitarModel + guitars.valuation + guitars.manufactureDate + guitars.image}")
         }
 
     }
-override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+
+/*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     inflater.inflate(R.menu.menu_guitar, menu)
     super.onCreateOptionsMenu(menu, inflater)
 }
@@ -159,7 +187,7 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
         item,
         requireView().findNavController()
     ) || super.onOptionsItemSelected(item)
-}
+}*/
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)

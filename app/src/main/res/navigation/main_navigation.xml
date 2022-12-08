@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/guitarFragment">
+    app:startDestination="@id/listFragment">
 
     <fragment
         android:id="@+id/guitarFragment"
-        android:name="ie.wit.guitarApp.fragments.GuitarFragment"
+        android:name="ie.wit.guitarApp.ui.guitar.GuitarFragment"
         android:label="@string/action_guitar"
         tools:layout="@layout/fragment_guitar" >
         <action
@@ -18,13 +18,35 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="ie.wit.guitarApp.fragments.ListFragment"
+        android:name="ie.wit.guitarApp.ui.list.ListFragment"
         android:label="@string/action_list"
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/action_listFragment_to_guitarFragment"
             app:destination="@id/guitarFragment"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_listFragment_to_guitarDetailFragment"
+            app:destination="@id/guitarDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="ie.wit.guitarApp.ui.about.AboutFragment"
+        android:label="@string/action_about"
+        tools:layout="@layout/fragment_aboutus" />
+    <fragment
+        android:id="@+id/guitarDetailFragment"
+        android:name="ie.wit.guitarApp.ui.detail.GuitarDetailFragment"
+        android:label="Guitar Detail"
+        tools:layout="@layout/fragment_guitar_detail" >
+        <action
+            android:id="@+id/action_guitarDetailFragment_to_reportFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="guitarid"
+            app:argType="long" />
     </fragment>
 </navigation>

@@ -8,7 +8,7 @@ internal fun getId(): Long {
     return lastId++
 }
 
-class GuitarMemStore : GuitarStore {
+object GuitarManager : GuitarStore {
 
     val guitars = ArrayList<GuitarModel>()
 

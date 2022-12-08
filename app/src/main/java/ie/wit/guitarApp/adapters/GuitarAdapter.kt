@@ -35,6 +35,7 @@ class GuitarAdapter constructor(
             binding.guitarMake.text = ("Make: " + guitar.guitarMake)
             binding.guitarModel.text = ("Model: " + guitar.guitarModel)
             binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
+
             Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
             //   binding.root.setOnClickListener() }
         }
