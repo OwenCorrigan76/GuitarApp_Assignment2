@@ -1,4 +1,4 @@
-package ie.wit.donationx.activities
+package ie.wit.guitarApp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,13 +6,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.*
 import androidx.navigation.ui.*
-import ie.wit.donationx.R
-import ie.wit.donationx.databinding.HomeBinding
+import ie.wit.guitarApp.R
+import ie.wit.guitarApp.databinding.HomeBinding
+
 
 class Home : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var homeBinding : HomeBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +29,18 @@ class Home : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         val navView = homeBinding.navView
         navView.setupWithNavController(navController)
+
+        appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.guitarFragment, R.id.listFragment), drawerLayout)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+    /*override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
+    }*/
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

@@ -1,4 +1,4 @@
-package ie.wit.donationx.fragments
+package ie.wit.guitarApp.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -6,21 +6,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import ie.wit.donationx.R
-import ie.wit.donationx.adapters.DonationAdapter
-import ie.wit.donationx.databinding.FragmentReportBinding
-import ie.wit.donationx.main.DonationXApp
+import ie.wit.guitarApp.R
+import ie.wit.guitarApp.adapters.GuitarAdapter
+import ie.wit.guitarApp.databinding.FragmentListBinding
 
-class ReportFragment : Fragment() {
+import ie.wit.guitarApp.main.MainApp
 
-    lateinit var app: DonationXApp
-    private var _fragBinding: FragmentReportBinding? = null
+class ListFragment : Fragment() {
+
+    lateinit var app: MainApp
+    private var _fragBinding: FragmentListBinding? = null
     private val fragBinding get() = _fragBinding!!
-    //lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        app = activity?.application as DonationXApp
+        app = activity?.application as MainApp
         setHasOptionsMenu(true)
         //navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
     }
@@ -29,18 +29,18 @@ class ReportFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _fragBinding = FragmentReportBinding.inflate(inflater, container, false)
+        _fragBinding = FragmentListBinding.inflate(inflater, container, false)
         val root = fragBinding.root
-        activity?.title = getString(R.string.action_report)
+        activity?.title = getString(R.string.action_list)
 
         fragBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        fragBinding.recyclerView.adapter = DonationAdapter(app.donationsStore.findAll())
+        fragBinding.recyclerView.adapter = GuitarAdapter(app.guitarStore.findAll())
 
         return root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_report, menu)
+        inflater.inflate(R.menu.menu_list, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -52,7 +52,7 @@ class ReportFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            ReportFragment().apply {
+            ListFragment().apply {
                 arguments = Bundle().apply { }
             }
     }

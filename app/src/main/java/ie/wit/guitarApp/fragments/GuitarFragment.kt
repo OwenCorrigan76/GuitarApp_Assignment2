@@ -1,29 +1,40 @@
-package ie.wit.donationx.fragments
+package ie.wit.guitarApp.fragments
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.res.Resources
 import android.icu.util.Calendar
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import ie.wit.donationx.R
-import ie.wit.donationx.databinding.FragmentDonateBinding
-import ie.wit.donationx.main.DonationXApp
-import ie.wit.donationx.models.DonationModel
+import com.squareup.picasso.Picasso
+import ie.wit.guitarApp.R
+import ie.wit.guitarApp.databinding.FragmentGuitarBinding
+import ie.wit.guitarApp.halpers.showImagePicker
+import ie.wit.guitarApp.main.MainApp
+import ie.wit.guitarApp.models.GuitarModel
+import timber.log.Timber
 import timber.log.Timber.i
 
-class DonateFragment : Fragment() {
+class GuitarFragment : Fragment() {
 
-    lateinit var app: DonationXApp
-    private var _fragBinding: FragmentDonateBinding? = null
+    lateinit var app: MainApp
+    private var _fragBinding: FragmentGuitarBinding? = null
     private val fragBinding get() = _fragBinding!!
-    val guitars = DonationModel()
+    val guitars = GuitarModel()
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
 
     //lateinit var navController: NavController
     val today = Calendar.getInstance()
@@ -33,8 +44,10 @@ class DonateFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        app = activity?.application as DonationXApp
+        app = activity?.application as MainApp
         setHasOptionsMenu(true)
+        // registerImagePickerCallback()
+
         //navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
     }
 
@@ -43,9 +56,9 @@ class DonateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _fragBinding = FragmentDonateBinding.inflate(inflater, container, false)
+        _fragBinding = FragmentGuitarBinding.inflate(inflater, container, false)
         val root = fragBinding.root
-        activity?.title = getString(R.string.action_donate)
+        activity?.title = getString(R.string.action_guitar)
 
         fragBinding.progressBar.max = 10000
         fragBinding.valuePicker.minValue = 500
@@ -70,7 +83,11 @@ class DonateFragment : Fragment() {
         val make = activity?.findViewById<TextView>(R.id.guitarMake)
         val res: Resources = resources
         val types = res.getStringArray(R.array.guitar_make_list)
+        if (guitarMakeSpinner == null) {
+            print("This is null")
+        }
         if (guitarMakeSpinner != null) {
+            print("Value is null")
             val guitarAdapter =
                 ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, types)
             guitarMakeSpinner.adapter = guitarAdapter
@@ -95,6 +112,10 @@ class DonateFragment : Fragment() {
                     }
                 }
         }
+        fragBinding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+        registerImagePickerCallback()
         setButtonListener(fragBinding)
         return root;
     }
@@ -102,52 +123,74 @@ class DonateFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            DonateFragment().apply {
+            GuitarFragment().apply {
                 arguments = Bundle().apply {}
             }
     }
 
-    fun setButtonListener(layout: FragmentDonateBinding) {
+    fun setButtonListener(layout: FragmentGuitarBinding) {
         layout.addButton.setOnClickListener {
-
             val valuation = layout.valuePicker.value.toDouble()
-            val guitarMake = layout.spinnerGuitarMake.toString()
+            val guitarMake = layout.guitarMake.text.toString()
             val guitarModel = layout.guitarModel.text.toString()
             val manufactureDate = layout.dateView.text.toString()
-            app.donationsStore.create(
-                DonationModel(
+
+
+            app.guitarStore.create(
+                GuitarModel(
                     valuation = valuation,
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,
-                    manufactureDate = manufactureDate
+                    manufactureDate = manufactureDate,
+
                 )
             )
-            i("add Button Pressed: ${guitars.guitarMake + guitars.guitarModel + guitars.valuation + guitars.manufactureDate}")
+            i("add Button Pressed: ${guitars.guitarMake + guitars.guitarModel + guitars.valuation + guitars.manufactureDate + guitars.image}")
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_donate, menu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
+override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    inflater.inflate(R.menu.menu_guitar, menu)
+    super.onCreateOptionsMenu(menu, inflater)
+}
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(
-            item,
-            requireView().findNavController()
-        ) || super.onOptionsItemSelected(item)
-    }
+override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return NavigationUI.onNavDestinationSelected(
+        item,
+        requireView().findNavController()
+    ) || super.onOptionsItemSelected(item)
+}
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
 //    }
+private fun registerImagePickerCallback() {
+    imageIntentLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    if (result.data != null) {
+                        i("Got Result ${result.data!!.data}")
+                        guitars.image = result.data!!.data!!
+                        Picasso.get()
+                            .load(guitars.image)
+                            .into(fragBinding.guitarImage)
+                        fragBinding.chooseImage.setText(R.string.change_guitar_image)
+                    }
+                }
+                RESULT_CANCELED -> {}
+                else -> {}
+            }
+        }
+}
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _fragBinding = null
-    }
+override fun onDestroyView() {
+    super.onDestroyView()
+    _fragBinding = null
+}
 
-    override fun onResume() {
-        super.onResume()
-    }
+override fun onResume() {
+    super.onResume()
+}
 }

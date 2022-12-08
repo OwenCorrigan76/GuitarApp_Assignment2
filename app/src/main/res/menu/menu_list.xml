@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/reportFragment"
+        android:id="@+id/guitarFragment"
         android:orderInCategory="100"
-        android:title="@string/action_report"
+        android:title="@string/action_guitar"
         app:showAsAction="never" />
 </menu>

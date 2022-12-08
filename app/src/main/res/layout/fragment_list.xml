@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ReportFragment">
+    tools:context=".fragments.">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -22,7 +22,7 @@
         android:id="@+id/reportTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/action_report"
+        android:text="@string/action_list"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"

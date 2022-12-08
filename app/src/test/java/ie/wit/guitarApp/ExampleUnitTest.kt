@@ -1,4 +1,4 @@
-package ie.wit.donationx
+package ie.wit.guitarApp
 
 import org.junit.Test
 
