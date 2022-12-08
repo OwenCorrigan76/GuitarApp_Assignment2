@@ -8,10 +8,7 @@ import android.content.res.Resources
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.*
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
@@ -25,9 +22,10 @@ import androidx.navigation.ui.NavigationUI
 import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.FragmentGuitarBinding
-import ie.wit.guitarApp.halpers.showImagePicker
+import ie.wit.guitarApp.helpers.showImagePicker
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
+import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber.i
 
 class GuitarFragment : Fragment() {
@@ -35,9 +33,13 @@ class GuitarFragment : Fragment() {
     lateinit var app: MainApp
     private var _fragBinding: FragmentGuitarBinding? = null
     private val fragBinding get() = _fragBinding!!
-    val guitars = GuitarModel()
-    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var guitarViewModel: GuitarViewModel
+
+    val guitars = GuitarModel()
+
+
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
+
     //lateinit var navController: NavController
     val today = Calendar.getInstance()
     val year = today.get(Calendar.YEAR)
@@ -46,27 +48,22 @@ class GuitarFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        app = activity?.application as MainApp
-        // setHasOptionsMenu(true)
+     //   app = activity?.application as MainApp
+        setHasOptionsMenu(true)
         // registerImagePickerCallback()
 
         //navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         _fragBinding = FragmentGuitarBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.action_guitar)
         setupMenu()
-        guitarViewModel =
-            ViewModelProvider(this).get(GuitarViewModel::class.java)
-        //val textView: TextView = root.findViewById(R.id.text_home)
-        guitarViewModel.text.observe(viewLifecycleOwner, Observer {
-            //textView.text = it
+        guitarViewModel = ViewModelProvider(this).get(GuitarViewModel::class.java)
+        guitarViewModel.observableStatus.observe(viewLifecycleOwner, Observer {
+                status -> status?.let { render(status) }
         })
         fragBinding.progressBar.max = 10000
         fragBinding.valuePicker.minValue = 500
@@ -142,16 +139,18 @@ class GuitarFragment : Fragment() {
                 // Validate and handle the selected menu item
                 return NavigationUI.onNavDestinationSelected(menuItem,
                     requireView().findNavController())
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+            }       }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            GuitarFragment().apply {
-                arguments = Bundle().apply {}
+    private fun render(status: Boolean) {
+        when (status) {
+            true -> {
+                view?.let {
+                    //Uncomment this if you want to immediately return to Report
+                    //findNavController().popBackStack()
+                }
             }
+            false -> Toast.makeText(context,getString(R.string.guitarError),Toast.LENGTH_LONG).show()
+        }
     }
 
     fun setButtonListener(layout: FragmentGuitarBinding) {
@@ -161,16 +160,15 @@ class GuitarFragment : Fragment() {
             val guitarModel = layout.guitarModel.text.toString()
             val manufactureDate = layout.dateView.text.toString()
 
-
-            app.guitarStore.create(
-                GuitarModel(
+          guitarViewModel.addGuitar(
+              GuitarModel(
                     valuation = valuation,
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate,
 
                     )
-            )
+          )
             i("add Button Pressed: ${guitars.guitarMake + guitars.guitarModel + guitars.valuation + guitars.manufactureDate + guitars.image}")
         }
 
@@ -218,7 +216,12 @@ override fun onDestroyView() {
     _fragBinding = null
 }
 
-override fun onResume() {
-    super.onResume()
-}
+ override fun onResume() {
+        super.onResume()
+     val reportViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+     reportViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer {
+         fragBinding.progressBar.progress
+     })
+ }
+
 }

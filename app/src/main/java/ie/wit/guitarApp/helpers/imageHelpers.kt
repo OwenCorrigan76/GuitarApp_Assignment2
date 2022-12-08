@@ -1,4 +1,4 @@
-package ie.wit.guitarApp.halpers
+package ie.wit.guitarApp.helpers
 
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher

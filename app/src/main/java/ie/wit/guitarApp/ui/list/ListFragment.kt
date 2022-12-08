@@ -16,12 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.adapters.GuitarAdapter
+import ie.wit.guitarApp.adapters.GuitarListener
 import ie.wit.guitarApp.databinding.FragmentListBinding
 
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), GuitarListener {
 
     lateinit var app: MainApp
     private var _fragBinding: FragmentListBinding? = null
@@ -88,7 +89,10 @@ class ListFragment : Fragment() {
             fragBinding.guitarsNotFound.visibility = View.GONE
         }
     }
-
+    override fun onGuitarClick(guitar: GuitarModel) {
+        val action = ListFragmentDirections.actionListFragmentToGuitarDetailFragment(guitar.id)
+        findNavController().navigate(action)
+    }
 
     override fun onResume() {
         super.onResume()
@@ -99,4 +103,5 @@ class ListFragment : Fragment() {
         super.onDestroyView()
         _fragBinding = null
     }
+
 }

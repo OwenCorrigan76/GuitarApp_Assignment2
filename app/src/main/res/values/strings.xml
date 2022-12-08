@@ -6,6 +6,7 @@
     <string name="amount"><u>Valuation €</u>.</string>
 
     <string name="guitarsNotFound">No Guitars Found \nFirst Add a Guitar!</string>
+    <string name="guitarError">Error : Couldn\'t Add a Guitar...</string>
 
     <string name="enter_amount">Enter Amount</string>
     <string name="action_guitar">Add Guitar</string>

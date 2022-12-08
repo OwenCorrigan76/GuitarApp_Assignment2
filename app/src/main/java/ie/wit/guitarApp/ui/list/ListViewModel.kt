@@ -8,16 +8,16 @@ import ie.wit.guitarApp.models.GuitarModel
 
 class ListViewModel : ViewModel() {
 
-    private val guitarsList = MutableLiveData<List<GuitarModel>>()
+    private val guitarList = MutableLiveData<List<GuitarModel>>()
 
     val observableGuitarsList: LiveData<List<GuitarModel>>
-        get() = guitarsList
+        get() = guitarList
 
     init {
         load()
     }
 
     fun load() {
-        guitarsList.value = GuitarManager.findAll()
+        guitarList.value = GuitarManager.findAll()
     }
 }
