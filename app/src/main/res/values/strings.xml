@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">Guitar App</string>
+
+    <string name="addButton">Add</string>
+
+    <string name="amount"><u>Valuation €</u>.</string>
+
+
+    <string name="enter_amount">Enter Amount</string>
+    <string name="action_donate">Donate</string>
+    <string name="action_report">Report</string>
+
+    <string name="action_share">Share</string>
+    <string name="action_send">Send</string>
+    <string name="group_communicate">Communicate</string>
+
+    <string name="nav_header_title">DonationX (Lab)</string>
+    <string name="nav_header_subtitle">voteforhomer@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="button_addGuitar">Add Guitar</string>
+    <string name="button_addImage">Upload Image</string>
+    <string name="button_saveGuitar">Save Guitar</string>
+    <string name="dateButton">Add Date</string>
+    <string name="valueTitle">Input Value</string>
+    <string name="valueSubtitle">Evaluate Guitar</string>
+    <string name="hint_guitarMake">Guitar Make</string>
+    <string name="hint_guitarModel">Guitar Model</string>
+    <string name="hint_guitarDate">Manufacture Date</string>
+
+    <string name="menu_addGuitar">Guitars</string>
+    <string name="menu_saveGuitar">Save</string>
+    <string name="title_activity_login"> Signup/Login to Guitar Evaluation App</string>
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_cancelButton">Cancel</string>
+    <string name="menu_deleteButton">Delete</string>
+    <string name="menu_homeButton">Home</string>
+    <string name="title_activity_guitar_map">Added Guitar Markers </string>
+    <string name="select_guitar_image">Select guitar image</string>
+    <string name="change_guitar_image">Change Image</string>
+    <string name="button_picker">Manufacture Date</string>
+    <string name="button_location">Set Location</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_guitar_maps">Map of all Locations</string>
+    <string name="enter_guitar_make">Enter Make</string>
+    <string name="enter_guitar_model">Enter Model</string>
+
+
+    <string-array name="guitar_make_list">
+        <item>Aria</item>
+        <item>Ampeg</item>
+        <item>Charvel</item>
+        <item>Cort</item>
+        <item>Dean</item>
+        <item>Danelectro</item>
+        <item>Epiphone</item>
+        <item>ESP</item>
+        <item>Fender</item>
+        <item>Framus</item>
+        <item>Freshman</item>
+        <item>Gibson</item>
+        <item>Godin</item>
+        <item>Gretch</item>
+        <item>Hofner</item>
+        <item>Hohner</item>
+        <item>Ibanez</item>
+        <item>Jackson</item>
+        <item>Kramer</item>
+        <item>Lowden</item>
+        <item>MusicMan</item>
+        <item>Ovation</item>
+        <item>Parker</item>
+        <item>PRS</item>
+        <item>Rickenbacker</item>
+        <item>Schecter</item>
+        <item>Squier</item>
+        <item>Suhr</item>
+        <item>Takamine</item>
+        <item>Taylor</item>
+        <item>Tanglewood</item>
+        <item>Warwick</item>
+        <item>Washburn</item>
+        <item>Yamaha</item>
+    </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+</resources>
