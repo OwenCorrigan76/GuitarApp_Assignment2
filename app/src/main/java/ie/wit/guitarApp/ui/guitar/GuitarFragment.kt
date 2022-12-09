@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -27,6 +28,7 @@ import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
 import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber.i
+import java.sql.SQLOutput
 import java.text.FieldPosition
 
 class GuitarFragment : Fragment() {
@@ -65,6 +67,7 @@ class GuitarFragment : Fragment() {
         _fragBinding = FragmentGuitarBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.action_guitar)
+        print("****** THis is onCreatView *******")
         setupMenu()
         registerImagePickerCallback()
         guitarViewModel = ViewModelProvider(this).get(GuitarViewModel::class.java)
@@ -72,11 +75,14 @@ class GuitarFragment : Fragment() {
             status?.let { render(status) }
         })
         var guitarTypes = resources.getStringArray(R.array.guitar_make_list)
-        var make = activity?.findViewById<TextView>(R.id.guitarMake).toString()
+        var guitarMake = activity?.findViewById<TextView>(R.id.guitarMake).toString()
+        print("***** Printout " +  guitarMake + "**********************")
         val guitarMakeSpinner = fragBinding.spinnerGuitarMake
-        val arrayAdapter =activity?.let {
-            ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, guitarTypes)}
-       guitarMakeSpinner.adapter = arrayAdapter
+        val arrayAdapter = activity?.let {
+            ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, guitarTypes)
+        }
+        guitarMakeSpinner.adapter = arrayAdapter
+
         fragBinding.spinnerGuitarMake.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -85,18 +91,17 @@ class GuitarFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-               // if (make != null) {
-                    val spinnerPosition = arrayAdapter!!.getPosition(make)
-                    guitarMakeSpinner.setSelection(spinnerPosition)
-           //     }
-                make = " ${guitarTypes.get(position)}"
+                // if (make != null) {
+                val spinnerPosition = arrayAdapter!!.getPosition(guitarMake)
+                guitarMakeSpinner.setSelection(spinnerPosition)
+                //     }
+                guitarMake = " ${guitarTypes.get(position)}"
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                make = "please select a guitar make"
+                guitarMake = "please select a guitar make"
             }
         }
-
 
         fragBinding.progressBar.max = 10000
         fragBinding.valuePicker.minValue = 500
@@ -126,6 +131,7 @@ class GuitarFragment : Fragment() {
     }
 
     private fun setupMenu() {
+        print("************This is setup*********")
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
                 // Handle for example visibility of menu items
@@ -158,16 +164,17 @@ class GuitarFragment : Fragment() {
         }
     }
 
+  /** Send to the model to be displayed in the list view */
     fun setButtonListener(layout: FragmentGuitarBinding) {
         layout.addButton.setOnClickListener {
             val valuation = layout.valuePicker.value.toDouble()
-            val guitarMake = layout.guitarMake.text.toString()
+           // val guitarMake = layout.guitarMake.text.toString()
             val guitarModel = layout.guitarModel.text.toString()
             val manufactureDate = layout.dateView.text.toString()
-
+            var guitarMake = layout.spinnerGuitarMake.selectedItem.toString()
             guitarViewModel.addGuitar(
                 GuitarModel(
-                    valuation = valuation,
+                   valuation = valuation,
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate
