@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/guitarMake"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="4dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -29,6 +29,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.011" />
+
+    <Spinner
+        android:id="@+id/spinnerGuitarMake"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:inputType="text"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:spinnerMode="dropdown"
+        android:textSize="45sp"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="67dp" />
 
     <EditText
         android:id="@+id/guitarModel"
@@ -54,21 +70,6 @@
         app:layout_constraintVertical_bias="0.173" />
 
 
-    <Spinner
-        android:id="@+id/spinnerGuitarMake"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="8dp"
-        android:layout_weight="1"
-        android:inputType="text"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:spinnerMode="dropdown"
-        android:textSize="30sp"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="67dp" />
 
 
     <Button

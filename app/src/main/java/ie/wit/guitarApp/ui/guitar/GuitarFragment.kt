@@ -27,6 +27,7 @@ import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
 import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber.i
+import java.text.FieldPosition
 
 class GuitarFragment : Fragment() {
 
@@ -48,23 +49,55 @@ class GuitarFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-     //   app = activity?.application as MainApp
+        //   app = activity?.application as MainApp
         setHasOptionsMenu(true)
         // registerImagePickerCallback()
 
         //navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    //  var guitarTypes = resources.getStringArray(R.array.guitar_make_list)
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _fragBinding = FragmentGuitarBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.action_guitar)
         setupMenu()
+        registerImagePickerCallback()
         guitarViewModel = ViewModelProvider(this).get(GuitarViewModel::class.java)
-        guitarViewModel.observableStatus.observe(viewLifecycleOwner, Observer {
-                status -> status?.let { render(status) }
+        guitarViewModel.observableStatus.observe(viewLifecycleOwner, Observer { status ->
+            status?.let { render(status) }
         })
+        var guitarTypes = resources.getStringArray(R.array.guitar_make_list)
+        var make = activity?.findViewById<TextView>(R.id.guitarMake).toString()
+        val guitarMakeSpinner = fragBinding.spinnerGuitarMake
+        val arrayAdapter =activity?.let {
+            ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, guitarTypes)}
+       guitarMakeSpinner.adapter = arrayAdapter
+        fragBinding.spinnerGuitarMake.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+               // if (make != null) {
+                    val spinnerPosition = arrayAdapter!!.getPosition(make)
+                    guitarMakeSpinner.setSelection(spinnerPosition)
+           //     }
+                make = " ${guitarTypes.get(position)}"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                make = "please select a guitar make"
+            }
+        }
+
+
         fragBinding.progressBar.max = 10000
         fragBinding.valuePicker.minValue = 500
         fragBinding.valuePicker.maxValue = 10000
@@ -83,44 +116,11 @@ class GuitarFragment : Fragment() {
             )
             dialogP.show()
         }
-        //  fun guitarMakeSpinner(layout: FragmentDonateBinding) {
-        val guitarMakeSpinner = activity?.findViewById<Spinner>(R.id.spinnerGuitarMake)
-        val make = activity?.findViewById<TextView>(R.id.guitarMake)
-        val res: Resources = resources
-        val types = res.getStringArray(R.array.guitar_make_list)
-        if (guitarMakeSpinner == null) {
-            print("This is null")
-        }
-        if (guitarMakeSpinner != null) {
-            print("Value is null")
-            val guitarAdapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, types)
-            guitarMakeSpinner.adapter = guitarAdapter
-            fragBinding.spinnerGuitarMake.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        if (make != null) {
-                            val spinnerPosition =
-                                guitarAdapter!!.getPosition(fragBinding.guitarMake.toString())
-                            guitarMakeSpinner.setSelection(spinnerPosition)
-                        }
-                        make!!.text = " ${types.get(position)}"
-                    }
 
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                        make!!.text = "please select a guitar make"
-                    }
-                }
-        }
         fragBinding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
-        registerImagePickerCallback()
+
         setButtonListener(fragBinding)
         return root;
     }
@@ -137,10 +137,14 @@ class GuitarFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Validate and handle the selected menu item
-                return NavigationUI.onNavDestinationSelected(menuItem,
-                    requireView().findNavController())
-            }       }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+                return NavigationUI.onNavDestinationSelected(
+                    menuItem,
+                    requireView().findNavController()
+                )
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
     private fun render(status: Boolean) {
         when (status) {
             true -> {
@@ -149,7 +153,8 @@ class GuitarFragment : Fragment() {
                     //findNavController().popBackStack()
                 }
             }
-            false -> Toast.makeText(context,getString(R.string.guitarError),Toast.LENGTH_LONG).show()
+            false -> Toast.makeText(context, getString(R.string.guitarError), Toast.LENGTH_LONG)
+                .show()
         }
     }
 
@@ -160,68 +165,51 @@ class GuitarFragment : Fragment() {
             val guitarModel = layout.guitarModel.text.toString()
             val manufactureDate = layout.dateView.text.toString()
 
-          guitarViewModel.addGuitar(
-              GuitarModel(
+            guitarViewModel.addGuitar(
+                GuitarModel(
                     valuation = valuation,
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,
-                    manufactureDate = manufactureDate,
-
-                    )
-          )
+                    manufactureDate = manufactureDate
+                )
+            )
             i("add Button Pressed: ${guitars.guitarMake + guitars.guitarModel + guitars.valuation + guitars.manufactureDate + guitars.image}")
         }
 
     }
 
-
-/*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    inflater.inflate(R.menu.menu_guitar, menu)
-    super.onCreateOptionsMenu(menu, inflater)
-}
-
-override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return NavigationUI.onNavDestinationSelected(
-        item,
-        requireView().findNavController()
-    ) || super.onOptionsItemSelected(item)
-}*/
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-//    }
-private fun registerImagePickerCallback() {
-    imageIntentLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-        { result ->
-            when (result.resultCode) {
-                RESULT_OK -> {
-                    if (result.data != null) {
-                        i("Got Result ${result.data!!.data}")
-                        guitars.image = result.data!!.data!!
-                        Picasso.get()
-                            .load(guitars.image)
-                            .into(fragBinding.guitarImage)
-                        fragBinding.chooseImage.setText(R.string.change_guitar_image)
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            guitars.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(guitars.image)
+                                .into(fragBinding.guitarImage)
+                            fragBinding.chooseImage.setText(R.string.change_guitar_image)
+                        }
                     }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
-                RESULT_CANCELED -> {}
-                else -> {}
             }
-        }
-}
+    }
 
-override fun onDestroyView() {
-    super.onDestroyView()
-    _fragBinding = null
-}
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragBinding = null
+    }
 
- override fun onResume() {
+    override fun onResume() {
         super.onResume()
-     val reportViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-     reportViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer {
-         fragBinding.progressBar.progress
-     })
- }
+        val reportViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        reportViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer {
+            fragBinding.progressBar.progress
+        })
+    }
 
 }
