@@ -211,7 +211,7 @@ class GuitarFragment : Fragment() {
                     image = image
                 )
             )
-            i("add Button Pressed: ${guitarMake + guitarModel + valuation + manufactureDate + " image is " + image}")
+            i("add Button Pressed: ${guitarMake + guitarModel + valuation + manufactureDate + " image is " + guitars.image}")
         }
     }
 
@@ -223,7 +223,7 @@ class GuitarFragment : Fragment() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            image = result.data!!.data!!
+                            guitars.image = result.data!!.data!!
                             Picasso.get()
                                 .load(guitars.image)
                                 .into(fragBinding.guitarImage)
@@ -250,32 +250,3 @@ class GuitarFragment : Fragment() {
     }
 
 }
-/*
-override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-        var takenImage = data?.extras?.get("data") as Bitmap
-        i("Taken image - $takenImage")
-        //binding.fishingspotImage.setImageBitmap(takenImage)
-
-        val bos = ByteArrayOutputStream()
-        takenImage.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos)
-        var pathImage: String
-        pathImage = MediaStore.Images.Media.insertImage(
-            getActivity()?.getApplicationContext()?.contentResolver,
-            takenImage,
-            "New Picture",
-            null
-        )
-        val bitmapdata = bos.toByteArray()
-        val bs = ByteArrayInputStream(bitmapdata)
-
-        i("pathImage - $pathImage")
-        val x = Movie.decodeStream(bs)
-
-        i("TdecodeStream(bs) - $x")
-
-    } else {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-}
-*/

@@ -37,11 +37,12 @@ class GuitarAdapter constructor(
            // binding.guitarMake.text = ("Make: " + guitar.guitarMake)
            // binding.guitarModel.text = ("Model: " + guitar.guitarModel)
            // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
-            binding.guitar = guitar
+            binding.guitar = guitar // update with individual guitar info
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            // this will bring us to the edit page
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
             binding.executePendingBindings()
-         //   Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
+           // Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
             //   binding.root.setOnClickListener() }
         }
     }

@@ -10,6 +10,7 @@ class ListViewModel : ViewModel() {
 
     private val guitarList = MutableLiveData<List<GuitarModel>>()
 
+    /** expose the public observable GuitarList */
     val observableGuitarsList: LiveData<List<GuitarModel>>
         get() = guitarList
 
@@ -17,6 +18,7 @@ class ListViewModel : ViewModel() {
         load()
     }
 
+    // .value property of <List<GuitarModel>> is equivalent to GuitarManager interface findAll function
     fun load() {
         guitarList.value = GuitarManager.findAll()
     }

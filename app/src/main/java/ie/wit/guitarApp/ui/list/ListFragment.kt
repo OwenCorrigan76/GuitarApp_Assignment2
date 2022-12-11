@@ -44,6 +44,8 @@ class ListFragment : Fragment(), GuitarClickListener {
         //    activity?.title = getString(R.string.action_list)
         setupMenu()
         fragBinding.recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        /* MVVM in action here */
         listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer { guitars ->
             guitars?.let { render(guitars) }
@@ -78,8 +80,8 @@ class ListFragment : Fragment(), GuitarClickListener {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun render(guitarsList: List<GuitarModel>) {
-        fragBinding.recyclerView.adapter = GuitarAdapter(guitarsList, this)
+    private fun render(guitarsList: List<GuitarModel>) { // live data values that have been updated
+        fragBinding.recyclerView.adapter = GuitarAdapter(guitarsList, this) // pass in the list
         if (guitarsList.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
             fragBinding.guitarsNotFound.visibility = View.VISIBLE
@@ -88,6 +90,8 @@ class ListFragment : Fragment(), GuitarClickListener {
             fragBinding.guitarsNotFound.visibility = View.GONE
         }
     }
+
+    // floating action takes us directly to the guitar fragment via the navigation component
     override fun onGuitarClick(guitar: GuitarModel) {
         val action = ListFragmentDirections.actionListFragmentToGuitarDetailFragment(guitar.id)
         findNavController().navigate(action)
