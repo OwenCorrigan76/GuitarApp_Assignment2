@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.CardGuitarBinding
 import ie.wit.guitarApp.models.GuitarModel
 interface GuitarListener {
@@ -31,10 +32,14 @@ class GuitarAdapter constructor(
     inner class MainHolder(val binding: CardGuitarBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(guitar: GuitarModel) {
-            binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
-            binding.guitarMake.text = ("Make: " + guitar.guitarMake)
-            binding.guitarModel.text = ("Model: " + guitar.guitarModel)
-            binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
+           // binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
+           // binding.guitarMake.text = ("Make: " + guitar.guitarMake)
+           // binding.guitarModel.text = ("Model: " + guitar.guitarModel)
+           // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
+            binding.guitar = guitar
+            binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            //Include this call to force the bindings to happen immediately
+            binding.executePendingBindings()
 
             Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
             //   binding.root.setOnClickListener() }

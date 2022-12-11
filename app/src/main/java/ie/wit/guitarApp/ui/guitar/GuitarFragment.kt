@@ -6,11 +6,13 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.Resources
 import android.icu.util.Calendar
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.get
@@ -19,6 +21,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
@@ -37,9 +40,10 @@ class GuitarFragment : Fragment() {
     private var _fragBinding: FragmentGuitarBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var guitarViewModel: GuitarViewModel
+    var edit = false
 
     val guitars = GuitarModel()
-
+    var image: Uri = Uri.EMPTY
 
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
 
@@ -68,20 +72,42 @@ class GuitarFragment : Fragment() {
         val root = fragBinding.root
         activity?.title = getString(R.string.action_guitar)
         print("****** THis is onCreatView *******")
+
+       /* if (getActivity()?.getIntent()?.getExtras()?.getString("guitar_edit") == "guitar_edit" ){
+            edit = true
+            guitars.guitarMake = requireActivity().getIntent()?.getExtras()?.getParcelable("guitar_edit")!!
+            edit = true
+            fragBinding.valuePicker.value.toString().toDouble()
+            fragBinding.valueAmount.setText("Valuation €" + guitars.valuation)
+            fragBinding.guitarModel.setText(guitars.guitarModel)
+            fragBinding.addButton.setText(R.string.button_saveGuitar)
+            fragBinding.dateView.setText(guitars.manufactureDate)
+
+            Picasso.get()
+                .load(guitars.image)
+                .into(fragBinding.guitarImage)
+            if (guitars.image != Uri.EMPTY) {
+                fragBinding.chooseImage.setText(R.string.change_guitar_image)
+            }
+        }*/
+
+
         setupMenu()
         registerImagePickerCallback()
+
         guitarViewModel = ViewModelProvider(this).get(GuitarViewModel::class.java)
         guitarViewModel.observableStatus.observe(viewLifecycleOwner, Observer { status ->
             status?.let { render(status) }
         })
         var guitarTypes = resources.getStringArray(R.array.guitar_make_list)
         var guitarMake = activity?.findViewById<TextView>(R.id.guitarMake).toString()
-        print("***** Printout " +  guitarMake + "**********************")
+        print("***** Printout " + guitarMake + "**********************")
         val guitarMakeSpinner = fragBinding.spinnerGuitarMake
         val arrayAdapter = activity?.let {
             ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, guitarTypes)
         }
         guitarMakeSpinner.adapter = arrayAdapter
+
 
         fragBinding.spinnerGuitarMake.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
@@ -122,16 +148,17 @@ class GuitarFragment : Fragment() {
             dialogP.show()
         }
 
+        setButtonListener(fragBinding)
+
+        /** This allows us to select an image with chooseImage button */
         fragBinding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
-
-        setButtonListener(fragBinding)
         return root;
     }
 
+
     private fun setupMenu() {
-        print("************This is setup*********")
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
                 // Handle for example visibility of menu items
@@ -155,8 +182,8 @@ class GuitarFragment : Fragment() {
         when (status) {
             true -> {
                 view?.let {
-                    //Uncomment this if you want to immediately return to Report
-                    //findNavController().popBackStack()
+                   // Uncomment this if you want to immediately return to Report
+                  //  findNavController().popBackStack()
                 }
             }
             false -> Toast.makeText(context, getString(R.string.guitarError), Toast.LENGTH_LONG)
@@ -164,25 +191,28 @@ class GuitarFragment : Fragment() {
         }
     }
 
-  /** Send to the model to be displayed in the list view */
+    /** Send to the model to be displayed in the list view */
     fun setButtonListener(layout: FragmentGuitarBinding) {
         layout.addButton.setOnClickListener {
             val valuation = layout.valuePicker.value.toDouble()
-           // val guitarMake = layout.guitarMake.text.toString()
+            // val guitarMake = layout.guitarMake.text.toString()
             val guitarModel = layout.guitarModel.text.toString()
             val manufactureDate = layout.dateView.text.toString()
             var guitarMake = layout.spinnerGuitarMake.selectedItem.toString()
+
+            print("*****************" + guitars + "*******************")
+
             guitarViewModel.addGuitar(
                 GuitarModel(
-                   valuation = valuation,
+                    valuation = valuation,
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,
-                    manufactureDate = manufactureDate
+                    manufactureDate = manufactureDate,
+                    image = image
                 )
             )
-            i("add Button Pressed: ${guitars.guitarMake + guitars.guitarModel + guitars.valuation + guitars.manufactureDate + guitars.image}")
+            i("add Button Pressed: ${guitarMake + guitarModel + valuation + manufactureDate + " image is " + image}")
         }
-
     }
 
     private fun registerImagePickerCallback() {
@@ -193,7 +223,7 @@ class GuitarFragment : Fragment() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            guitars.image = result.data!!.data!!
+                            image = result.data!!.data!!
                             Picasso.get()
                                 .load(guitars.image)
                                 .into(fragBinding.guitarImage)
@@ -220,3 +250,32 @@ class GuitarFragment : Fragment() {
     }
 
 }
+/*
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+        var takenImage = data?.extras?.get("data") as Bitmap
+        i("Taken image - $takenImage")
+        //binding.fishingspotImage.setImageBitmap(takenImage)
+
+        val bos = ByteArrayOutputStream()
+        takenImage.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos)
+        var pathImage: String
+        pathImage = MediaStore.Images.Media.insertImage(
+            getActivity()?.getApplicationContext()?.contentResolver,
+            takenImage,
+            "New Picture",
+            null
+        )
+        val bitmapdata = bos.toByteArray()
+        val bs = ByteArrayInputStream(bitmapdata)
+
+        i("pathImage - $pathImage")
+        val x = Movie.decodeStream(bs)
+
+        i("TdecodeStream(bs) - $x")
+
+    } else {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+}
+*/

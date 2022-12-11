@@ -29,6 +29,6 @@ object GuitarManager : GuitarStore {
 
     fun logAll() {
         Timber.v("** Guitars List **")
-        guitars.forEach { Timber.v("Guitar ${it}") }
+        guitars.forEach { Timber.v("Guitar List Fom Model ${it}") }
     }
 }
