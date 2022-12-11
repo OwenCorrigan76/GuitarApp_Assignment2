@@ -1,20 +1,18 @@
 <resources>
     <string name="app_name">Guitar App</string>
-
     <string name="addButton">Add</string>
-
     <string name="amount"><u>Valuation €</u>.</string>
-
     <string name="guitarsNotFound">No Guitars Found \nFirst Add a Guitar!</string>
     <string name="guitarError">Error : Couldn\'t Add a Guitar...</string>
-
     <string name="enter_amount">Enter Amount</string>
     <string name="action_guitar">Add Guitar</string>
     <string name="action_list">Guitar List</string>
-    <string name="amt">Amount :</string>
-    <string name="payment">Payment :</string>
-    <string name="message">Message :</string>
-    <string name="upvotes">UpVotes :</string>
+
+    <string name="guitarDetails">Guitar Details</string>
+    <string name="make">Guitar Make :</string>
+    <string name="model">Guitar Model :</string>
+    <string name="date">Manufactured :</string>
+    <string name="additional">Notes :</string>
     <string name="action_share">Share</string>
     <string name="action_send">Send</string>
     <string name="group_communicate">Communicate</string>

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -16,13 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.adapters.GuitarAdapter
-import ie.wit.guitarApp.adapters.GuitarListener
+import ie.wit.guitarApp.adapters.GuitarClickListener
 import ie.wit.guitarApp.databinding.FragmentListBinding
 
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
 
-class ListFragment : Fragment(), GuitarListener {
+class ListFragment : Fragment(), GuitarClickListener {
 
     lateinit var app: MainApp
     private var _fragBinding: FragmentListBinding? = null
@@ -80,7 +79,7 @@ class ListFragment : Fragment(), GuitarListener {
     }
 
     private fun render(guitarsList: List<GuitarModel>) {
-        fragBinding.recyclerView.adapter = GuitarAdapter(guitarsList)
+        fragBinding.recyclerView.adapter = GuitarAdapter(guitarsList, this)
         if (guitarsList.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
             fragBinding.guitarsNotFound.visibility = View.VISIBLE
@@ -93,7 +92,6 @@ class ListFragment : Fragment(), GuitarListener {
         val action = ListFragmentDirections.actionListFragmentToGuitarDetailFragment(guitar.id)
         findNavController().navigate(action)
     }
-
     override fun onResume() {
         super.onResume()
         listViewModel.load()
