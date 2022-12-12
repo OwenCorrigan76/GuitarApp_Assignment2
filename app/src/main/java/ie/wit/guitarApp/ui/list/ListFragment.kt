@@ -1,5 +1,6 @@
 package ie.wit.guitarApp.ui.list
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.MenuHost
@@ -11,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.adapters.GuitarAdapter
@@ -20,6 +23,10 @@ import ie.wit.guitarApp.databinding.FragmentListBinding
 
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
+import ie.wit.guitarApp.utils.SwipeToDeleteCallback
+import ie.wit.guitarApp.utils.createLoader
+import ie.wit.guitarApp.utils.hideLoader
+import ie.wit.guitarApp.utils.showLoader
 
 class ListFragment : Fragment(), GuitarClickListener {
 
@@ -27,11 +34,12 @@ class ListFragment : Fragment(), GuitarClickListener {
     private var _fragBinding: FragmentListBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var listViewModel: ListViewModel
+    lateinit var loader : AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //   app = activity?.application as MainApp
-        setHasOptionsMenu(true)
+      //  setHasOptionsMenu(true)
         //navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
     }
 
@@ -43,13 +51,26 @@ class ListFragment : Fragment(), GuitarClickListener {
         val root = fragBinding.root
         //    activity?.title = getString(R.string.action_list)
         setupMenu()
-        fragBinding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        loader = createLoader(requireActivity())
 
-        /* MVVM in action here */
+        fragBinding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+
+        showLoader(loader,"Downloading Guitars")
+        listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer {
+                guitars ->
+            guitars?.let {
+                render(guitars as ArrayList<GuitarModel>)
+                hideLoader(loader)
+                checkSwipeRefresh()
+            }
+        })
+     /*  // MVVM in action here
         listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer { guitars ->
             guitars?.let { render(guitars) }
         })
+
 
         val fab: FloatingActionButton = fragBinding.fab
         fab.setOnClickListener {
@@ -57,6 +78,17 @@ class ListFragment : Fragment(), GuitarClickListener {
                 ListFragmentDirections.actionListFragmentToGuitarFragment()
             findNavController().navigate(action)
         }
+        return root
+    }*/
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = fragBinding.recyclerView.adapter as GuitarAdapter
+                adapter.removeAt(viewHolder.adapterPosition)
+
+            }
+        }
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        itemTouchDeleteHelper.attachToRecyclerView(fragBinding.recyclerView)
         return root
     }
 
@@ -80,7 +112,7 @@ class ListFragment : Fragment(), GuitarClickListener {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun render(guitarsList: List<GuitarModel>) { // live data values that have been updated
+    private fun render(guitarsList: ArrayList<GuitarModel>) { // live data values that have been updated
         fragBinding.recyclerView.adapter = GuitarAdapter(guitarsList, this) // pass in the list
         if (guitarsList.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
@@ -93,9 +125,24 @@ class ListFragment : Fragment(), GuitarClickListener {
 
     // floating action takes us directly to the guitar fragment via the navigation component
     override fun onGuitarClick(guitar: GuitarModel) {
-        val action = ListFragmentDirections.actionListFragmentToGuitarDetailFragment(guitar.id)
+        val action = ListFragmentDirections.actionListFragmentToGuitarDetailFragment(guitar._id)
         findNavController().navigate(action)
     }
+
+    fun setSwipeRefresh() {
+        fragBinding.swiperefresh.setOnRefreshListener {
+            fragBinding.swiperefresh.isRefreshing = true
+            showLoader(loader,"Downloading Guitars")
+            listViewModel.load()
+
+        }
+    }
+
+    fun checkSwipeRefresh() {
+        if (fragBinding.swiperefresh.isRefreshing)
+            fragBinding.swiperefresh.isRefreshing = false
+    }
+
     override fun onResume() {
         super.onResume()
         listViewModel.load()

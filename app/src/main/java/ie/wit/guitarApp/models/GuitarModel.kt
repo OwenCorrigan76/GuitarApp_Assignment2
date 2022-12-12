@@ -2,14 +2,17 @@ package ie.wit.guitarApp.models
 
 import android.net.Uri
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class GuitarModel(var id: Long = 0,
+data class GuitarModel(var _id: String = "N/A",
+                       @SerializedName("paymenttype")
                        var guitarMake: String = "",
                        var guitarModel: String = "",
                        var value: Double = 0.0,
+                      // @SerializedName("amount")
                        var valuation: Double = 0.0,
                        var manufactureDate: String = "",
                        val serialNumber: Long = 0L,

@@ -15,7 +15,7 @@ class GuitarDetailViewModel : ViewModel() {
     get() = guitar
 
     // this function gets an id and updates the guitar.value via GuitarManager interface
-    fun getGuitar(id: Long){
+    fun getGuitar(id: String){
         guitar.value = GuitarManager.findById(id)
     }
 }

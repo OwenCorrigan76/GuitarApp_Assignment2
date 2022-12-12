@@ -50,6 +50,7 @@
     <string name="title_activity_guitar_maps">Map of all Locations</string>
     <string name="enter_guitar_make">Enter Make</string>
     <string name="enter_guitar_model">Enter Model</string>
+    <string name="messageLoading">Please Wait while the Guitar Page is Loading...</string>
 
 
     <string-array name="guitar_make_list">

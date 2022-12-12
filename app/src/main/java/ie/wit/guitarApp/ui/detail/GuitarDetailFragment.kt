@@ -1,5 +1,4 @@
 package ie.wit.guitarApp.ui.detail
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.databinding.FragmentGuitarDetailBinding
 import ie.wit.guitarApp.ui.guitar.GuitarViewModel
+import timber.log.Timber
 
 
 class GuitarDetailFragment : Fragment() {
@@ -20,12 +20,7 @@ class GuitarDetailFragment : Fragment() {
     private val args by navArgs<GuitarDetailFragmentArgs>()
     private var _fragBinding: FragmentGuitarDetailBinding? = null
     private val fragBinding get() = _fragBinding!!
-    private lateinit var viewModel: GuitarDetailViewModel
-    companion object {
-        fun newInstance() = GuitarDetailFragment()
-    }
-
-
+   // private lateinit var viewModel: GuitarDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,10 +40,10 @@ class GuitarDetailFragment : Fragment() {
             fragBinding.editModel.setText("This is Model")
             fragBinding.editManDate.text
             fragBinding.guitarvm = detailViewModel
-            //Timber.i("Retrofit fragBinding.donationvm == $fragBinding.donationvm")
+            Timber.i("Retrofit fragBinding.guitarvm == $fragBinding.guitarvm")
         }
 
-    override fun onResume() {
+   override fun onResume() {
         super.onResume()
         detailViewModel.getGuitar(args.guitarid)
     }

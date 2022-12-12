@@ -11,7 +11,7 @@ interface GuitarClickListener {
     fun onGuitarClick(guitar: GuitarModel)
 }
 class GuitarAdapter constructor(
-    private var guitars: List<GuitarModel>,
+    private var guitars: ArrayList<GuitarModel>,
     private val listener: GuitarClickListener
 ) :
     RecyclerView.Adapter<GuitarAdapter.MainHolder>() {
@@ -27,6 +27,10 @@ class GuitarAdapter constructor(
         val guitar = guitars[holder.adapterPosition]
         holder.bind(guitar, listener)
     }
+    fun removeAt(position: Int) {
+        guitars.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
     override fun getItemCount(): Int = guitars.size
 
@@ -37,6 +41,7 @@ class GuitarAdapter constructor(
            // binding.guitarMake.text = ("Make: " + guitar.guitarMake)
            // binding.guitarModel.text = ("Model: " + guitar.guitarModel)
            // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
+            binding.root.tag = guitar._id
             binding.guitar = guitar // update with individual guitar info
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
             // this will bring us to the edit page
