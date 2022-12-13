@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "543013927216",
+    "project_id": "guitar-evaluation-app",
+    "storage_bucket": "guitar-evaluation-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543013927216:android:9ef0ab19652611ed8df0f5",
+        "android_client_info": {
+          "package_name": "ie.wit.guitarApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543013927216-n67l5rj5qt0ti05nhhnlpv2blv8mcp3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjgVjMAQh_Jb6G7LgcO479X6DXJ6vTmQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543013927216-n67l5rj5qt0ti05nhhnlpv2blv8mcp3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
