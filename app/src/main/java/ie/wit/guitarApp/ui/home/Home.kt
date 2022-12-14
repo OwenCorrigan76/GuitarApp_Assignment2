@@ -11,12 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.*
 import androidx.navigation.ui.*
 import com.google.firebase.auth.FirebaseUser
+import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.HomeBinding
 import ie.wit.guitarApp.databinding.NavHeaderBinding
 
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.auth.Login
+import ie.wit.guitarApp.utils.customTransformation
 
 class Home : AppCompatActivity() {
 
@@ -70,6 +72,16 @@ class Home : AppCompatActivity() {
         var headerView = homeBinding.navView.getHeaderView(0)
         navHeaderBinding = NavHeaderBinding.bind(headerView)
         navHeaderBinding.navHeaderEmail.text = currentUser.email
+        navHeaderBinding.navHeaderName.text = currentUser.displayName
+        // nav bar with Google profile photo
+        if(currentUser.photoUrl != null && currentUser.displayName != null) {
+            navHeaderBinding.navHeaderName.text = currentUser.displayName
+            Picasso.get().load(currentUser.photoUrl)
+                .resize(200, 200)
+                .transform(customTransformation())
+                .centerCrop()
+                .into(navHeaderBinding.navHeaderImage)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

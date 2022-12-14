@@ -28,7 +28,7 @@ import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarAppModel
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.list.ListViewModel
-import timber.log.Timber.i
+import timber.log.Timber.Forest.i
 
 class GuitarFragment : Fragment() {
 

@@ -92,5 +92,7 @@ class FirebaseAuthManager(application: Application) {
         firebaseAuth!!.signOut()
         loggedOut.postValue(true)
         errorStatus.postValue(false)
+        googleSignInClient.value!!.signOut()
+
     }
 }
