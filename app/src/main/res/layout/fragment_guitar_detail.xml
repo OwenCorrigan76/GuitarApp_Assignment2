@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/additional"
+            android:text="@string/message"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -95,6 +95,8 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
+            android:text="@={guitarvm.observableGuitar.message}"
+
             android:inputType="text"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"

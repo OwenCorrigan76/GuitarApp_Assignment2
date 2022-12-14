@@ -6,19 +6,28 @@ import retrofit2.http.*
 
 interface GuitarService {
         @GET("/donations")
-        fun getall(): Call<List<GuitarModel>>
+        fun findall(): Call<List<GuitarModel>>
 
-        @GET("/donations/{id}")
-        fun get(@Path("id") id: String): Call<GuitarModel>
+        @GET("/donations/{email}")
+        fun findall(@Path("email") email: String?)
+                : Call<List<GuitarModel>>
 
-        @DELETE("/donations/{id}")
-        fun delete(@Path("id") id: String): Call<GuitarWrapper>
+        @GET("/donations/{email}/{id}")
+        fun get(@Path("email") email: String?,
+                @Path("id") id: String): Call<GuitarModel>
 
-        @POST("/donations")
-        fun post(@Body guitar: GuitarModel): Call<GuitarWrapper>
+        @DELETE("/donations/{email}/{id}")
+        fun delete(@Path("email") email: String?,
+                   @Path("id") id: String): Call<GuitarWrapper>
 
-        @PUT("/donations/{id}")
-        fun put(@Path("id") id: String,
+        @POST("/donations/{email}")
+        fun post(@Path("email") email: String?,
+                 @Body guitar: GuitarModel)
+                : Call<GuitarWrapper>
+
+        @PUT("/donations/{email}/{id}")
+        fun put(@Path("email") email: String?,
+                @Path("id") id: String,
                 @Body guitar: GuitarModel
         ): Call<GuitarWrapper>
-    }
+}

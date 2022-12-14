@@ -17,6 +17,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,6 +30,7 @@ import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.helpers.showImagePicker
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarModel
+import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber.i
 import java.sql.SQLOutput
@@ -40,6 +42,8 @@ class GuitarFragment : Fragment() {
     private var _fragBinding: FragmentGuitarBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var guitarViewModel: GuitarViewModel
+    private val listViewModel: ListViewModel by activityViewModels()
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
     var edit = false
 
     val guitars = GuitarModel()
@@ -192,7 +196,7 @@ class GuitarFragment : Fragment() {
     }
 
     /** Send to the model to be displayed in the list view */
-    fun setButtonListener(layout: FragmentGuitarBinding) {
+  private fun setButtonListener(layout: FragmentGuitarBinding) {
         layout.addButton.setOnClickListener {
             val valuation = layout.valuePicker.value.toDouble()
             // val guitarMake = layout.guitarMake.text.toString()
@@ -208,7 +212,8 @@ class GuitarFragment : Fragment() {
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate,
-                    image = image
+                    image = image,
+                    email = loggedInViewModel.liveFirebaseUser.value?.email!!
                 )
             )
             i("add Button Pressed: ${guitarMake + guitarModel + valuation + manufactureDate + " image is " + guitars.image}")

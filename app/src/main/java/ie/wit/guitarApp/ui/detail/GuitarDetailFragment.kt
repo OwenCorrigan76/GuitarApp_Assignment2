@@ -1,17 +1,22 @@
 package ie.wit.guitarApp.ui.detail
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.databinding.FragmentGuitarDetailBinding
+import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.guitar.GuitarViewModel
+import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber
 
 
@@ -20,7 +25,8 @@ class GuitarDetailFragment : Fragment() {
     private val args by navArgs<GuitarDetailFragmentArgs>()
     private var _fragBinding: FragmentGuitarDetailBinding? = null
     private val fragBinding get() = _fragBinding!!
-   // private lateinit var viewModel: GuitarDetailViewModel
+    private val loggedInViewModel: LoggedInViewModel by activityViewModels()
+    private val listViewModel: ListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,25 +39,46 @@ class GuitarDetailFragment : Fragment() {
         detailViewModel.observableGuitar.observe(viewLifecycleOwner, Observer {
             render()
         })
+
+        // for editing
+        fragBinding.editGuitarButton.setOnClickListener {
+            detailViewModel.updateGuitar(
+                loggedInViewModel.liveFirebaseUser.value?.email!!,
+                args.guitarid, fragBinding.guitarvm?.observableGuitar!!.value!!
+            )
+            findNavController().navigateUp()
+        }
+       // for deleting
+        fragBinding.deleteGuitarButton.setOnClickListener {
+            listViewModel.delete(
+                loggedInViewModel.liveFirebaseUser.value?.email!!,
+                detailViewModel.observableGuitar.value?._id!!
+            )
+            findNavController().navigateUp()
+        }
         return root
     }
-        private fun render() {
-            fragBinding.editMake.setText("This is Make")
-            fragBinding.editModel.setText("This is Model")
-            fragBinding.editManDate.text
-            fragBinding.guitarvm = detailViewModel
-            Timber.i("Retrofit fragBinding.guitarvm == $fragBinding.guitarvm")
-        }
 
-   override fun onResume() {
+    private fun render() {
+        fragBinding.editMake.setText("This is Make")
+        fragBinding.editModel.setText("This is Model")
+        fragBinding.editManDate.text
+        fragBinding.guitarvm = detailViewModel
+        Timber.i("Retrofit fragBinding.guitarvm == $fragBinding.guitarvm")
+    }
+
+    override fun onResume() {
         super.onResume()
-        detailViewModel.getGuitar(args.guitarid)
+        detailViewModel.getGuitar(
+            loggedInViewModel.liveFirebaseUser.value?.email!!,
+            args.guitarid
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _fragBinding = null
     }
-    }
+}
 
 

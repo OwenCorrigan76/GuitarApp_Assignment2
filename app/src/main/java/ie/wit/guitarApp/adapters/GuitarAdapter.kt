@@ -41,7 +41,8 @@ class GuitarAdapter constructor(
            // binding.guitarMake.text = ("Make: " + guitar.guitarMake)
            // binding.guitarModel.text = ("Model: " + guitar.guitarModel)
            // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
-            binding.root.tag = guitar._id
+            binding.root.tag = guitar
+          //  binding.root.tag = guitar._id
             binding.guitar = guitar // update with individual guitar info
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
             // this will bring us to the edit page
