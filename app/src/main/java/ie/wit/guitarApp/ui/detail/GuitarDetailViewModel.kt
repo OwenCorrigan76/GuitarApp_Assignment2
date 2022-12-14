@@ -3,31 +3,32 @@ package ie.wit.guitarApp.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ie.wit.guitarApp.models.GuitarManager
-import ie.wit.guitarApp.models.GuitarModel
-import ie.wit.guitarApp.ui.guitar.GuitarViewModel
+import ie.wit.guitarApp.firebase.FirebaseDBManager
+import ie.wit.guitarApp.models.GuitarAppModel
 import timber.log.Timber
 
 class GuitarDetailViewModel : ViewModel() {
-    private val guitar = MutableLiveData<GuitarModel>() // keeps track of individual guitars
+    private val guitar = MutableLiveData<GuitarAppModel>() // keeps track of individual guitars
 
     // public read only observable data
-    var observableGuitar: LiveData<GuitarModel>
+    var observableGuitar: LiveData<GuitarAppModel>
         get() = guitar
         set(value) {guitar.value = value.value}
 
     // this function gets an id and updates the guitar.value via GuitarManager interface
-    fun getGuitar(email: String, id: String) {
+    fun getGuitar(userid:String, id: String) {
         try {
-            GuitarManager.findById(email, id, guitar)
-            Timber.i("Detail getDonation() Success : ${guitar.value.toString()}")
-        } catch (e: Exception) {
+            FirebaseDBManager.findById(userid, id, guitar)
+            Timber.i("Detail getGuitar() Success : ${
+                guitar.value.toString()}")
+        }
+        catch (e: Exception) {
             Timber.i("Detail getDonation() Error : $e.message")
         }
     }
-    fun updateGuitar(email:String, id: String,guitar: GuitarModel) {
+    fun updateGuitar(userid:String, id: String,guitar: GuitarAppModel) {
         try {
-            GuitarManager.update(email, id, guitar)
+            FirebaseDBManager.update(userid, id, guitar)
             Timber.i("Detail update() Success : $guitar")
         }
         catch (e: Exception) {
@@ -35,3 +36,5 @@ class GuitarDetailViewModel : ViewModel() {
         }
     }
 }
+
+

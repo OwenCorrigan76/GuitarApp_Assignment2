@@ -4,7 +4,6 @@ import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.content.res.Resources
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
@@ -12,29 +11,24 @@ import android.view.*
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.helpers.showImagePicker
 import ie.wit.guitarApp.main.MainApp
-import ie.wit.guitarApp.models.GuitarModel
+import ie.wit.guitarApp.models.GuitarAppModel
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber.i
-import java.sql.SQLOutput
-import java.text.FieldPosition
 
 class GuitarFragment : Fragment() {
 
@@ -46,7 +40,7 @@ class GuitarFragment : Fragment() {
     private val loggedInViewModel : LoggedInViewModel by activityViewModels()
     var edit = false
 
-    val guitars = GuitarModel()
+    val guitars = GuitarAppModel()
     var image: Uri = Uri.EMPTY
 
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
@@ -206,8 +200,8 @@ class GuitarFragment : Fragment() {
 
             print("*****************" + guitars + "*******************")
 
-            guitarViewModel.addGuitar(
-                GuitarModel(
+            guitarViewModel.addGuitar(loggedInViewModel.liveFirebaseUser,
+                GuitarAppModel(
                     valuation = valuation,
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,

@@ -5,8 +5,9 @@ package ie.wit.guitarApp.ui.guitar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ie.wit.guitarApp.models.GuitarManager
-import ie.wit.guitarApp.models.GuitarModel
+import com.google.firebase.auth.FirebaseUser
+import ie.wit.guitarApp.firebase.FirebaseDBManager
+import ie.wit.guitarApp.models.GuitarAppModel
 
 class GuitarViewModel : ViewModel() { // declaration of type ViewModel
 
@@ -17,9 +18,10 @@ class GuitarViewModel : ViewModel() { // declaration of type ViewModel
     // get at and return status
         get() = status
 
-    fun addGuitar(guitar: GuitarModel) {
+    fun addGuitar(firebaseUser: MutableLiveData<FirebaseUser>,
+                  guitar: GuitarAppModel) {
         status.value = try {
-            GuitarManager.create(guitar)
+            FirebaseDBManager.create(firebaseUser,guitar)
             true
         } catch (e: IllegalArgumentException) {
             false

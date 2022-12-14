@@ -1,7 +1,6 @@
 package ie.wit.guitarApp.main
 
 import android.app.Application
-import ie.wit.guitarApp.models.GuitarManager
 import ie.wit.guitarApp.models.GuitarStore
 import timber.log.Timber
 

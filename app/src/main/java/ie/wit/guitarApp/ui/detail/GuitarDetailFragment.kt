@@ -52,7 +52,7 @@ class GuitarDetailFragment : Fragment() {
         fragBinding.deleteGuitarButton.setOnClickListener {
             listViewModel.delete(
                 loggedInViewModel.liveFirebaseUser.value?.email!!,
-                detailViewModel.observableGuitar.value?._id!!
+                detailViewModel.observableGuitar.value?.uid!!
             )
             findNavController().navigateUp()
         }

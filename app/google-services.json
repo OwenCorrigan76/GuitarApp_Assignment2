@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "543013927216",
+    "firebase_url": "https://guitar-evaluation-app-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "guitar-evaluation-app",
     "storage_bucket": "guitar-evaluation-app.appspot.com"
   },

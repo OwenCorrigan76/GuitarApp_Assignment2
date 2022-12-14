@@ -3,15 +3,14 @@ package ie.wit.guitarApp.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.CardGuitarBinding
-import ie.wit.guitarApp.models.GuitarModel
+import ie.wit.guitarApp.models.GuitarAppModel
 interface GuitarClickListener {
-    fun onGuitarClick(guitar: GuitarModel)
+    fun onGuitarClick(guitar: GuitarAppModel)
 }
 class GuitarAdapter constructor(
-    private var guitars: ArrayList<GuitarModel>,
+    private var guitars: ArrayList<GuitarAppModel>,
     private val listener: GuitarClickListener
 ) :
     RecyclerView.Adapter<GuitarAdapter.MainHolder>() {
@@ -36,20 +35,19 @@ class GuitarAdapter constructor(
 
     inner class MainHolder(val binding: CardGuitarBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(guitar: GuitarModel, listener: GuitarClickListener) {
+        fun bind(guitar: GuitarAppModel, listener: GuitarClickListener) {
            // binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
            // binding.guitarMake.text = ("Make: " + guitar.guitarMake)
            // binding.guitarModel.text = ("Model: " + guitar.guitarModel)
            // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
+            // Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
+            //   binding.root.setOnClickListener() }
             binding.root.tag = guitar
-          //  binding.root.tag = guitar._id
             binding.guitar = guitar // update with individual guitar info
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
-            // this will bring us to the edit page
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
             binding.executePendingBindings()
-           // Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
-            //   binding.root.setOnClickListener() }
+
         }
     }
 }

@@ -4,18 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
-import ie.wit.guitarApp.models.GuitarManager
-import ie.wit.guitarApp.models.GuitarManager.findAll
-import ie.wit.guitarApp.models.GuitarModel
+import ie.wit.guitarApp.firebase.FirebaseDBManager
+import ie.wit.guitarApp.models.GuitarAppModel
 import timber.log.Timber
 import java.lang.Exception
 
 class ListViewModel : ViewModel() {
 
-    private val guitarList = MutableLiveData<List<GuitarModel>>()
+    private val guitarList = MutableLiveData<List<GuitarAppModel>>()
 
     /** expose the public observable GuitarList */
-    val observableGuitarsList: LiveData<List<GuitarModel>>
+    val observableGuitarsList: LiveData<List<GuitarAppModel>>
         get() = guitarList
 
     var liveFirebaseUser = MutableLiveData<FirebaseUser>()
@@ -24,23 +23,23 @@ class ListViewModel : ViewModel() {
         load()
     }
 
-    // .value property of <List<GuitarModel>> is equivalent to GuitarManager interface findAll function
+    // .value property of <List<GuitarAppModel>> is equivalent to GuitarManager interface findAll function
     fun load() {
         try {// liveFirebaseUser for retrieving email users
-            GuitarManager.findAll(liveFirebaseUser.value?.email!!, guitarList)
+            FirebaseDBManager.findAll(liveFirebaseUser.value?.uid!!, guitarList)
             Timber.i("Report Load Success : ${guitarList.value.toString()}")
         }
         catch (e: Exception) {
             Timber.i("Retrofit Error : $e.message")
         }
     }
-    fun delete(email: String, id: String) {
+    fun delete(userid: String, id: String) {
         try {
-            GuitarManager.delete(email, id)
-            Timber.i("Delete Success")
+            FirebaseDBManager.delete(userid,id)
+            Timber.i("Report Delete Success")
         }
-        catch (e: java.lang.Exception) {
-            Timber.i("Delete Error : $e.message")
+        catch (e: Exception) {
+            Timber.i("Report Delete Error : $e.message")
         }
     }
 }

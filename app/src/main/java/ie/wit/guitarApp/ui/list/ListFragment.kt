@@ -9,21 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.adapters.GuitarAdapter
 import ie.wit.guitarApp.adapters.GuitarClickListener
 import ie.wit.guitarApp.databinding.FragmentListBinding
 
 import ie.wit.guitarApp.main.MainApp
-import ie.wit.guitarApp.models.GuitarModel
+import ie.wit.guitarApp.models.GuitarAppModel
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.utils.*
 
@@ -61,7 +59,7 @@ class ListFragment : Fragment(), GuitarClickListener {
         showLoader(loader, "Downloading Guitars")
         listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer { guitars ->
             guitars?.let {
-                render(guitars as ArrayList<GuitarModel>)
+                render(guitars as ArrayList<GuitarAppModel>)
                 hideLoader(loader)
                 checkSwipeRefresh()
             }
@@ -87,8 +85,8 @@ class ListFragment : Fragment(), GuitarClickListener {
                 val adapter = fragBinding.recyclerView.adapter as GuitarAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 listViewModel.delete(
-                    listViewModel.liveFirebaseUser.value?.email!!,
-                    (viewHolder.itemView.tag as GuitarModel)._id
+                    listViewModel.liveFirebaseUser.value?.uid!!,
+                    (viewHolder.itemView.tag as GuitarAppModel).uid
                 )
                 hideLoader(loader)
             }
@@ -99,7 +97,7 @@ class ListFragment : Fragment(), GuitarClickListener {
         // for swipe edit
         val swipeEditHandler = object : SwipeToEditCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onGuitarClick(viewHolder.itemView.tag as GuitarModel)
+                onGuitarClick(viewHolder.itemView.tag as GuitarAppModel)
             }
         }
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
@@ -128,7 +126,7 @@ class ListFragment : Fragment(), GuitarClickListener {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun render(guitarsList: ArrayList<GuitarModel>) { // live data values that have been updated
+    private fun render(guitarsList: ArrayList<GuitarAppModel>) { // live data values that have been updated
         fragBinding.recyclerView.adapter = GuitarAdapter(guitarsList, this) // pass in the list
         if (guitarsList.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
@@ -140,8 +138,8 @@ class ListFragment : Fragment(), GuitarClickListener {
     }
 
     // floating action takes us directly to the guitar fragment via the navigation component
-    override fun onGuitarClick(guitar: GuitarModel) {
-        val action = ListFragmentDirections.actionListFragmentToGuitarDetailFragment(guitar._id)
+    override fun onGuitarClick(guitar: GuitarAppModel) {
+        val action = ListFragmentDirections.actionListFragmentToGuitarDetailFragment(guitar.uid)
         findNavController().navigate(action)
     }
 
