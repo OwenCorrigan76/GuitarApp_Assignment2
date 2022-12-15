@@ -20,7 +20,11 @@ data class GuitarAppModel(
     var message: String = "Fender or Gibson?",
     var image: String =  "",
     var profilepic: String = "",
-    var email: String = "joe@bloggs.com"
+    var email: String = "joe@bloggs.com",
+    var lat : Double = 0.0,
+    var lng: Double = 0.0,
+    var zoom: Float = 0f
+
 ) : Parcelable {
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -37,3 +41,8 @@ data class GuitarAppModel(
         )
     }
 }
+@Parcelize
+data class Location(
+    var lat: Double = 0.0,
+    var lng: Double = 0.0,
+    var zoom: Float = 0f) : Parcelable
