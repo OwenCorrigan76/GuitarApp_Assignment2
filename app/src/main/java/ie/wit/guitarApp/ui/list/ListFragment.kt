@@ -65,6 +65,8 @@ class ListFragment : Fragment(), GuitarClickListener {
                 checkSwipeRefresh()
             }
         })
+        setSwipeRefresh()
+
         /*  // MVVM in action here
            listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
            listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer { guitars ->
@@ -159,8 +161,10 @@ class ListFragment : Fragment(), GuitarClickListener {
         fragBinding.swiperefresh.setOnRefreshListener {
             fragBinding.swiperefresh.isRefreshing = true
             showLoader(loader, "Downloading Guitars")
-            listViewModel.load()
-
+            if(listViewModel.readOnly.value!!)
+                listViewModel.loadAll()
+            else
+                listViewModel.load()
         }
     }
 
