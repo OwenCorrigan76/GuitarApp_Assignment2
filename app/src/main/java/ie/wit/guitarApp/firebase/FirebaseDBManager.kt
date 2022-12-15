@@ -56,7 +56,11 @@ object FirebaseDBManager : GuitarStore {
             })
     }
 
-    override fun findById(userid: String, guitarid: String, guitar: MutableLiveData<GuitarAppModel>) {
+    override fun findById(
+        userid: String,
+        guitarid: String,
+        guitar: MutableLiveData<GuitarAppModel>
+    ) {
 
         database.child("user-guitars").child(userid)
             .child(guitarid).get().addOnSuccessListener {
@@ -107,4 +111,25 @@ object FirebaseDBManager : GuitarStore {
 
         database.updateChildren(childUpdate)
     }
+
+  /*  fun updateImageRef(userid: String, imageUri: String) {
+
+        val userGuitars = database.child("user-guitars").child(userid)
+        val allGuitars = database.child("guitars")
+
+        userGuitars.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {}
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        //Update Users imageUri
+                        it.ref.child("profilepic").setValue(imageUri)
+                        //Update all donations that match 'it'
+                        val guitar = it.getValue(GuitarAppModel::class.java)
+                        allGuitars.child(guitar!!.uid!!)
+                            .child("profilepic").setValue(imageUri)
+                    }
+                }
+            })
+    }*/
 }

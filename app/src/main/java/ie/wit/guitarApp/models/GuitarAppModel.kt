@@ -19,7 +19,7 @@ data class GuitarAppModel(
     val serialNumber: Long = 0L,
     var message: String = "n/a",
     var image: Uri = Uri.EMPTY,
- //   var profilepic: String = "",
+    var profilepic: String = "",
     var email: String = "joe@bloggs.com"
 ) : Parcelable {
     @Exclude
@@ -33,6 +33,7 @@ data class GuitarAppModel(
             "manufactureDate" to manufactureDate,
             "email" to email,
         //    "image" to image,
+            "profilepic" to profilepic,
         )
     }
 }

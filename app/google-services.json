@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "543013927216-b5f3h6fio9139jlpgolgd5ggpgp9fni9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.wit.guitarApp",
+            "certificate_hash": "3b05ce4d75c69f6fe1a8353ec753268c3c53a362"
+          }
+        },
+        {
           "client_id": "543013927216-n67l5rj5qt0ti05nhhnlpv2blv8mcp3p.apps.googleusercontent.com",
           "client_type": 3
         }

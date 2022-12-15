@@ -1,4 +1,3 @@
-/*
 package ie.wit.guitarApp.firebase
 
 import android.graphics.Bitmap
@@ -6,12 +5,15 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import com.squareup.picasso.Target
+import ie.wit.guitarApp.utils.customTransformation
 
 object FirebaseImageManager {
 
@@ -31,8 +33,7 @@ object FirebaseImageManager {
             imageUri.value = Uri.EMPTY
         }
     }
-*/
-/*
+
     fun uploadImageToFirebase(userid: String, bitmap: Bitmap, updating : Boolean) {
         // Get the data from an ImageView as bytes
         val imageRef = storage.child("photos").child("${userid}.jpg")
@@ -50,7 +51,6 @@ object FirebaseImageManager {
                 uploadTask.addOnSuccessListener { ut ->
                     ut.metadata!!.reference!!.downloadUrl.addOnCompleteListener { task ->
                         imageUri.value = task.result!!
-                        FirebaseDBManager.updateImageRef(userid,imageUri.value.toString())
                     }
                 }
             }
@@ -59,7 +59,6 @@ object FirebaseImageManager {
             uploadTask.addOnSuccessListener { ut ->
                 ut.metadata!!.reference!!.downloadUrl.addOnCompleteListener { task ->
                     imageUri.value = task.result!!
-                   // FirebaseDBManager.updateImageRef(userid,imageUri.value.toString())
                 }
             }
         }
@@ -112,4 +111,5 @@ object FirebaseImageManager {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
             })
     }
-}*/
+
+}
