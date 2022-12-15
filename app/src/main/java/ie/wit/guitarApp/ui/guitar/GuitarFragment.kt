@@ -183,6 +183,7 @@ class GuitarFragment : Fragment() {
             val manufactureDate = layout.dateView.text.toString()
             var guitarMake = layout.spinnerGuitarMake.selectedItem.toString()
 
+
             print("*****************" + guitars + "*******************")
 
             guitarViewModel.addGuitar(loggedInViewModel.liveFirebaseUser,
@@ -198,7 +199,7 @@ class GuitarFragment : Fragment() {
                     zoom = 15f,
                 )
             )
-            i("add Button Pressed: ${guitarMake + guitarModel + valuation + manufactureDate + " image is " + guitars.image}")
+            i("add Button Pressed: ${guitarMake + guitarModel + valuation + manufactureDate + " image is " + guitars.image  }")
         }
     }
 

@@ -36,8 +36,11 @@ data class GuitarAppModel(
             "guitarModel" to guitarModel,
             "manufactureDate" to manufactureDate,
             "email" to email,
-        //    "image" to image,
+            "image" to image,
             "profilepic" to profilepic,
+            "lat" to lat,
+            "lng" to lng,
+            "zoom" to zoom
         )
     }
 }
