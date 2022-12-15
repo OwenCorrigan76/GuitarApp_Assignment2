@@ -35,7 +35,25 @@ object FirebaseDBManager : GuitarStore {
     }
 
     override fun findAll(guitarList: MutableLiveData<List<GuitarAppModel>>) {
-        TODO("Not yet implemented")
+        database.child("guitars")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    Timber.i("Firebase Guitar error : ${error.message}")
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val localList = ArrayList<GuitarAppModel>()
+                    val children = snapshot.children
+                    children.forEach {
+                        val guitar = it.getValue(GuitarAppModel::class.java)
+                        localList.add(guitar!!)
+                    }
+                    database.child("guitars")
+                        .removeEventListener(this)
+
+                    guitarList.value = localList
+                }
+            })
     }
 
     override fun findById(userid: String, guitarid: String, guitar: MutableLiveData<GuitarAppModel>) {

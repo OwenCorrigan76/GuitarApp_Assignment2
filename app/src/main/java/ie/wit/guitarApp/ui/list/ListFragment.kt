@@ -3,6 +3,7 @@ package ie.wit.guitarApp.ui.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -114,6 +115,16 @@ class ListFragment : Fragment(), GuitarClickListener {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_list, menu)
+
+                val item = menu.findItem(R.id.toggleGuitars) as MenuItem
+                item.setActionView(R.layout.togglebutton_layout)
+                val toggleDonations: SwitchCompat = item.actionView!!.findViewById(R.id.toggleButton)
+                toggleDonations.isChecked = false
+
+                toggleDonations.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) listViewModel.loadAll()
+                    else listViewModel.load()
+                }
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -127,7 +138,8 @@ class ListFragment : Fragment(), GuitarClickListener {
     }
 
     private fun render(guitarsList: ArrayList<GuitarAppModel>) { // live data values that have been updated
-        fragBinding.recyclerView.adapter = GuitarAdapter(guitarsList, this) // pass in the list
+        fragBinding.recyclerView.adapter =
+            listViewModel.readOnly.value?.let { GuitarAdapter(guitarsList, this, it) } // pass in the list
         if (guitarsList.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
             fragBinding.guitarsNotFound.visibility = View.VISIBLE

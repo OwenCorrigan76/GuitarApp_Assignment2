@@ -12,9 +12,10 @@ import ie.wit.guitarApp.utils.customTransformation
 interface GuitarClickListener {
     fun onGuitarClick(guitar: GuitarAppModel)
 }
+
 class GuitarAdapter constructor(
     private var guitars: ArrayList<GuitarAppModel>,
-    private val listener: GuitarClickListener
+    private val listener: GuitarClickListener, private val readOnly: Boolean
 ) :
     RecyclerView.Adapter<GuitarAdapter.MainHolder>() {
 
@@ -22,13 +23,14 @@ class GuitarAdapter constructor(
         val binding = CardGuitarBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return MainHolder(binding)
+        return MainHolder(binding, readOnly)
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val guitar = guitars[holder.adapterPosition]
         holder.bind(guitar, listener)
     }
+
     fun removeAt(position: Int) {
         guitars.removeAt(position)
         notifyItemRemoved(position)
@@ -36,23 +38,26 @@ class GuitarAdapter constructor(
 
     override fun getItemCount(): Int = guitars.size
 
-    inner class MainHolder(val binding: CardGuitarBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MainHolder(val binding: CardGuitarBinding, private val readOnly: Boolean) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        val readOnlyRow = readOnly
 
         fun bind(guitar: GuitarAppModel, listener: GuitarClickListener) {
-           // binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
-           // binding.guitarMake.text = ("Make: " + guitar.guitarMake)
-           // binding.guitarModel.text = ("Model: " + guitar.guitarModel)
-           // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
+            // binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
+            // binding.guitarMake.text = ("Make: " + guitar.guitarMake)
+            // binding.guitarModel.text = ("Model: " + guitar.guitarModel)
+            // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
             // Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
             //   binding.root.setOnClickListener() }
             binding.root.tag = guitar
             binding.guitar = guitar // update with individual guitar info
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
-          /*  Picasso.get().load(guitar.profilepic.toUri())
-                .resize(200, 200)
-                .transform(customTransformation())
-                .centerCrop()
-                .into(binding.imageIcon)*/
+            /*  Picasso.get().load(guitar.profilepic.toUri())
+                  .resize(200, 200)
+                  .transform(customTransformation())
+                  .centerCrop()
+                  .into(binding.imageIcon)*/
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
             binding.executePendingBindings()
 
