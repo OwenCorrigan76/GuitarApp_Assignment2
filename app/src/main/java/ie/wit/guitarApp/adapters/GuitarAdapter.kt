@@ -2,6 +2,7 @@ package ie.wit.guitarApp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
@@ -53,11 +54,16 @@ class GuitarAdapter constructor(
             binding.root.tag = guitar
             binding.guitar = guitar // update with individual guitar info
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
-            /*  Picasso.get().load(guitar.profilepic.toUri())
-                  .resize(200, 200)
-                  .transform(customTransformation())
-                  .centerCrop()
-                  .into(binding.imageIcon)*/
+            Picasso.get().load(guitar.profilepic.toUri())
+                .resize(200, 200)
+                .transform(customTransformation())
+                .centerCrop()
+                .into(binding.imageIcon)
+           /* Picasso.get().load(guitar.image.toUri())
+                .resize(200, 200)
+                .transform(customTransformation())
+                .centerCrop()
+                .into(binding.imageIcon2)*/
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
             binding.executePendingBindings()
 

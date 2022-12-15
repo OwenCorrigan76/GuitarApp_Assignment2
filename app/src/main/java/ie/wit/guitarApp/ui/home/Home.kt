@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.Toolbar
@@ -51,22 +52,16 @@ class Home : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.listFragment, R.id.listFragment, R.id.aboutFragment), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.listFragment, R.id.listFragment, R.id.aboutFragment
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         val navView = homeBinding.navView
         navView.setupWithNavController(navController)
         initNavHeader()
-//        navController.addOnDestinationChangedListener { _, destination, arguments ->
-//            when(destination.id) {
-//                R.id.reportFragment -> {
-//                    val argument = NavArgument.Builder().setDefaultValue(totalDonated).build()
-//                    destination.addArgument("totalDonated", argument)
-//
-//                }
-//            }
-//        }
     }
 
     public override fun onStart() {
@@ -89,7 +84,7 @@ class Home : AppCompatActivity() {
     }
 
     private fun initNavHeader() {
-        Timber.i("DX Init Nav Header")
+        Timber.i("Guitar App Init Nav Header")
         headerView = homeBinding.navView.getHeaderView(0)
         navHeaderBinding = NavHeaderBinding.bind(headerView)
         navHeaderBinding.navHeaderImage.setOnClickListener {
@@ -100,7 +95,7 @@ class Home : AppCompatActivity() {
     private fun updateNavHeader(currentUser: FirebaseUser) {
         FirebaseImageManager.imageUri.observe(this) { result ->
             if (result == Uri.EMPTY) {
-                Timber.i("DX NO Existing imageUri")
+                Timber.i("Guitar App NO Existing imageUri")
                 if (currentUser.photoUrl != null) {
                     //if you're a google user
                     FirebaseImageManager.updateUserImage(
@@ -110,7 +105,7 @@ class Home : AppCompatActivity() {
                         false
                     )
                 } else {
-                    Timber.i("DX Loading Existing Default imageUri")
+                    Timber.i("Guitar App Loading Existing Default imageUri")
                     FirebaseImageManager.updateDefaultImage(
                         currentUser.uid,
                         R.drawable.ic_launcher_homer,
@@ -119,7 +114,7 @@ class Home : AppCompatActivity() {
                 }
             } else // load existing image from firebase
             {
-                Timber.i("DX Loading Existing imageUri")
+                Timber.i("Guitar App Loading Existing imageUri")
                 FirebaseImageManager.updateUserImage(
                     currentUser.uid,
                     FirebaseImageManager.imageUri.value,
@@ -150,7 +145,7 @@ class Home : AppCompatActivity() {
                 when(result.resultCode){
                     RESULT_OK -> {
                         if (result.data != null) {
-                            Timber.i("DX registerPickerCallback() ${readImageUri(result.resultCode, result.data).toString()}")
+                            Timber.i("Guitar App registerPickerCallback() ${readImageUri(result.resultCode, result.data).toString()}")
                             FirebaseImageManager
                                 .updateUserImage(loggedInViewModel.liveFirebaseUser.value!!.uid,
                                     readImageUri(result.resultCode, result.data),

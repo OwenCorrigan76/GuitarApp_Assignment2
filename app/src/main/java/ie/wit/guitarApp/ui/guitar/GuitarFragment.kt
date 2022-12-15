@@ -206,7 +206,7 @@ class GuitarFragment : Fragment() {
                     guitarMake = guitarMake,
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate,
-                    image = image,
+                    image = image.toString(),
                     email = loggedInViewModel.liveFirebaseUser.value?.email!!
                 )
             )
@@ -222,7 +222,7 @@ class GuitarFragment : Fragment() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            guitars.image = result.data!!.data!!
+                            guitars.image = result.data!!.data.toString()!!
                             Picasso.get()
                                 .load(guitars.image)
                                 .into(fragBinding.guitarImage)

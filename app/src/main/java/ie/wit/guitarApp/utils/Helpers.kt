@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
 import com.makeramen.roundedimageview.RoundedTransformationBuilder
@@ -63,6 +62,7 @@ fun readImageUri(resultCode: Int, data: Intent?): Uri? {
     return uri
 }
 
+/*
 fun serviceUnavailableMessage(activity: FragmentActivity) {
     Toast.makeText(
         activity,
@@ -77,4 +77,4 @@ fun serviceAvailableMessage(activity: FragmentActivity) {
         "Guitar App Contacted Successfully",
         Toast.LENGTH_LONG
     ).show()
-}
+}*/

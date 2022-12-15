@@ -17,8 +17,8 @@ data class GuitarAppModel(
     var valuation: Double = 0.0,
     var manufactureDate: String = "",
     val serialNumber: Long = 0L,
-    var message: String = "n/a",
-    var image: Uri = Uri.EMPTY,
+    var message: String = "Fender or Gibson?",
+    var image: String =  "",
     var profilepic: String = "",
     var email: String = "joe@bloggs.com"
 ) : Parcelable {
@@ -28,7 +28,7 @@ data class GuitarAppModel(
             "uid" to uid,
             "valuation" to valuation,
             "guitarMake" to guitarMake,
-      //      "message" to message,
+            "message" to message,
             "guitarModel" to guitarModel,
             "manufactureDate" to manufactureDate,
             "email" to email,
