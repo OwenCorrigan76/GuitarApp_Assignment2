@@ -11,6 +11,8 @@
     <string name="make">Guitar Make :</string>
     <string name="model">Guitar Model :</string>
     <string name="date">Manufactured :</string>
+    <string name="valuation">Valuation :</string>
+
     <string name="message">Message :</string>
     <string name="action_share">Share</string>
     <string name="action_send">Send</string>

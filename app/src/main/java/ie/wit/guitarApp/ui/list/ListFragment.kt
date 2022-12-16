@@ -58,8 +58,11 @@ class ListFragment : Fragment(), GuitarClickListener {
             findNavController().navigate(action)
         }
         showLoader(loader, "Downloading Guitars")
-        listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer { guitars ->
+        listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer
+        // when guitar changes through obsevable....
+        { guitars ->
             guitars?.let {
+                // call render on the data (ArrayList)
                 render(guitars as ArrayList<GuitarAppModel>)
                 hideLoader(loader)
                 checkSwipeRefresh()
@@ -141,6 +144,7 @@ class ListFragment : Fragment(), GuitarClickListener {
     }
 
     private fun render(guitarsList: ArrayList<GuitarAppModel>) { // live data values that have been updated
+       // create an adapter and pass in the list
         fragBinding.recyclerView.adapter =
             listViewModel.readOnly.value?.let { GuitarAdapter(guitarsList, this, it) } // pass in the list
         if (guitarsList.isEmpty()) {

@@ -51,8 +51,11 @@ class GuitarAdapter constructor(
             // binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
             // Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
             //   binding.root.setOnClickListener() }
+
+            // update guitar (in layout) object info with dataBinding
+            binding.guitar = guitar
             binding.root.tag = guitar
-            binding.guitar = guitar // update with individual guitar info
+
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
             Picasso.get().load(guitar.profilepic.toUri())
                 .resize(200, 200)
