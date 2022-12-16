@@ -25,7 +25,7 @@ class ListViewModel : ViewModel() {
 
     // .value property of <List<GuitarAppModel>> is equivalent to GuitarManager interface findAll function
     fun load() {
-        try {// liveFirebaseUser for retrieving email users
+        try {// liveFirebaseUser for retrieving users by id
             readOnly.value = false
             FirebaseDBManager.findAll(liveFirebaseUser.value?.uid!!, guitarList)
             Timber.i("Report Load Success : ${guitarList.value.toString()}")
@@ -47,7 +47,7 @@ class ListViewModel : ViewModel() {
     }
 
     fun delete(userid: String, id: String) {
-        try {
+        try { // delete using userid and the guitar id
             FirebaseDBManager.delete(userid,id)
             Timber.i("Report Delete Success")
         }

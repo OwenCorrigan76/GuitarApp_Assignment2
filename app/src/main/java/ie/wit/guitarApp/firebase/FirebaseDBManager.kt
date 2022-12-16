@@ -11,6 +11,7 @@ import timber.log.Timber
 object FirebaseDBManager : GuitarStore {
     var database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
+    // for single users - via userid
     override fun findAll(userid: String, guitarList: MutableLiveData<List<GuitarAppModel>>) {
 
         database.child("user-guitars").child(userid)
@@ -21,9 +22,13 @@ object FirebaseDBManager : GuitarStore {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val localList = ArrayList<GuitarAppModel>()
+      //get the .children property of the snapshot called children (collection)
                     val children = snapshot.children
+    // for loop, running through each element, retrieving the data....
                     children.forEach {
+                  // storing it it in tha guitar object and....
                         val guitar = it.getValue(GuitarAppModel::class.java)
+              // adding it to localList as an ArrayList
                         localList.add(guitar!!)
                     }
                     database.child("user-guitars").child(userid)
@@ -33,7 +38,7 @@ object FirebaseDBManager : GuitarStore {
                 }
             })
     }
-
+    // for all users
     override fun findAll(guitarList: MutableLiveData<List<GuitarAppModel>>) {
         database.child("guitars")
             .addValueEventListener(object : ValueEventListener {
@@ -56,14 +61,20 @@ object FirebaseDBManager : GuitarStore {
             })
     }
 
+    override fun findAll(): List<GuitarAppModel> {
+        TODO("Not yet implemented")
+    }
+
     override fun findById(
         userid: String,
         guitarid: String,
         guitar: MutableLiveData<GuitarAppModel>
     ) {
-
+            // retrieves dat from the user, dased on userid
         database.child("user-guitars").child(userid)
+                // add for once off retrieval of the object
             .child(guitarid).get().addOnSuccessListener {
+                // assign the retrieval to the value property of guitar
                 guitar.value = it.getValue(GuitarAppModel::class.java)
                 Timber.i("firebase Got value ${it.value}")
             }.addOnFailureListener {
@@ -92,24 +103,28 @@ object FirebaseDBManager : GuitarStore {
         database.updateChildren(childAdd)
     }
 
-    override fun delete(userid: String, guitarid: String) {
 
+
+    override fun update(userid: String, guitarid: String, guitar: GuitarAppModel) {
+   // creating a map with all of the data and passing to guitarValues
+        val guitarValues = guitar.toMap()
+
+        val childUpdate: MutableMap<String, Any?> = HashMap()
+        // overwriting existing values for both updates
+        childUpdate["guitars/$guitarid"] = guitarValues
+        childUpdate["user-guitars/$userid/$guitarid"] = guitarValues
+     // call it here and force update the changes
+        database.updateChildren(childUpdate)
+    }
+
+    override fun delete(userid: String, guitarid: String) {
+       // map through
         val childDelete: MutableMap<String, Any?> = HashMap()
+        // delete by assigning the value to null
         childDelete["/guitars/$guitarid"] = null
         childDelete["/user-guitars/$userid/$guitarid"] = null
 
         database.updateChildren(childDelete)
-    }
-
-    override fun update(userid: String, guitarid: String, guitar: GuitarAppModel) {
-
-        val guitarValues = guitar.toMap()
-
-        val childUpdate: MutableMap<String, Any?> = HashMap()
-        childUpdate["guitars/$guitarid"] = guitarValues
-        childUpdate["user-guitars/$userid/$guitarid"] = guitarValues
-
-        database.updateChildren(childUpdate)
     }
 
   /*  fun updateImageRef(userid: String, imageUri: String) {

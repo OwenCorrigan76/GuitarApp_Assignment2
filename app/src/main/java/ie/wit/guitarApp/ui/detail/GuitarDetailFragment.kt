@@ -70,9 +70,14 @@ class GuitarDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         detailViewModel.getGuitar(
-            loggedInViewModel.liveFirebaseUser.value?.email!!,
+            loggedInViewModel.liveFirebaseUser.value?.uid!!,
             args.guitarid
         )
+        /* detailViewModel.updateGuitar(
+            loggedInViewModel.liveFirebaseUser.value?.uid!!,
+            // two way dataBinding
+            args.guitarid, fragBinding.guitarvm?.observableGuitar!!.value!!)
+    }*/
     }
 
     override fun onDestroyView() {

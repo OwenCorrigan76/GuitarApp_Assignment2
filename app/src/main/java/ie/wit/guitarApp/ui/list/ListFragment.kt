@@ -87,6 +87,7 @@ class ListFragment : Fragment(), GuitarClickListener {
                 showLoader(loader, "Deleting Guitar")
                 val adapter = fragBinding.recyclerView.adapter as GuitarAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
+                // delete with the id assigned by Firebase
                 listViewModel.delete(
                     listViewModel.liveFirebaseUser.value?.uid!!,
                     (viewHolder.itemView.tag as GuitarAppModel).uid
@@ -178,7 +179,9 @@ class ListFragment : Fragment(), GuitarClickListener {
         showLoader(loader, "Downloading Donations")
         loggedInViewModel.liveFirebaseUser.observe(viewLifecycleOwner, Observer { firebaseUser ->
             if (firebaseUser != null) {
+                // update from the database
                 listViewModel.liveFirebaseUser.value = firebaseUser
+                // and reload with the correct data from a particular user
                 listViewModel.load()
             }
         })

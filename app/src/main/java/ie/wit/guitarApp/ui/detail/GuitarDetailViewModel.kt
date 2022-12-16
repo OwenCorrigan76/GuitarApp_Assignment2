@@ -12,12 +12,14 @@ class GuitarDetailViewModel : ViewModel() {
 
     // public read only observable data
     var observableGuitar: LiveData<GuitarAppModel>
+    // getters and setters so we can use the private Mutable.....
         get() = guitar
         set(value) {guitar.value = value.value}
 
     // this function gets an id and updates the guitar.value via GuitarManager interface
     fun getGuitar(userid:String, id: String) {
         try {
+            // findById called here with userid
             FirebaseDBManager.findById(userid, id, guitar)
             Timber.i("Detail getGuitar() Success : ${
                 guitar.value.toString()}")
@@ -28,6 +30,7 @@ class GuitarDetailViewModel : ViewModel() {
     }
     fun updateGuitar(userid:String, id: String,guitar: GuitarAppModel) {
         try {
+            // same as findById
             FirebaseDBManager.update(userid, id, guitar)
             Timber.i("Detail update() Success : $guitar")
         }

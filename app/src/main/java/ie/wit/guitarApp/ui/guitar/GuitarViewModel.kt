@@ -25,8 +25,9 @@ class GuitarViewModel : ViewModel() { // declaration of type ViewModel
     ) {
         status.value = try {
             guitar.profilepic = FirebaseImageManager.imageUri.value.toString()
-          //  guitar.image = FirebaseImageManager.imageUri.value.toString()
-
+            guitar.lng
+            guitar.lat
+            guitar.zoom
             FirebaseDBManager.create(firebaseUser, guitar)
             true
         } catch (e: IllegalArgumentException) {

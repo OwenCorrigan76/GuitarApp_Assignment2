@@ -193,6 +193,7 @@ class GuitarFragment : Fragment() {
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate,
                     image = image.toString(),
+                    // tied to the email of the signed in user
                     email = loggedInViewModel.liveFirebaseUser.value?.email!!,
                     lat = guitars.lat,
                     lng = guitars.lng,

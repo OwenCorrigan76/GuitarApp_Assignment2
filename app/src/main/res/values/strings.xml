@@ -14,7 +14,7 @@
     <string name="message">Message :</string>
     <string name="action_share">Share</string>
     <string name="action_send">Send</string>
-    <string name="group_communicate">Communicate</string>
+    <string name="locations_services">Location Services</string>
 
     <string name="nav_header_title">Guitar Application</string>
     <string name="nav_header_subtitle">voteforhomer@android.com</string>
@@ -32,7 +32,7 @@
     <string name="action_about">About Us</string>
     <string name="aboutus_title">Homer for President !!</string>
     <string name="aboutus_message">Hi, I\'m Homer\n\nPlease vote for me.\n\n Please Please Please Please!!</string>
-    <string name="menu_addGuitar">Guitars</string>
+    <string name="menu_addGuitar">Guitar Locations</string>
     <string name="menu_saveGuitar">Save</string>
     <string name="title_activity_login"> Signup/Login to Guitar Evaluation App</string>
     <string name="menu_showMap">Show Map</string>
