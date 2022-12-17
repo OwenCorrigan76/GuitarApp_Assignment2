@@ -1,12 +1,16 @@
 package org.wit.guitar.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.ActivityGuitarMapsBinding
 import ie.wit.guitarApp.databinding.ContentGuitarMapsBinding
 import ie.wit.guitarApp.main.MainApp
@@ -18,6 +22,7 @@ class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
     private lateinit var contentBinding: ContentGuitarMapsBinding
     lateinit var map: GoogleMap
     lateinit var app: MainApp
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +38,8 @@ class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
             configureMap()
         }
     }
+
+
 
     fun configureMap() {
         map.setOnMarkerClickListener(this)

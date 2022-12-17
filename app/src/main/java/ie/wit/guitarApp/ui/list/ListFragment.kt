@@ -1,8 +1,12 @@
 package ie.wit.guitarApp.ui.list
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -23,8 +27,12 @@ import ie.wit.guitarApp.databinding.FragmentListBinding
 
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarAppModel
+import ie.wit.guitarApp.models.Location
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
+import ie.wit.guitarApp.ui.guitar.GuitarFragment
 import ie.wit.guitarApp.utils.*
+import org.wit.guitar.activities.GuitarMapsActivity
+import timber.log.Timber
 
 class ListFragment : Fragment(), GuitarClickListener {
 
@@ -34,6 +42,9 @@ class ListFragment : Fragment(), GuitarClickListener {
     lateinit var loader: AlertDialog
     private val listViewModel: ListViewModel by activityViewModels()
     private val loggedInViewModel: LoggedInViewModel by activityViewModels()
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
+    val guitars = GuitarAppModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,21 +80,9 @@ class ListFragment : Fragment(), GuitarClickListener {
             }
         })
         setSwipeRefresh()
+        registerMapCallback()
 
-        /*  // MVVM in action here
-           listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-           listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer { guitars ->
-               guitars?.let { render(guitars) }
-           })
-   */
 
-      /*  val fab: FloatingActionButton = fragBinding.fab
-        fab.setOnClickListener {
-            val action =
-                ListFragmentDirections.actionListFragmentToGuitarFragment()
-            findNavController().navigate(action)
-        }
-*/
         // for swipe delete
         val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -113,6 +112,9 @@ class ListFragment : Fragment(), GuitarClickListener {
         return root
     }
 
+
+
+
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
@@ -121,17 +123,23 @@ class ListFragment : Fragment(), GuitarClickListener {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_list, menu)
+               /* val item2 = menu.findItem(R.id.item_map) as MenuItem
+                        val launcherIntent = Intent(context, GuitarMapsActivity::class.java)
+                        mapIntentLauncher.launch(launcherIntent)*/
+
 
                 val item = menu.findItem(R.id.toggleGuitars) as MenuItem
                 item.setActionView(R.layout.togglebutton_layout)
-                val toggleDonations: SwitchCompat = item.actionView!!.findViewById(R.id.toggleButton)
-                toggleDonations.isChecked = false
+                val toggleGuitars: SwitchCompat =
+                    item.actionView!!.findViewById(R.id.toggleButton)
+                toggleGuitars.isChecked = false
 
-                toggleDonations.setOnCheckedChangeListener { _, isChecked ->
+                toggleGuitars.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) listViewModel.loadAll()
                     else listViewModel.load()
                 }
             }
+
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Validate and handle the selected menu item
@@ -143,10 +151,17 @@ class ListFragment : Fragment(), GuitarClickListener {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
+
     private fun render(guitarsList: ArrayList<GuitarAppModel>) { // live data values that have been updated
-       // create an adapter and pass in the list
+        // create an adapter and pass in the list
         fragBinding.recyclerView.adapter =
-            listViewModel.readOnly.value?.let { GuitarAdapter(guitarsList, this, it) } // pass in the list
+            listViewModel.readOnly.value?.let {
+                GuitarAdapter(
+                    guitarsList,
+                    this,
+                    it
+                )
+            } // pass in the list
         if (guitarsList.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
             fragBinding.guitarsNotFound.visibility = View.VISIBLE
@@ -166,7 +181,7 @@ class ListFragment : Fragment(), GuitarClickListener {
         fragBinding.swiperefresh.setOnRefreshListener {
             fragBinding.swiperefresh.isRefreshing = true
             showLoader(loader, "Downloading Guitars")
-            if(listViewModel.readOnly.value!!)
+            if (listViewModel.readOnly.value!!)
                 listViewModel.loadAll()
             else
                 listViewModel.load()
@@ -197,4 +212,23 @@ class ListFragment : Fragment(), GuitarClickListener {
         _fragBinding = null
     }
 
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    Activity.RESULT_OK -> {
+                        if (result.data != null) {
+                            Timber.i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            Timber.i("Location == $location")
+                            guitars.lat = location.lat
+                            guitars.lng = location.lng
+                            guitars.zoom = location.zoom
+                        } // end of if
+                    }
+                    Activity.RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
 }

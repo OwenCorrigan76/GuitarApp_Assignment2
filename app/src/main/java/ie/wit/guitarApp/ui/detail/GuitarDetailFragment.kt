@@ -43,7 +43,7 @@ class GuitarDetailFragment : Fragment() {
         // for editing
         fragBinding.editGuitarButton.setOnClickListener {
             detailViewModel.updateGuitar(
-                loggedInViewModel.liveFirebaseUser.value?.email!!,
+                loggedInViewModel.liveFirebaseUser.value?.uid!!,
                 args.guitarid, fragBinding.guitarvm?.observableGuitar!!.value!!
             )
             findNavController().navigateUp()

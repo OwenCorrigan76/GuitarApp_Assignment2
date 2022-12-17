@@ -1,5 +1,6 @@
 package ie.wit.guitarApp.ui.home
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -21,11 +22,14 @@ import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.HomeBinding
 import ie.wit.guitarApp.databinding.NavHeaderBinding
 import ie.wit.guitarApp.firebase.FirebaseImageManager
+import ie.wit.guitarApp.models.GuitarAppModel
+import ie.wit.guitarApp.models.Location
 
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.auth.Login
 import ie.wit.guitarApp.utils.readImageUri
 import ie.wit.guitarApp.utils.showImagePicker
+import org.wit.guitar.activities.GuitarMapsActivity
 import timber.log.Timber
 
 class Home : AppCompatActivity() {
@@ -37,6 +41,8 @@ class Home : AppCompatActivity() {
     private lateinit var loggedInViewModel : LoggedInViewModel
     private lateinit var headerView : View
     private lateinit var intentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    val guitars = GuitarAppModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +68,17 @@ class Home : AppCompatActivity() {
         val navView = homeBinding.navView
         navView.setupWithNavController(navController)
         initNavHeader()
+        registerImagePickerCallback()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, GuitarMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     public override fun onStart() {
@@ -154,6 +171,25 @@ class Home : AppCompatActivity() {
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    Activity.RESULT_OK -> {
+                        if (result.data != null) {
+                            Timber.i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            Timber.i("Location == $location")
+                            guitars.lat = location.lat
+                            guitars.lng = location.lng
+                            guitars.zoom = location.zoom
+                        } // end of if
+                    }
+                    Activity.RESULT_CANCELED -> { } else -> { }
                 }
             }
     }

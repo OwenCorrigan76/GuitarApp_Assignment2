@@ -99,12 +99,13 @@ class GuitarFragment : Fragment() {
         }
 
         fragBinding.guitarLocation.setOnClickListener { // launch maps and pass location to MapActivity
-            val location = Location(52.245696, -7.139102, 15f)
-            if (guitars.zoom != 0f) {
-                location.lat =  guitars.lat
-                location.lng = guitars.lng
-                location.zoom = guitars.zoom
-            }
+            var location = Location(52.245696, -7.139102, 15f)
+
+            /* if (guitars.zoom != 0f) {
+                 location.lat =  guitars.lat
+                 location.lng = guitars.lng
+                 location.zoom = guitars.zoom
+             }*/
 
             val launcherIntent = Intent(activity, MapActivity::class.java)
                 .putExtra("location", location)
@@ -256,4 +257,5 @@ class GuitarFragment : Fragment() {
                 }
             }
     }
-}
+    }
+
