@@ -19,7 +19,11 @@
 
     <item android:title="@string/locations_services">
         <menu>
-            <item
+
+<!--
+                clicking this item in the nav drawer inflates mapFragment layout
+                from main_navigation, which opens the map in fragment_map
+--><item
                 android:id="@+id/mapFragment"
                 android:icon="@drawable/ic_menu_map"
                 android:title="@string/menu_addGuitar"

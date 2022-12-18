@@ -64,6 +64,32 @@
                 android:textColor="@color/black"
                 tools:text="A Date" />
 
+            <TextView
+                android:id="@+id/latView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/guitarModel"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="28dp"
+                android:text="@{Double.toString(guitar.lat)}"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/dateView"
+                tools:text="Latitude" />
+
+            <TextView
+                android:id="@+id/lngView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/guitarModel"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="60dp"
+                android:text="@{Double.toString(guitar.lng)}"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/latView"
+                tools:text="Longitude" />
+
             <ImageView
                 android:id="@+id/imageIcon"
                 android:layout_width="100dp"

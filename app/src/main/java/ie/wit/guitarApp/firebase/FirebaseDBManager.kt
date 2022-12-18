@@ -61,9 +61,9 @@ object FirebaseDBManager : GuitarStore {
             })
     }
 
-    override fun findAll(): List<GuitarAppModel> {
+   /* override fun findAll(): List<GuitarAppModel> {
         TODO("Not yet implemented")
-    }
+    }*/
 
     override fun findById(
         userid: String,

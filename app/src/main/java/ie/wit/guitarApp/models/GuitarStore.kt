@@ -8,7 +8,7 @@ interface GuitarStore {
     fun findAll(userid:String,
                 guitarList:
                 MutableLiveData<List<GuitarAppModel>>)
-    fun findAll() : List<GuitarAppModel>
+ //   fun findAll() : List<GuitarAppModel>
     fun findById(userid:String, guitarid: String,
                  guitar: MutableLiveData<GuitarAppModel>)
     fun create(firebaseUser: MutableLiveData<FirebaseUser>, guitar: GuitarAppModel)

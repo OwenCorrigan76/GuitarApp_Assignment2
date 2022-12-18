@@ -25,10 +25,11 @@ import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.auth.Login
 import ie.wit.guitarApp.utils.readImageUri
 import ie.wit.guitarApp.utils.showImagePicker
+import org.wit.guitar.activities.GuitarMapsActivity
 import timber.log.Timber
 
 class Home : AppCompatActivity() {
-
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var homeBinding: HomeBinding
     private lateinit var navHeaderBinding: NavHeaderBinding
@@ -67,15 +68,15 @@ class Home : AppCompatActivity() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+  /*  override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_map -> {
-                /*     val launcherIntent = Intent(this, GuitarMapsActivity::class.java)
-                     mapIntentLauncher.launch(launcherIntent)*/
+            R.id.item_map_button -> {
+                     val launcherIntent = Intent(this, GuitarMapsActivity::class.java)
+                     mapIntentLauncher.launch(launcherIntent)
             }
         }
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 
     public override fun onStart() {
         super.onStart()

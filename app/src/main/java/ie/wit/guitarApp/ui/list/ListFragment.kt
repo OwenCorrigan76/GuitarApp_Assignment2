@@ -67,7 +67,7 @@ class ListFragment : Fragment(), GuitarClickListener {
         }
         showLoader(loader, "Downloading Guitars")
         listViewModel.observableGuitarsList.observe(viewLifecycleOwner, Observer
-        // when guitar changes through obsevable....
+        // when guitar changes through observable....
         { guitars ->
             guitars?.let {
                 // call render on the data (ArrayList)

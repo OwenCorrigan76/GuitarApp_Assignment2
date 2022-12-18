@@ -104,12 +104,13 @@ class GuitarFragment : Fragment() {
 
         /** map click listener */
         fragBinding.guitarLocation.setOnClickListener { // launch maps and pass location to MapActivity
+         //   var location = Location(-35.0, 151.0, 15f)
 
-            /* if (guitars.zoom != 0f) {
+             if (guitars.zoom != 0f) {
                  location.lat =  guitars.lat
                  location.lng = guitars.lng
                  location.zoom = guitars.zoom
-             }*/
+             }
 
             val launcherIntent = Intent(activity, MapActivity::class.java)
                 .putExtra("location", location)
@@ -182,12 +183,9 @@ class GuitarFragment : Fragment() {
   private fun setButtonListener(layout: FragmentGuitarBinding) {
         layout.addButton.setOnClickListener {
             val valuation = layout.valuePicker.value.toDouble()
-            // val guitarMake = layout.guitarMake.text.toString()
             val guitarModel = layout.guitarModel.text.toString()
             val manufactureDate = layout.dateView.text.toString()
             var guitarMake = layout.spinnerGuitarMake.selectedItem.toString()
-
-
 
             print("*****************" + guitars + "*******************")
 
@@ -205,7 +203,7 @@ class GuitarFragment : Fragment() {
                     zoom = 20f,
                 )
             )
-            i("add Button Pressed: ${location.lat.toString() + " " + location.lng.toString() + " " +
+            i("add Button Pressed: ${location.lat.toString() + " " + location.lng.toString() +  " " +
                     15f + " " +  guitarMake + " " +  guitarModel + " " +  valuation + " " +  
                     manufactureDate + " " +  " image is " + guitars.image  }")
         }
@@ -252,8 +250,11 @@ class GuitarFragment : Fragment() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
+                            guitars.lat = location.lat
+                            guitars.lng = location.lng
+                            guitars.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
