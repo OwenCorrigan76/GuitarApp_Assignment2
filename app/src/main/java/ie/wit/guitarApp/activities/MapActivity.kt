@@ -18,6 +18,7 @@ import ie.wit.guitarApp.R
 import ie.wit.guitarApp.models.GuitarAppModel
 import ie.wit.guitarApp.models.Location
 import org.wit.guitar.activities.GuitarMapsActivity
+import timber.log.Timber
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback,
     GoogleMap.OnMarkerDragListener,
@@ -55,10 +56,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
     }
 
     override fun onMarkerDrag(marker: Marker) {
+        Timber.i("Dragging Marker")
     }
 
     override fun onMarkerDragStart(marker: Marker) {
-
+        
     }
 
     override fun onMarkerDragEnd(marker: Marker) {
