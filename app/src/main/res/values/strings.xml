@@ -33,8 +33,8 @@
     <string name="hint_guitarMake">Guitar Make</string>
     <string name="hint_guitarModel">Guitar Model</string>
     <string name="hint_guitarDate">Manufacture Date</string>
-    <string name="action_about">About Us</string>
-    <string name="aboutus_title">Homer for President !!</string>
+    <string name="action_about">About This App</string>
+    <string name="aboutus_title">Guitar App!!</string>
     <string name="aboutus_message">Guitar App\n\nFor adding and valuing guitars\n\n Please respect other users!!</string>
     <string name="menu_addGuitar">Guitar Locations</string>
     <string name="menu_saveGuitar">Save</string>
