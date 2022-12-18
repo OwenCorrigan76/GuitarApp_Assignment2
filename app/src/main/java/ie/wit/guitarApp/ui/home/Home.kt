@@ -55,13 +55,11 @@ class Home : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
+      /** embed these fragments inside drawerLayout */
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.listFragment, R.id.listFragment, R.id.aboutFragment
-            ), drawerLayout
+            ), drawerLayout,
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -74,8 +72,8 @@ class Home : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_map -> {
-                val launcherIntent = Intent(this, GuitarMapsActivity::class.java)
-                mapIntentLauncher.launch(launcherIntent)
+           /*     val launcherIntent = Intent(this, GuitarMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)*/
             }
         }
         return super.onOptionsItemSelected(item)
@@ -98,6 +96,7 @@ class Home : AppCompatActivity() {
             }
         })
         registerImagePickerCallback()
+        registerMapCallback()
     }
 
     private fun initNavHeader() {

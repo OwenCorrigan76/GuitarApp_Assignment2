@@ -35,16 +35,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
         mapFragment.getMapAsync(this)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.item_map -> {
-                val launcherIntent = Intent(this, GuitarMapsActivity::class.java)
-                mapIntentLauncher.launch(launcherIntent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         val loc = LatLng(location.lat, location.lng)

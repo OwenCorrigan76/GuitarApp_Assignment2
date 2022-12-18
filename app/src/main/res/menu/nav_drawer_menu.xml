@@ -21,13 +21,13 @@
         <menu>
             <item
                 android:id="@+id/item_map"
-                android:icon="@android:drawable/ic_menu_mapmode"
+                android:icon="@drawable/ic_menu_map"
                 android:title="@string/menu_addGuitar"
                 app:showAsAction="always"/>
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/aboutFragment"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/action_send" />
+                android:title="@string/action_about" />
         </menu>
     </item>
     <item android:title="Access Control">

@@ -19,10 +19,11 @@
         android:theme="@style/Theme.DonationX"
         tools:targetApi="31">
 
-        <meta-data
+      <!--  <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDpZLvKP8vzG_qHI8ZSw3_86oaf23y3wig" />
-
+            android:value="AIzaSyDpZLvKP8vzG_qHI8ZSw3_86oaf23y3wig"
+            />
+-->
         <activity
             android:name=".activities.MapActivity"
             android:exported="false"

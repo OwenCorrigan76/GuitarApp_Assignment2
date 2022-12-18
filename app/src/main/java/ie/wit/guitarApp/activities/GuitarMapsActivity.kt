@@ -29,7 +29,7 @@ class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
         app = application as MainApp
         binding = ActivityGuitarMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //binding.toolbar.title = title
+        binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
         contentBinding = ContentGuitarMapsBinding.bind(binding.root)
         contentBinding.mapView.onCreate(savedInstanceState)

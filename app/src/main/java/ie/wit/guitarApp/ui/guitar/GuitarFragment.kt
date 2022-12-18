@@ -32,13 +32,14 @@ import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber.Forest.i
 
+
+/** this lifeCycle is directly dependant on the Home (Activity) lifeCycle */
 class GuitarFragment : Fragment() {
 
     lateinit var app: MainApp
     private var _fragBinding: FragmentGuitarBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var guitarViewModel: GuitarViewModel
-    private val listViewModel: ListViewModel by activityViewModels()
     private val loggedInViewModel : LoggedInViewModel by activityViewModels()
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
@@ -59,12 +60,14 @@ class GuitarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        /** inflate fragment_guitar */
         _fragBinding = FragmentGuitarBinding.inflate(inflater, container, false)
         val root = fragBinding.root
         activity?.title = getString(R.string.action_guitar)
 
         setupMenu()
         registerImagePickerCallback()
+        registerMapCallback()
 
         guitarViewModel = ViewModelProvider(this).get(GuitarViewModel::class.java)
         guitarViewModel.observableStatus.observe(viewLifecycleOwner, Observer { status ->
@@ -131,7 +134,6 @@ class GuitarFragment : Fragment() {
             )
             dialogP.show()
         }
-        registerMapCallback()
         setButtonListener(fragBinding)
 
         /** This allows us to select an image with chooseImage button */
@@ -166,8 +168,6 @@ class GuitarFragment : Fragment() {
         when (status) {
             true -> {
                 view?.let {
-                   // Uncomment this if you want to immediately return to Report
-                  //  findNavController().popBackStack()
                 }
             }
             false -> Toast.makeText(context, getString(R.string.guitarError), Toast.LENGTH_LONG)
