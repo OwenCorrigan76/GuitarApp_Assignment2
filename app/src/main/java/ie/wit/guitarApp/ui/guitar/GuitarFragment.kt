@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.activities.MapActivity
@@ -155,7 +156,7 @@ class GuitarFragment : Fragment() {
             }
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_guitar, menu)
+                menuInflater.inflate(R.menu.menu_guitar,  menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -180,7 +181,11 @@ class GuitarFragment : Fragment() {
     }
 
     /** Send to the model to be displayed in the list view */
-  private fun setButtonListener(layout: FragmentGuitarBinding) {
+  private fun setButtonListener(layout: FragmentGuitarBinding
+    // menuItem: MenuItem
+    ) {
+       /* when (item.itemId) {
+            R.id.item_save -> */
         layout.addButton.setOnClickListener {
             val valuation = layout.valuePicker.value.toDouble()
             val guitarModel = layout.guitarModel.text.toString()
@@ -196,7 +201,6 @@ class GuitarFragment : Fragment() {
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate,
                     image = image.toString(),
-
                     email = loggedInViewModel.liveFirebaseUser.value?.email!!,
                     lat = location.lat,
                     lng = location.lng,

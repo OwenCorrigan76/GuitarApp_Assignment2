@@ -42,7 +42,7 @@
                 android:layout_marginTop="48dp"
                 android:text="@{guitar.guitarMake}"
                 android:textColor="@color/black"
-                tools:text="Make"/>
+                tools:text="Make" />
 
             <TextView
                 android:id="@+id/guitarModel"
@@ -111,17 +111,21 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="175dp"
                 android:contentDescription="@string/app_name"
-                />
+                app:srcCompat="@drawable/ic_menu_guitar" />
 
             <TextView
                 android:id="@+id/message"
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/imageIcon"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="145dp"
+                android:layout_marginEnd="355dp"
+                android:layout_toEndOf="@+id/valuation"
                 android:text="@{guitar.message}"
                 android:textColor="@color/color_primary"
+                app:layout_constraintBottom_toBottomOf="@+id/latView"
+                android:textSize="20dp"
+
                 tools:text="message" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

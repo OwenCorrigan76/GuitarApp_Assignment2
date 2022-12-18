@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Guitar Evaluation App</string>
-    <string name="addButton">Add</string>
+    <string name="addButton">Save</string>
     <string name="amount"><u>Valuation €</u>.</string>
     <string name="guitarsNotFound">No Guitars Found \nFirst Add a Guitar!</string>
     <string name="guitarError">Error : Couldn\'t Add a Guitar...</string>
@@ -25,7 +25,7 @@
     <string name="nav_header_desc">Navigation header</string>
 
     <string name="button_addGuitar">Add Guitar</string>
-    <string name="button_addImage">Upload Image</string>
+    <string name="button_addImage">Add Image</string>
     <string name="button_saveGuitar">Save Guitar</string>
     <string name="dateButton">Add Date</string>
     <string name="valueTitle">Input Value</string>
@@ -48,7 +48,7 @@
     <string name="select_guitar_image">Select guitar image</string>
     <string name="change_guitar_image">Change Image</string>
     <string name="button_picker">Manufacture Date</string>
-    <string name="button_location">Set Location</string>
+    <string name="button_location">Location</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_guitar_maps">Map of all Locations</string>
     <string name="enter_guitar_make">Enter Make</string>
@@ -77,6 +77,7 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="select_profile_image">Select Profile Image</string>
+    <string name="menu_save">Save</string>
 
     <string-array name="guitar_make_list">
         <item>Aria</item>

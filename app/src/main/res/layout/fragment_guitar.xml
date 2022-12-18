@@ -7,7 +7,7 @@
     tools:context=".ui.guitar.GuitarFragment">
 
 
-    <EditText
+  <!--  <EditText
         android:id="@+id/guitarMake"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -27,47 +27,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011" />
-
-
-    <Spinner
-        android:id="@+id/spinnerGuitarMake"
+        app:layout_constraintVertical_bias="0.082" />-->
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="8dp"
-        android:layout_weight="1"
-        android:inputType="text"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:spinnerMode="dropdown"
-        android:textSize="45sp"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="119dp" />
-
-    <EditText
-        android:id="@+id/guitarModel"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:autofillHints=""
-        android:hint="@string/hint_guitarModel"
-        android:inputType="text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.253" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </RelativeLayout>
 
 
     <RelativeLayout
@@ -107,7 +76,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="349dp"
         android:layout_height="14dp"
-        android:layout_above="@+id/addButton"
+        android:layout_above="@+id/guitarLocation"
         android:layout_alignParentStart="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -175,7 +144,7 @@
         app:layout_constraintVertical_bias="0.847" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/guitarLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -184,13 +153,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/addButton"
+        android:text="@string/button_location"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948" />
+        app:layout_constraintVertical_bias="0.98" />
 
     <Button
         android:id="@+id/dateButton"
@@ -208,22 +177,7 @@
         app:layout_constraintHorizontal_bias="0.973"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.949" />
-
-    <Button
-        android:id="@+id/guitarLocation"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorAccent"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:stateListAnimator="@null"
-        android:text="@string/button_location"
-        android:textSize="10sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="689dp" />
+        app:layout_constraintVertical_bias="0.98" />
 
     <Button
         android:id="@+id/chooseImage"
@@ -238,9 +192,58 @@
         android:text="@string/button_addImage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.949" />
+        app:layout_constraintVertical_bias="0.98" />
+
+  <EditText
+      android:id="@+id/guitarModel"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      android:autofillHints=""
+      android:hint="@string/hint_guitarModel"
+      android:inputType="text"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.098" />
+
+  <Spinner
+      android:id="@+id/spinnerGuitarMake"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:layout_weight="1"
+      android:inputType="text"
+      android:maxLength="25"
+      android:maxLines="1"
+      android:spinnerMode="dropdown"
+      android:textSize="45sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+  <Button
+      android:id="@+id/addButton"
+      android:layout_width="100dp"
+      android:layout_height="50dp"
+      android:background="#8F0303"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:stateListAnimator="@null"
+      android:text="@string/addButton"
+      android:textSize="10sp"
+      tools:ignore="MissingConstraints"
+      tools:layout_editor_absoluteX="28dp"
+      tools:layout_editor_absoluteY="161dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
