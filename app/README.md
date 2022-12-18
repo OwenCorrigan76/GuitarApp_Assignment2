@@ -9,6 +9,7 @@ These details include:
 + Valuation
 + Manufacture Date
 + Location of guitar owner
++ 
 
 Below is a list of app features:
 + Feature 1 - Add Guitar.
