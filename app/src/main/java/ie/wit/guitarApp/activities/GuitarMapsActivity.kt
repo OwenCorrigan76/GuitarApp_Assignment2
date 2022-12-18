@@ -14,6 +14,7 @@ import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.ActivityGuitarMapsBinding
 import ie.wit.guitarApp.databinding.ContentGuitarMapsBinding
 import ie.wit.guitarApp.main.MainApp
+import ie.wit.guitarApp.ui.map.MapFragment
 
 
 class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
@@ -23,6 +24,8 @@ class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
     lateinit var map: GoogleMap
     lateinit var app: MainApp
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
+    val fragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as MapFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,6 @@ class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
             configureMap()
         }
     }
-
 
 
     fun configureMap() {

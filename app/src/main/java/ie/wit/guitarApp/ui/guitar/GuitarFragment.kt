@@ -43,7 +43,7 @@ class GuitarFragment : Fragment() {
     private val loggedInViewModel : LoggedInViewModel by activityViewModels()
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
-
+    var location = Location(-34.0, 151.0, 15f)
     val guitars = GuitarAppModel()
     var image: Uri = Uri.EMPTY
     val today = Calendar.getInstance()
@@ -101,8 +101,9 @@ class GuitarFragment : Fragment() {
             }
         }
 
+
+        /** map click listener */
         fragBinding.guitarLocation.setOnClickListener { // launch maps and pass location to MapActivity
-            var location = Location(52.245696, -7.139102, 15f)
 
             /* if (guitars.zoom != 0f) {
                  location.lat =  guitars.lat
@@ -140,6 +141,8 @@ class GuitarFragment : Fragment() {
         fragBinding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
+
+
         return root;
     }
 
@@ -185,6 +188,7 @@ class GuitarFragment : Fragment() {
             var guitarMake = layout.spinnerGuitarMake.selectedItem.toString()
 
 
+
             print("*****************" + guitars + "*******************")
 
             guitarViewModel.addGuitar(loggedInViewModel.liveFirebaseUser,
@@ -194,14 +198,16 @@ class GuitarFragment : Fragment() {
                     guitarModel = guitarModel,
                     manufactureDate = manufactureDate,
                     image = image.toString(),
-                    // tied to the email of the signed in user
+
                     email = loggedInViewModel.liveFirebaseUser.value?.email!!,
-                    lat = guitars.lat,
-                    lng = guitars.lng,
-                    zoom = 15f,
+                    lat = location.lat,
+                    lng = location.lng,
+                    zoom = 20f,
                 )
             )
-            i("add Button Pressed: ${guitarMake + guitarModel + valuation + manufactureDate + " image is " + guitars.image  }")
+            i("add Button Pressed: ${location.lat.toString() + " " + location.lng.toString() + " " +
+                    15f + " " +  guitarMake + " " +  guitarModel + " " +  valuation + " " +  
+                    manufactureDate + " " +  " image is " + guitars.image  }")
         }
     }
 
@@ -246,11 +252,8 @@ class GuitarFragment : Fragment() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            location = result.data!!.extras?.getParcelable("location")!!
                             i("Location == $location")
-                            guitars.lat = location.lat
-                            guitars.lng = location.lng
-                            guitars.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }

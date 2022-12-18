@@ -48,9 +48,6 @@ class ListFragment : Fragment(), GuitarClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //   app = activity?.application as MainApp
-        //  setHasOptionsMenu(true)
-        //navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
     }
 
     override fun onCreateView(
@@ -80,7 +77,7 @@ class ListFragment : Fragment(), GuitarClickListener {
             }
         })
         setSwipeRefresh()
-        registerMapCallback()
+      //  registerMapCallback()
 
 
         // for swipe delete
@@ -123,11 +120,6 @@ class ListFragment : Fragment(), GuitarClickListener {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_list, menu)
-               /* val item2 = menu.findItem(R.id.item_map) as MenuItem
-                        val launcherIntent = Intent(context, GuitarMapsActivity::class.java)
-                        mapIntentLauncher.launch(launcherIntent)*/
-
-
                 val item = menu.findItem(R.id.toggleGuitars) as MenuItem
                 item.setActionView(R.layout.togglebutton_layout)
                 val toggleGuitars: SwitchCompat =
@@ -212,23 +204,5 @@ class ListFragment : Fragment(), GuitarClickListener {
         _fragBinding = null
     }
 
-    private fun registerMapCallback() {
-        mapIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { result ->
-                when (result.resultCode) {
-                    Activity.RESULT_OK -> {
-                        if (result.data != null) {
-                            Timber.i("Got Location ${result.data.toString()}")
-                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
-                            Timber.i("Location == $location")
-                            guitars.lat = location.lat
-                            guitars.lng = location.lng
-                            guitars.zoom = location.zoom
-                        } // end of if
-                    }
-                    Activity.RESULT_CANCELED -> { } else -> { }
-                }
-            }
-    }
+
 }
