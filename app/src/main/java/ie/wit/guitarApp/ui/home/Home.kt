@@ -58,7 +58,7 @@ class Home : AppCompatActivity() {
       /** embed these fragments inside drawerLayout */
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.listFragment, R.id.listFragment, R.id.aboutFragment
+                R.id.listFragment, R.id.mapFragment, R.id.aboutFragment
             ), drawerLayout,
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

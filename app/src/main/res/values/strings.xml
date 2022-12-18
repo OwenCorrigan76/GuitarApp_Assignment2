@@ -16,6 +16,8 @@
     <string name="message">Message :</string>
     <string name="action_share">Share</string>
     <string name="action_send">Send</string>
+    <string name="action_maps">Maps</string>
+
     <string name="locations_services">Location Services</string>
 
     <string name="nav_header_title">Guitar Application</string>
@@ -112,6 +114,8 @@
         <item>Washburn</item>
         <item>Yamaha</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
