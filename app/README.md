@@ -1,7 +1,8 @@
 Name: Owen Corrigan
 GitHub Reopsitory - https://github.com/OwenCorrigan76/GuitarApp_Assignment2
+
 ## Overview.
-This app is an Android app written in the Kotlin language. The app is designed so users can uplad images of guitars, along with details about the instrument.
+This app is an Android app written in the Kotlin language. The app is designed so users can upload images of guitars, along with details about the instrument.
 These details include:
 + Make
 + Model
