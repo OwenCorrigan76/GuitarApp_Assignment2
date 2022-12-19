@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ie.wit.guitarApp.databinding.FragmentGuitarDetailBinding
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
-import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber
 
 class GuitarDetailFragment : Fragment() {
@@ -21,7 +20,6 @@ class GuitarDetailFragment : Fragment() {
     private var _fragBinding: FragmentGuitarDetailBinding? = null
     private val fragBinding get() = _fragBinding!!
     private val loggedInViewModel: LoggedInViewModel by activityViewModels()
-    private val listViewModel: ListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
