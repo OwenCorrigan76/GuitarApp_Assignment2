@@ -24,15 +24,40 @@
 
 
             <TextView
+                android:id="@+id/euro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0.5dp"
+                android:layout_marginTop="5dp"
+                android:text="€"
+                android:textSize="30sp"
+                tools:text="€" />
+
+            <TextView
                 android:id="@+id/valuation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:text="@{Double.toString(guitar.valuation) }"
                 android:textSize="30sp"
                 tools:text="Value" />
 
+            <TextView
+                android:id="@+id/makeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/guitarModel"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="-38dp"
+                android:text="@string/gMake"
+                android:textColor="@color/black"
+                tools:text="Make" />
 
             <TextView
                 android:id="@+id/guitarMake"
@@ -42,7 +67,20 @@
                 android:layout_marginTop="48dp"
                 android:text="@{guitar.guitarMake}"
                 android:textColor="@color/black"
+                android:layout_marginStart="55dp"
                 tools:text="Make" />
+
+            <TextView
+                android:id="@+id/modelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/guitarModel"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="-17dp"
+                android:text="@string/gModel"
+                android:textColor="@color/black"
+                tools:text="Model" />
 
             <TextView
                 android:id="@+id/guitarModel"
@@ -52,17 +90,44 @@
                 android:layout_marginTop="0dp"
                 android:text="@{guitar.guitarModel}"
                 android:textColor="@color/black"
+                android:layout_marginStart="55dp"
                 tools:text="Model" />
 
             <TextView
-                android:id="@+id/dateView"
+                android:id="@+id/dateText"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="90dp"
+                android:text="@string/gDAte"
+                android:textColor="@color/black"
+                tools:text="Date" />
+
+
+            <TextView
+                android:id="@+id/dateView"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/guitarModel"
                 android:layout_alignParentStart="true"
                 android:text="@{guitar.manufactureDate}"
                 android:textColor="@color/black"
+                android:layout_marginStart="55dp"
                 tools:text="A Date" />
+
+            <TextView
+                android:id="@+id/latText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/guitarModel"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="24dp"
+                android:text="LAT:"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/dateView"
+                tools:text="Latitude" />
 
             <TextView
                 android:id="@+id/latView"
@@ -70,9 +135,22 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/guitarModel"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="24dp"
                 android:text="@{Double.toString(guitar.lat)}"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/dateView"
+                tools:text="Latitude" />
+
+            <TextView
+                android:id="@+id/lngText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/guitarModel"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="44dp"
+                android:text="LNG:"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/dateView"
                 tools:text="Latitude" />
@@ -83,8 +161,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/guitarModel"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="44dp"
                 android:text="@{Double.toString(guitar.lng)}"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/latView"
@@ -92,26 +170,24 @@
 
             <ImageView
                 android:id="@+id/profilepicIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="6dp"
-                android:layout_marginEnd="15dp"
-                android:contentDescription="@string/change_guitar_image"
-                />
+                android:layout_marginEnd="2dp"
+                android:contentDescription="@string/change_guitar_image" />
 
 
             <ImageView
                 android:id="@+id/guitarIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="29dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="175dp"
-                android:contentDescription="@string/app_name"
-               />
+                android:layout_marginEnd="145dp"
+                android:contentDescription="@string/app_name" />
 
             <TextView
                 android:id="@+id/message"
@@ -123,8 +199,8 @@
                 android:layout_toEndOf="@+id/valuation"
                 android:text="@{guitar.message}"
                 android:textColor="@color/color_primary"
-                app:layout_constraintBottom_toBottomOf="@+id/latView"
                 android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/latView"
 
                 tools:text="message" />
         </RelativeLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -10,7 +11,7 @@
             type="ie.wit.guitarApp.ui.detail.GuitarDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,8 +22,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="38dp"
             android:text="@string/date"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/editManDate"
+            app:layout_constraintHorizontal_bias="0.888"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="38dp"
+            android:text="@string/lat"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -35,14 +52,14 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="38dp"
             android:text="@string/message"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/editNotes"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.988"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -50,19 +67,20 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="38dp"
             android:text="@string/valuation"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/editNotes"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.972"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
-        <EditText
+
+        <TextView
             android:id="@+id/editMake"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
@@ -73,9 +91,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
             android:id="@+id/editModel"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
             android:layout_marginEnd="8dp"
@@ -83,35 +101,50 @@
             android:inputType="text"
             android:text="@{guitarvm.observableGuitar.guitarModel}"
             android:textAlignment="textStart"
-            android:textColor="@color/color_primary"
+            android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
             android:id="@+id/editManDate"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="4dp"
             android:ems="10"
             android:inputType="text"
+            android:textColor="@color/black"
             android:text="@{guitarvm.observableGuitar.manufactureDate}"
             android:textAlignment="viewStart"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editModel" />
 
-        <EditText
+        <TextView
             android:id="@+id/editNotes"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="4dp"
             android:ems="10"
-            android:text="@={guitarvm.observableGuitar.message}"
-
             android:inputType="text"
+            android:textColor="@color/black"
+            android:text="@{Double.toString(guitarvm.observableGuitar.lat)}"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editManDate" />
+
+        <TextView
+            android:id="@+id/editLng"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="4dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:text="@{Double.toString(guitarvm.observableGuitar.lng)}"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editManDate" />
@@ -121,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="62dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="38dp"
             android:text="@string/make"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
@@ -136,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="38dp"
             android:text="@string/model"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
@@ -146,39 +179,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <EditText
+
+
+
+        <TextView
             android:id="@+id/editValuation"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="4dp"
             android:ems="10"
             android:inputType="text"
+            android:textColor="@color/black"
             android:text="@{Double.toString(guitarvm.observableGuitar.valuation)}"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
-        />
-
 
         <Button
             android:id="@+id/editGuitarButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update"
+            android:text="Back"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/deleteGuitarButton"
+
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/deleteGuitarButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editGuitarButton" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

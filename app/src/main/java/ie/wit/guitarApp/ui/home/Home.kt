@@ -55,8 +55,8 @@ class Home : AppCompatActivity() {
         /** embed these fragments inside drawerLayout */
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                /** Top level Fragments */
-                R.id.guitarFragment, R.id.listFragment, R.id.mapFragment, R.id.aboutFragment
+                /** Top level Fragments = Hamburger or back arrow */
+               R.id.listFragment, R.id.mapFragment, R.id.aboutFragment
             ),
             drawerLayout,
         )
@@ -68,7 +68,6 @@ class Home : AppCompatActivity() {
         val navView = homeBinding.navView
         navView.setupWithNavController(navController)
         initNavHeader()
-
     }
 
     public override fun onStart() {
@@ -142,15 +141,6 @@ class Home : AppCompatActivity() {
         val intent = Intent(this, Login::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
-    }
-
-    fun saveStuff(item: MenuItem) {
-     //   val intent = Intent(this, GuitarFragment::class.java)
-        when (item.itemId) {
-            R.id.storeFragment ->
-                println("Testing***")
-
-        }
     }
 
     private fun registerImagePickerCallback() {
