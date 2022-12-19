@@ -127,7 +127,7 @@ object FirebaseDBManager : GuitarStore {
         database.updateChildren(childDelete)
     }
 
-  /*  fun updateImageRef(userid: String, imageUri: String) {
+    fun updateImageRef(userid: String, imageUri: String) {
 
         val userGuitars = database.child("user-guitars").child(userid)
         val allGuitars = database.child("guitars")
@@ -138,13 +138,13 @@ object FirebaseDBManager : GuitarStore {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach {
                         //Update Users imageUri
-                        it.ref.child("profilepic").setValue(imageUri)
+                        it.ref.child("image").setValue(imageUri)
                         //Update all donations that match 'it'
                         val guitar = it.getValue(GuitarAppModel::class.java)
                         allGuitars.child(guitar!!.uid!!)
-                            .child("profilepic").setValue(imageUri)
+                            .child("image").setValue(imageUri)
                     }
                 }
             })
-    }*/
+    }
 }

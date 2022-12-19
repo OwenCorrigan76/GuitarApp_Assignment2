@@ -80,6 +80,37 @@ object FirebaseImageManager {
         }
     }
 
+    fun uploadGuitarImageToFirebase(userid: String, bitmap: Bitmap, updating : Boolean) {
+        // Get the data from an ImageView as bytes
+        val imageRef = storage.child("photos").child("${userid}.jpg")
+        //val bitmap = (imageView as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        lateinit var uploadTask: UploadTask
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        imageRef.metadata.addOnSuccessListener { //File Exists
+            if(updating) // Update existing Image
+            {
+                uploadTask = imageRef.putBytes(data)
+                uploadTask.addOnSuccessListener { ut ->
+                    ut.metadata!!.reference!!.downloadUrl.addOnCompleteListener { task ->
+                        imageUri.value = task.result!!
+                    }
+                }
+            }
+        }.addOnFailureListener { //File Doesn't Exist
+            uploadTask = imageRef.putBytes(data)
+            uploadTask.addOnSuccessListener { ut ->
+                ut.metadata!!.reference!!.downloadUrl.addOnCompleteListener { task ->
+                    imageUri.value = task.result!!
+                }
+            }
+        }
+    }
+
+
     fun updateUserImage(userid: String, imageUri : Uri?, imageView: ImageView, updating : Boolean) {
         Picasso.get().load(imageUri)
             .resize(200, 200)
@@ -103,6 +134,30 @@ object FirebaseImageManager {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
             })
     }
+    fun updateGuitarImage(userid: String, imageUri : Uri?, imageView: ImageView, updating : Boolean) {
+        Picasso.get().load(imageUri)
+            .resize(200, 200)
+            .transform(customTransformation())
+            .memoryPolicy(MemoryPolicy.NO_CACHE)
+            .centerCrop()
+            .into(object : Target {
+                override fun onBitmapLoaded(bitmap: Bitmap?,
+                                            from: Picasso.LoadedFrom?
+                ) {
+                    Timber.i("Guitar App onBitmapLoaded $bitmap")
+                    uploadImageToFirebase(userid, bitmap!!,updating)
+                    imageView.setImageBitmap(bitmap)
+                }
+
+                override fun onBitmapFailed(e: java.lang.Exception?,
+                                            errorDrawable: Drawable?) {
+                    Timber.i("Guitar App onBitmapFailed $e")
+                }
+
+                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
+            })
+    }
+
 
     fun updateDefaultImage(userid: String, resource: Int, imageView: ImageView) {
         Picasso.get().load(resource)

@@ -11,6 +11,7 @@ import android.view.*
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -25,12 +26,15 @@ import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.activities.MapActivity
 import ie.wit.guitarApp.databinding.FragmentGuitarBinding
+import ie.wit.guitarApp.firebase.FirebaseImageManager
 import ie.wit.guitarApp.helpers.showImagePicker
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarAppModel
 import ie.wit.guitarApp.models.Location
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.list.ListViewModel
+import ie.wit.guitarApp.utils.readImageUri
+import timber.log.Timber
 import timber.log.Timber.Forest.i
 
 
@@ -46,12 +50,12 @@ class GuitarFragment : Fragment() {
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     var location = Location(-34.0, 151.0, 15f)
     val guitars = GuitarAppModel()
-    var image: Uri = Uri.EMPTY
+   // var image: Uri = Uri.EMPTY
     val today = Calendar.getInstance()
     val year = today.get(Calendar.YEAR)
     val month = today.get(Calendar.MONTH)
     val day = today.get(Calendar.DAY_OF_MONTH)
-
+    var image: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -220,16 +224,19 @@ class GuitarFragment : Fragment() {
                 when (result.resultCode) {
                     RESULT_OK -> {
                         if (result.data != null) {
-                            i("Got Result ${result.data!!.data}")
-                            guitars.image = result.data!!.data.toString()!!
-                            Picasso.get()
-                                .load(guitars.image)
-                                .into(fragBinding.guitarImage)
+                            Timber.i("Got Result ${readImageUri(result.resultCode, result.data).toString()}")
+                            image = result.data!!.data!!.toString()
                             fragBinding.chooseImage.setText(R.string.change_guitar_image)
-                        }
+                            FirebaseImageManager
+                                .updateGuitarImage(loggedInViewModel.liveFirebaseUser.value!!.uid,
+                                    readImageUri(result.resultCode, result.data),
+                                    fragBinding.guitarImage,
+                                    true)
+                            guitars.image = result.data!!.data!!.toString()
+                            println("this is an image ${guitars.image}")
+                        } // end of if
                     }
-                    RESULT_CANCELED -> {}
-                    else -> {}
+                    AppCompatActivity.RESULT_CANCELED -> { } else -> { }
                 }
             }
     }
