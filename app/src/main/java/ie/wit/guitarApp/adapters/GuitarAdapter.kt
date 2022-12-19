@@ -56,17 +56,18 @@ class GuitarAdapter constructor(
             binding.guitar = guitar
             binding.root.tag = guitar
 
-            binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            binding.profilepicIcon.setImageResource(R.mipmap.ic_launcher_round)
             Picasso.get().load(guitar.profilepic.toUri())
                 .resize(200, 200)
                 .transform(customTransformation())
                 .centerCrop()
-                .into(binding.imageIcon)
-           /* Picasso.get().load(guitar.image.toUri())
+                .into(binding.profilepicIcon)
+           // binding.guitarIcon.setImageResource(R.id.guitarIcon)
+            Picasso.get().load(guitar.image.toUri())
                 .resize(200, 200)
                 .transform(customTransformation())
                 .centerCrop()
-                .into(binding.imageIcon2)*/
+                .into(binding.guitarIcon)
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
             binding.executePendingBindings()
 

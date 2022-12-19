@@ -122,7 +122,7 @@ class Home : AppCompatActivity() {
                     Timber.i("Guitar App Loading Existing Default imageUri")
                     FirebaseImageManager.updateDefaultImage(
                         currentUser.uid,
-                        R.drawable.ic_launcher_homer,
+                        R.drawable.ic_launcher_background,
                         navHeaderBinding.navHeaderImage
                     )
                 }

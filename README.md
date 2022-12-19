@@ -19,7 +19,7 @@ This feature allows a user to........
 
 + Feature 3 - Add
 
-+ Feature 4 - Add
++ Feature 4 - Update Nav Header image
 
 
 ## Setup requirements.

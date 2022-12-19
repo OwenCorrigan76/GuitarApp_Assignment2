@@ -19,23 +19,27 @@ object FirebaseImageManager {
 
     var storage = FirebaseStorage.getInstance().reference
     var imageUri = MutableLiveData<Uri>()
+    var imageUri2 = MutableLiveData<Uri>()
 
+    /** check if there is a profilepic already */
     fun checkStorageForExistingProfilePic(userid: String) {
         val imageRef = storage.child("photos").child("${userid}.jpg")
         val defaultImageRef = storage.child("homer.jpg")
 
-        imageRef.metadata.addOnSuccessListener { //File Exists
+        /** If the image exists */
+        imageRef.metadata.addOnSuccessListener {
+          /** download the image */
             imageRef.downloadUrl.addOnCompleteListener { task ->
                 imageUri.value = task.result!!
             }
-            //File Doesn't Exist
+            /** If image doesn't exist, set to empty URI */
         }.addOnFailureListener {
             imageUri.value = Uri.EMPTY
         }
     }
 
-    fun checkStorageForExistingGuitarPic(userid: String) {
-        val imageRef = storage.child("photos").child("${userid}.jpg")
+  /*  fun checkStorageForExistingGuitarPic(userid: String) {
+        val imageRef = storage.child("photos2").child("${userid}.jpg")
      //   val defaultImageRef = storage.child("homer.jpg")
 
         imageRef.metadata.addOnSuccessListener { //File Exists
@@ -46,14 +50,12 @@ object FirebaseImageManager {
         }.addOnFailureListener {
             imageUri.value = Uri.EMPTY
         }
-    }
+    }*/
 
 
 
     fun uploadImageToFirebase(userid: String, bitmap: Bitmap, updating : Boolean) {
-        // Get the data from an ImageView as bytes
         val imageRef = storage.child("photos").child("${userid}.jpg")
-        //val bitmap = (imageView as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         lateinit var uploadTask: UploadTask
 
@@ -61,7 +63,8 @@ object FirebaseImageManager {
         val data = baos.toByteArray()
 
         imageRef.metadata.addOnSuccessListener { //File Exists
-            if(updating) // Update existing Image
+            if(updating)
+                /** For updating existing Image */
             {
                 uploadTask = imageRef.putBytes(data)
                 uploadTask.addOnSuccessListener { ut ->
@@ -97,6 +100,8 @@ object FirebaseImageManager {
                 uploadTask.addOnSuccessListener { ut ->
                     ut.metadata!!.reference!!.downloadUrl.addOnCompleteListener { task ->
                         imageUri.value = task.result!!
+                        FirebaseDBManager.updateImageRef(userid,imageUri.value.toString())
+
                     }
                 }
             }
@@ -134,8 +139,8 @@ object FirebaseImageManager {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
             })
     }
-    fun updateGuitarImage(userid: String, imageUri : Uri?, imageView: ImageView, updating : Boolean) {
-        Picasso.get().load(imageUri)
+    fun updateGuitarImage(userid: String, imageUri2 : Uri?, imageView2: ImageView, updating : Boolean) {
+        Picasso.get().load(imageUri2)
             .resize(200, 200)
             .transform(customTransformation())
             .memoryPolicy(MemoryPolicy.NO_CACHE)
@@ -145,8 +150,9 @@ object FirebaseImageManager {
                                             from: Picasso.LoadedFrom?
                 ) {
                     Timber.i("Guitar App onBitmapLoaded $bitmap")
-                    uploadGuitarImageToFirebase(userid, bitmap!!,updating)
-                    imageView.setImageBitmap(bitmap)
+                    /** Don't update as it will change profile pic too */
+                 /*   uploadGuitarImageToFirebase(userid, bitmap!!,updating)
+                    imageView2.setImageBitmap(bitmap)*/
                 }
 
                 override fun onBitmapFailed(e: java.lang.Exception?,
@@ -182,5 +188,4 @@ object FirebaseImageManager {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
             })
     }
-
 }

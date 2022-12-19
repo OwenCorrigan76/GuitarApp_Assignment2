@@ -91,18 +91,18 @@
                 tools:text="Longitude" />
 
             <ImageView
-                android:id="@+id/imageIcon"
+                android:id="@+id/profilepicIcon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="15dp"
                 android:contentDescription="@string/change_guitar_image"
-                app:srcCompat="@mipmap/ic_launcher_round" />
+                />
 
 
             <ImageView
-                android:id="@+id/imageIcon2"
+                android:id="@+id/guitarIcon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_alignParentTop="true"
@@ -111,7 +111,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="175dp"
                 android:contentDescription="@string/app_name"
-                app:srcCompat="@mipmap/ic_launcher" />
+               />
 
             <TextView
                 android:id="@+id/message"

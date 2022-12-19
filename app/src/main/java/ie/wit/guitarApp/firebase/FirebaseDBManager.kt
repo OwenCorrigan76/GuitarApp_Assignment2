@@ -61,9 +61,6 @@ object FirebaseDBManager : GuitarStore {
             })
     }
 
-   /* override fun findAll(): List<GuitarAppModel> {
-        TODO("Not yet implemented")
-    }*/
 
     override fun findById(
         userid: String,
@@ -127,6 +124,7 @@ object FirebaseDBManager : GuitarStore {
         database.updateChildren(childDelete)
     }
 
+    /** Updates the card image when profilepic */
     fun updateImageRef(userid: String, imageUri: String) {
 
         val userGuitars = database.child("user-guitars").child(userid)

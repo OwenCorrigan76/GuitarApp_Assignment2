@@ -22,6 +22,7 @@ class FirebaseAuthManager(application: Application) {
     var loggedOut = MutableLiveData<Boolean>()
     var errorStatus = MutableLiveData<Boolean>()
     var googleSignInClient = MutableLiveData<GoogleSignInClient>()
+
     init {
         this.application = application
         firebaseAuth = FirebaseAuth.getInstance()
@@ -31,10 +32,12 @@ class FirebaseAuthManager(application: Application) {
             loggedOut.postValue(false)
             errorStatus.postValue(false)
             FirebaseImageManager.checkStorageForExistingProfilePic(
-                firebaseAuth!!.currentUser!!.uid)
+                firebaseAuth!!.currentUser!!.uid
+            )
         }
         configureGoogleSignIn()
     }
+
     private fun configureGoogleSignIn() {
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -42,23 +45,23 @@ class FirebaseAuthManager(application: Application) {
             .requestEmail()
             .build()
 
-        googleSignInClient.value = GoogleSignIn.getClient(application!!.applicationContext,gso)
+        googleSignInClient.value = GoogleSignIn.getClient(application!!.applicationContext, gso)
     }
 
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Timber.i( "GuitarApp firebaseAuthWithGoogle:" + acct.id!!)
+        Timber.i("GuitarApp firebaseAuthWithGoogle:" + acct.id!!)
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         firebaseAuth!!.signInWithCredential(credential)
             .addOnCompleteListener(application!!.mainExecutor) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update with the signed-in user's information
-                    Timber.i( "signInWithCredential:success")
+                    Timber.i("signInWithCredential:success")
                     liveFirebaseUser.postValue(firebaseAuth!!.currentUser)
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    Timber.i( "signInWithCredential:failure $task.exception")
+                    Timber.i("signInWithCredential:failure $task.exception")
                     errorStatus.postValue(true)
                 }
             }
