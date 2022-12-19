@@ -1,12 +1,10 @@
-package ie.wit.guitarApp.activities
+package ie.wit.guitarApp.ui.map
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -17,7 +15,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.models.GuitarAppModel
 import ie.wit.guitarApp.models.Location
-import org.wit.guitar.activities.GuitarMapsActivity
 import timber.log.Timber
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -40,7 +37,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        val sydney = LatLng(-34.0, 151.0)
+        // val sydney = LatLng(-34.0, 151.0)
         val loc = LatLng(location.lat, location.lng)
            val options = MarkerOptions()
                 .title("Placemark")
@@ -50,7 +47,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
             map.setOnMarkerClickListener(this)
             map.setOnMarkerDragListener(this)
             map.addMarker(options)
-
         map.addMarker(MarkerOptions().position(loc).title("Default"))
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
@@ -69,7 +65,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
         location.zoom = map.cameraPosition.zoom
     }
 
-
     override fun onMarkerClick(marker: Marker): Boolean {
         // Showing co-ordinates on marker click
         val loc = LatLng(location.lat, location.lng)
@@ -78,11 +73,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
         return false
     }
 
-
     /** This intercepts the marker location when back button is pressed */
     override fun onBackPressed() {
         val resultIntent = Intent()
-        // Passing the new location upon back click
+        /** Passing the new location upon back click */
         resultIntent.putExtra("location", location)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()

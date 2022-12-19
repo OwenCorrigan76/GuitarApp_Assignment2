@@ -15,9 +15,9 @@ Below is a list of app features:
 + Feature 1 - Add Guitar.
 This feature allows a user to........
 
-+ Feature 2 - Add 
++ Feature 2 - Swipe to .....  
 
-+ Feature 3 - Add
++ Feature 3 - Floating add...........
 
 + Feature 4 - Update Nav Header image
 

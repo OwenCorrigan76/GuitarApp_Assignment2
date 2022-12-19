@@ -1,4 +1,3 @@
-
 package ie.wit.guitarApp.ui.auth
 
 import android.content.Intent
@@ -17,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import ie.wit.guitarApp.R
 import ie.wit.guitarApp.databinding.LoginBinding
 import ie.wit.guitarApp.ui.home.Home
-
 import timber.log.Timber
 
 class Login : AppCompatActivity() {
@@ -59,7 +57,6 @@ class Login : AppCompatActivity() {
         setupGoogleSignInCallback()
     }
 
-
     private fun googleSignIn() {
         val signInIntent = loginRegisterViewModel.firebaseAuthManager
             .googleSignInClient.value!!.signInIntent
@@ -92,8 +89,6 @@ class Login : AppCompatActivity() {
             }
     }
 
-
-    //Required to exit app from Login Screen - must investigate this further
     override fun onBackPressed() {
         super.onBackPressed()
         Toast.makeText(this,"Click again to Close App...",Toast.LENGTH_LONG).show()

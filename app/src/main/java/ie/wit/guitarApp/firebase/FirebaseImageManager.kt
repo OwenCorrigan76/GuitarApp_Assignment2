@@ -38,22 +38,6 @@ object FirebaseImageManager {
         }
     }
 
-  /*  fun checkStorageForExistingGuitarPic(userid: String) {
-        val imageRef = storage.child("photos2").child("${userid}.jpg")
-     //   val defaultImageRef = storage.child("homer.jpg")
-
-        imageRef.metadata.addOnSuccessListener { //File Exists
-            imageRef.downloadUrl.addOnCompleteListener { task ->
-                imageUri.value = task.result!!
-            }
-            //File Doesn't Exist
-        }.addOnFailureListener {
-            imageUri.value = Uri.EMPTY
-        }
-    }*/
-
-
-
     fun uploadImageToFirebase(userid: String, bitmap: Bitmap, updating : Boolean) {
         val imageRef = storage.child("photos").child("${userid}.jpg")
         val baos = ByteArrayOutputStream()
@@ -151,8 +135,8 @@ object FirebaseImageManager {
                 ) {
                     Timber.i("Guitar App onBitmapLoaded $bitmap")
                     /** Don't update as it will change profile pic too */
-                 /*   uploadGuitarImageToFirebase(userid, bitmap!!,updating)
-                    imageView2.setImageBitmap(bitmap)*/
+                    uploadGuitarImageToFirebase(userid, bitmap!!,updating)
+                    imageView2.setImageBitmap(bitmap)
                 }
 
                 override fun onBitmapFailed(e: java.lang.Exception?,

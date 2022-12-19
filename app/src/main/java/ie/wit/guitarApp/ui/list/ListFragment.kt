@@ -1,12 +1,8 @@
 package ie.wit.guitarApp.ui.list
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -24,30 +20,24 @@ import ie.wit.guitarApp.R
 import ie.wit.guitarApp.adapters.GuitarAdapter
 import ie.wit.guitarApp.adapters.GuitarClickListener
 import ie.wit.guitarApp.databinding.FragmentListBinding
-
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarAppModel
-import ie.wit.guitarApp.models.Location
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
-import ie.wit.guitarApp.ui.guitar.GuitarFragment
 import ie.wit.guitarApp.utils.*
-import org.wit.guitar.activities.GuitarMapsActivity
-import timber.log.Timber
 
 class ListFragment : Fragment(), GuitarClickListener {
-
     lateinit var app: MainApp
     private var _fragBinding: FragmentListBinding? = null
     private val fragBinding get() = _fragBinding!!
     lateinit var loader: AlertDialog
     private val listViewModel: ListViewModel by activityViewModels()
     private val loggedInViewModel: LoggedInViewModel by activityViewModels()
-    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
     val guitars = GuitarAppModel()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -56,7 +46,6 @@ class ListFragment : Fragment(), GuitarClickListener {
     ): View? {
         _fragBinding = FragmentListBinding.inflate(inflater, container, false)
         val root = fragBinding.root
-        //    activity?.title = getString(R.string.action_list)
         setupMenu()
         loader = createLoader(requireActivity())
 
@@ -77,8 +66,6 @@ class ListFragment : Fragment(), GuitarClickListener {
             }
         })
         setSwipeRefresh()
-      //  registerMapCallback()
-
 
         // for swipe delete
         val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
@@ -109,9 +96,6 @@ class ListFragment : Fragment(), GuitarClickListener {
         return root
     }
 
-
-
-
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
@@ -132,7 +116,6 @@ class ListFragment : Fragment(), GuitarClickListener {
                 }
             }
 
-
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Validate and handle the selected menu item
                 return NavigationUI.onNavDestinationSelected(
@@ -142,7 +125,6 @@ class ListFragment : Fragment(), GuitarClickListener {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
-
 
     private fun render(guitarsList: ArrayList<GuitarAppModel>) { // live data values that have been updated
         // create an adapter and pass in the list

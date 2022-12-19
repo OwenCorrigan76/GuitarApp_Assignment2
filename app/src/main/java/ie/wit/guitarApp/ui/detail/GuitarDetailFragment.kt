@@ -5,20 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import ie.wit.guitarApp.R
-import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.databinding.FragmentGuitarDetailBinding
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
-import ie.wit.guitarApp.ui.guitar.GuitarViewModel
 import ie.wit.guitarApp.ui.list.ListViewModel
 import timber.log.Timber
-
 
 class GuitarDetailFragment : Fragment() {
     private lateinit var detailViewModel: GuitarDetailViewModel

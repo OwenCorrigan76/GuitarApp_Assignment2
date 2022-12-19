@@ -5,7 +5,6 @@ import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -21,10 +20,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.snackbar.Snackbar
-import com.squareup.picasso.Picasso
 import ie.wit.guitarApp.R
-import ie.wit.guitarApp.activities.MapActivity
+import ie.wit.guitarApp.ui.map.MapActivity
 import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.firebase.FirebaseImageManager
 import ie.wit.guitarApp.helpers.showImagePicker
@@ -37,7 +34,6 @@ import ie.wit.guitarApp.utils.readImageUri
 import timber.log.Timber
 import timber.log.Timber.Forest.i
 
-
 /** this lifeCycle is directly dependant on the Home (Activity) lifeCycle */
 class GuitarFragment : Fragment() {
 
@@ -45,17 +41,17 @@ class GuitarFragment : Fragment() {
     private var _fragBinding: FragmentGuitarBinding? = null
     private val fragBinding get() = _fragBinding!!
     private lateinit var guitarViewModel: GuitarViewModel
-    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
-    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    private val loggedInViewModel: LoggedInViewModel by activityViewModels()
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     var location = Location(-34.0, 151.0, 15f)
     val guitars = GuitarAppModel()
-   // var image: Uri = Uri.EMPTY
     val today = Calendar.getInstance()
     val year = today.get(Calendar.YEAR)
     val month = today.get(Calendar.MONTH)
     val day = today.get(Calendar.DAY_OF_MONTH)
     var image: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -106,21 +102,17 @@ class GuitarFragment : Fragment() {
             }
         }
 
-
         /** map click listener */
         fragBinding.guitarLocation.setOnClickListener { // launch maps and pass location to MapActivity
-         //   var location = Location(-35.0, 151.0, 15f)
-
-             if (guitars.zoom != 0f) {
-                 location.lat =  guitars.lat
-                 location.lng = guitars.lng
-                 location.zoom = guitars.zoom
-             }
+            if (guitars.zoom != 0f) {
+                location.lat = guitars.lat
+                location.lng = guitars.lng
+                location.zoom = guitars.zoom
+            }
 
             val launcherIntent = Intent(activity, MapActivity::class.java)
                 .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
-
         }
 
         fragBinding.progressBar.max = 10000
@@ -147,11 +139,8 @@ class GuitarFragment : Fragment() {
         fragBinding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
-
-
         return root;
     }
-
 
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
@@ -160,7 +149,7 @@ class GuitarFragment : Fragment() {
             }
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_guitar,  menu)
+                menuInflater.inflate(R.menu.menu_guitar, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -185,11 +174,8 @@ class GuitarFragment : Fragment() {
     }
 
     /** Send to the model to be displayed in the list view */
-  private fun setButtonListener(layout: FragmentGuitarBinding
-    // menuItem: MenuItem
-    ) {
-       /* when (item.itemId) {
-            R.id.item_save -> */
+    private fun setButtonListener(layout: FragmentGuitarBinding) {
+
         layout.addButton.setOnClickListener {
             val valuation = layout.valuePicker.value.toDouble()
             val guitarModel = layout.guitarModel.text.toString()
@@ -198,7 +184,8 @@ class GuitarFragment : Fragment() {
 
             print("*****************" + guitars + "*******************")
 
-            guitarViewModel.addGuitar(loggedInViewModel.liveFirebaseUser,
+            guitarViewModel.addGuitar(
+                loggedInViewModel.liveFirebaseUser,
                 GuitarAppModel(
                     valuation = valuation,
                     guitarMake = guitarMake,
@@ -211,9 +198,13 @@ class GuitarFragment : Fragment() {
                     zoom = 20f,
                 )
             )
-            i("add Button Pressed: ${location.lat.toString() + " " + location.lng.toString() +  " " +
-                    15f + " " +  guitarMake + " " +  guitarModel + " " +  valuation + " " +  
-                    manufactureDate + " " +  " image is " + guitars.image  }")
+            i(
+                "add Button Pressed: ${
+                    location.lat.toString() + " " + location.lng.toString() + " " +
+                            15f + " " + guitarMake + " " + guitarModel + " " + valuation + " " +
+                            manufactureDate + " " + " image is " + guitars.image
+                }"
+            )
         }
     }
 
@@ -224,19 +215,29 @@ class GuitarFragment : Fragment() {
                 when (result.resultCode) {
                     RESULT_OK -> {
                         if (result.data != null) {
-                            Timber.i("Got Result ${readImageUri(result.resultCode, result.data).toString()}")
+                            Timber.i(
+                                "Got Result ${
+                                    readImageUri(
+                                        result.resultCode,
+                                        result.data
+                                    ).toString()
+                                }"
+                            )
                             image = result.data!!.data!!.toString()
                             fragBinding.chooseImage.setText(R.string.change_guitar_image)
                             FirebaseImageManager
-                                .updateGuitarImage(loggedInViewModel.liveFirebaseUser.value!!.uid,
+                                .updateGuitarImage(
+                                    loggedInViewModel.liveFirebaseUser.value!!.uid,
                                     readImageUri(result.resultCode, result.data),
                                     fragBinding.guitarImage,
-                                    true)
+                                    true
+                                )
                             guitars.image = result.data!!.data!!.toString()
                             println("this is an image ${guitars.image}")
                         } // end of if
                     }
-                    AppCompatActivity.RESULT_CANCELED -> { } else -> { }
+                    AppCompatActivity.RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }
@@ -253,6 +254,7 @@ class GuitarFragment : Fragment() {
             fragBinding.progressBar.progress
         })
     }
+
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -261,16 +263,18 @@ class GuitarFragment : Fragment() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            val location =
+                                result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
                             guitars.lat = location.lat
                             guitars.lng = location.lng
                             guitars.zoom = location.zoom
                         } // end of if
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }
-    }
+}
 

@@ -22,13 +22,13 @@ object FirebaseDBManager : GuitarStore {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val localList = ArrayList<GuitarAppModel>()
-      //get the .children property of the snapshot called children (collection)
+                    //get the .children property of the snapshot called children (collection)
                     val children = snapshot.children
-    // for loop, running through each element, retrieving the data....
+                    // for loop, running through each element, retrieving the data....
                     children.forEach {
-                  // storing it it in tha guitar object and....
+                        // storing it it in tha guitar object and....
                         val guitar = it.getValue(GuitarAppModel::class.java)
-              // adding it to localList as an ArrayList
+                        // adding it to localList as an ArrayList
                         localList.add(guitar!!)
                     }
                     database.child("user-guitars").child(userid)
@@ -38,6 +38,7 @@ object FirebaseDBManager : GuitarStore {
                 }
             })
     }
+
     // for all users
     override fun findAll(guitarList: MutableLiveData<List<GuitarAppModel>>) {
         database.child("guitars")
@@ -61,15 +62,14 @@ object FirebaseDBManager : GuitarStore {
             })
     }
 
-
     override fun findById(
         userid: String,
         guitarid: String,
         guitar: MutableLiveData<GuitarAppModel>
     ) {
-            // retrieves dat from the user, dased on userid
+        // retrieves dat from the user, dased on userid
         database.child("user-guitars").child(userid)
-                // add for once off retrieval of the object
+            // add for once off retrieval of the object
             .child(guitarid).get().addOnSuccessListener {
                 // assign the retrieval to the value property of guitar
                 guitar.value = it.getValue(GuitarAppModel::class.java)
@@ -78,7 +78,6 @@ object FirebaseDBManager : GuitarStore {
                 Timber.e("firebase Error getting data $it")
             }
     }
-
 
     override fun create(firebaseUser: MutableLiveData<FirebaseUser>, guitar: GuitarAppModel) {
         Timber.i("Firebase DB Reference : $database")
@@ -92,30 +91,25 @@ object FirebaseDBManager : GuitarStore {
         guitar.uid = key
         // map created in the model
         val guitarValues = guitar.toMap()
-
         val childAdd = HashMap<String, Any>()
         childAdd["/guitars/$key"] = guitarValues
         childAdd["/user-guitars/$uid/$key"] = guitarValues
-
         database.updateChildren(childAdd)
     }
 
-
-
     override fun update(userid: String, guitarid: String, guitar: GuitarAppModel) {
-   // creating a map with all of the data and passing to guitarValues
+        // creating a map with all of the data and passing to guitarValues
         val guitarValues = guitar.toMap()
-
         val childUpdate: MutableMap<String, Any?> = HashMap()
         // overwriting existing values for both updates
         childUpdate["guitars/$guitarid"] = guitarValues
         childUpdate["user-guitars/$userid/$guitarid"] = guitarValues
-     // call it here and force update the changes
+        // call it here and force update the changes
         database.updateChildren(childUpdate)
     }
 
     override fun delete(userid: String, guitarid: String) {
-       // map through
+        // map through
         val childDelete: MutableMap<String, Any?> = HashMap()
         // delete by assigning the value to null
         childDelete["/guitars/$guitarid"] = null
@@ -126,7 +120,6 @@ object FirebaseDBManager : GuitarStore {
 
     /** Updates the card image when profilepic */
     fun updateImageRef(userid: String, imageUri: String) {
-
         val userGuitars = database.child("user-guitars").child(userid)
         val allGuitars = database.child("guitars")
 
