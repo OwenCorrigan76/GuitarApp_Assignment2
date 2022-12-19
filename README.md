@@ -1,19 +1,21 @@
 Name: Owen Corrigan
-GitHub Reopsitory - https://github.com/OwenCorrigan76/GuitarApp_Assignment2
+GitHub Repository - https://github.com/OwenCorrigan76/GuitarApp_Assignment2
 
 ## Overview.
-This app is an Android app written in the Kotlin language. The app is designed so users can upload images of guitars, along with details about the instrument.
+The app is designed so a users can upload images of guitars, along with make and model of the instrument, 
+date of purchase, location of the user and value of the guitar.
 These details include:
 + Make
 + Model
 + Valuation
 + Manufacture Date
 + Location of guitar owner
-+ 
 
 Below is a list of app features:
 + Feature 1 - Add Guitar.
-This feature allows a user to........
+This feature allows a user to choose a guitar make with a drop down menu. The model can be typed in.
+A date picker allows the user to add a purchase date and location can be added by clicking setLocation
+and moving a Google Maps marker to the desired location. An image can be uploaded and added to the guitar profile.
 
 + Feature 2 - Swipe to .....  
 
@@ -39,33 +41,27 @@ Below is a list of the set of links this app supports:
 <br/>
 
 ### Views/Pages.
+<br/>
 
-### 1 Guitar View
-![][i2]
+### 1 Signup / Login
 <br/>
 
 ### 2 Guitar List View
-![][i3]
 <br/>
 
-### 3 Add Maps View
-![][i4]
+### 3 Add Guitar View
 <br/>
 
-### 4 View All Maps View
-![][i5]
+### 4 Add Maps View
+<br/>
+
+### 5 Useful Links
 <br/>
 
 ### 5 About The App View
-![][i6]
 <br/>
 
 ### Component catalogue.
-
-
-<br/>
-
-![][ig]
 
 <br/>
 
@@ -77,4 +73,3 @@ This app utilises Firebase authentication. To use the app, a user must link the 
 
 <br/>
 
-[i1]: ./public/i1.png
