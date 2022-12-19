@@ -21,6 +21,7 @@ This feature allows a user to........
 
 + Feature 4 - Update Nav Header image
 
++ Feature 5 - Useful Links
 
 ## Setup requirements.
 This app is created in Android Studio. To run the app, a user must have a valid Google Maps API key. This is available at Google Developer Console :

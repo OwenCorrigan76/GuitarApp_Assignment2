@@ -55,6 +55,11 @@
         android:label="@string/action_about"
         tools:layout="@layout/fragment_aboutus" />
     <fragment
+        android:id="@+id/storeFragment"
+        android:name="ie.wit.guitarApp.ui.store.StoreFragment"
+        android:label="@string/action_store"
+        tools:layout="@layout/fragment_store" />
+    <fragment
         android:id="@+id/guitarDetailFragment"
         android:name="ie.wit.guitarApp.ui.detail.GuitarDetailFragment"
         android:label="Guitar Detail"

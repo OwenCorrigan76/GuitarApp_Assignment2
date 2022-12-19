@@ -34,6 +34,8 @@
     <string name="hint_guitarModel">Guitar Model</string>
     <string name="hint_guitarDate">Manufacture Date</string>
     <string name="action_about">About This App</string>
+    <string name="action_store">Useful Links</string>
+
     <string name="aboutus_title">Guitar App!!</string>
     <string name="aboutus_message">Guitar App\n\nFor adding and valuing guitars\n\n Please respect other users!!</string>
     <string name="menu_addGuitar">Guitar Locations</string>
@@ -77,7 +79,9 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="select_profile_image">Select Profile Image</string>
-    <string name="menu_save">Save</string>
+    <string name="menu_save">Local Stores</string>
+    <string name="goog">Please go <a href="www.google.com">here</a></string>
+    <string name="hyperlink"><a href="https://www.geeksforgeeks.org/">greatguitars.org</a></string>
 
     <string-array name="guitar_make_list">
         <item>Aria</item>

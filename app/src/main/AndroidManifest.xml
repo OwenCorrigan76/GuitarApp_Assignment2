@@ -21,18 +21,13 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDpZLvKP8vzG_qHI8ZSw3_86oaf23y3wig"
-            />
+            android:value="${MAPS_API_KEY}" />
+
         <activity
             android:name=".ui.map.MapActivity"
             android:exported="false"
             android:label="@string/title_activity_map" />
 
-        <activity
-            android:name="org.wit.guitar.activities.GuitarMapsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_guitar_map"
-            android:theme="@style/Theme.AppCompat.DayNight" />
 
         <activity
             android:name="ie.wit.guitarApp.ui.auth.Login"

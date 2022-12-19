@@ -23,9 +23,13 @@ import ie.wit.guitarApp.models.GuitarAppModel
 
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.auth.Login
+import ie.wit.guitarApp.ui.guitar.GuitarFragment
+import ie.wit.guitarApp.ui.guitar.GuitarViewModel
 import ie.wit.guitarApp.utils.readImageUri
 import ie.wit.guitarApp.utils.showImagePicker
 import timber.log.Timber
+
+/** Most important activity */
 
 class Home : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
@@ -50,7 +54,8 @@ class Home : AppCompatActivity() {
 
         /** embed these fragments inside drawerLayout */
         appBarConfiguration = AppBarConfiguration(
-            setOf( /** Top level Fragments */
+            setOf(
+                /** Top level Fragments */
                 R.id.guitarFragment, R.id.listFragment, R.id.mapFragment, R.id.aboutFragment
             ),
             drawerLayout,
@@ -65,6 +70,7 @@ class Home : AppCompatActivity() {
         initNavHeader()
 
     }
+
     public override fun onStart() {
         super.onStart()
         loggedInViewModel = ViewModelProvider(this).get(LoggedInViewModel::class.java)
@@ -136,6 +142,15 @@ class Home : AppCompatActivity() {
         val intent = Intent(this, Login::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+    }
+
+    fun saveStuff(item: MenuItem) {
+     //   val intent = Intent(this, GuitarFragment::class.java)
+        when (item.itemId) {
+            R.id.storeFragment ->
+                println("Testing***")
+
+        }
     }
 
     private fun registerImagePickerCallback() {

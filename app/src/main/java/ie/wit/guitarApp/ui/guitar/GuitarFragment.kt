@@ -24,13 +24,13 @@ import ie.wit.guitarApp.R
 import ie.wit.guitarApp.ui.map.MapActivity
 import ie.wit.guitarApp.databinding.FragmentGuitarBinding
 import ie.wit.guitarApp.firebase.FirebaseImageManager
-import ie.wit.guitarApp.helpers.showImagePicker
 import ie.wit.guitarApp.main.MainApp
 import ie.wit.guitarApp.models.GuitarAppModel
 import ie.wit.guitarApp.models.Location
 import ie.wit.guitarApp.ui.auth.LoggedInViewModel
 import ie.wit.guitarApp.ui.list.ListViewModel
 import ie.wit.guitarApp.utils.readImageUri
+import ie.wit.guitarApp.utils.showImagePicker
 import timber.log.Timber
 import timber.log.Timber.Forest.i
 
@@ -175,7 +175,6 @@ class GuitarFragment : Fragment() {
 
     /** Send to the model to be displayed in the list view */
     private fun setButtonListener(layout: FragmentGuitarBinding) {
-
         layout.addButton.setOnClickListener {
             val valuation = layout.valuePicker.value.toDouble()
             val guitarModel = layout.guitarModel.text.toString()

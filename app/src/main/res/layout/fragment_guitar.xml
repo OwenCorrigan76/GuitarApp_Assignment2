@@ -7,38 +7,6 @@
     tools:context=".ui.guitar.GuitarFragment">
 
 
-  <!--  <EditText
-        android:id="@+id/guitarMake"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:autofillHints=""
-        android:inputType="text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.082" />-->
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </RelativeLayout>
-
-
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
@@ -208,7 +176,6 @@
       android:autofillHints=""
       android:hint="@string/hint_guitarModel"
       android:inputType="text"
-      android:textAppearance="?android:attr/textAppearanceLarge"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
@@ -226,8 +193,9 @@
       android:inputType="text"
       android:maxLength="25"
       android:maxLines="1"
+      android:textAppearance="?android:attr/textAppearanceLarge"
       android:spinnerMode="dropdown"
-      android:textSize="45sp"
+      android:textSize="65sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -236,14 +204,20 @@
       android:id="@+id/addButton"
       android:layout_width="100dp"
       android:layout_height="50dp"
-      android:background="#8F0303"
+      android:backgroundTint="@color/red"
+      android:outlineSpotShadowColor="@color/black"
       android:paddingTop="8dp"
       android:paddingBottom="8dp"
       android:stateListAnimator="@null"
       android:text="@string/addButton"
-      android:textSize="10sp"
-      tools:ignore="MissingConstraints"
-      tools:layout_editor_absoluteX="28dp"
-      tools:layout_editor_absoluteY="161dp" />
+      android:textColor="#FFFFFF"
+      android:textSize="14sp"
+      app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.597"
+      tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
