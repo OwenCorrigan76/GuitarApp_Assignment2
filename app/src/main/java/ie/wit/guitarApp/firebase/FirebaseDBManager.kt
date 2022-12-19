@@ -138,11 +138,11 @@ object FirebaseDBManager : GuitarStore {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach {
                         //Update Users imageUri
-                        it.ref.child("image").setValue(imageUri)
+                        it.ref.child("profilepic").setValue(imageUri)
                         //Update all donations that match 'it'
                         val guitar = it.getValue(GuitarAppModel::class.java)
                         allGuitars.child(guitar!!.uid!!)
-                            .child("image").setValue(imageUri)
+                            .child("profilepic").setValue(imageUri)
                     }
                 }
             })

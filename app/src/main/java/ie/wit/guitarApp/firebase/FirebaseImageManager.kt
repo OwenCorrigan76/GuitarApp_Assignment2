@@ -82,7 +82,7 @@ object FirebaseImageManager {
 
     fun uploadGuitarImageToFirebase(userid: String, bitmap: Bitmap, updating : Boolean) {
         // Get the data from an ImageView as bytes
-        val imageRef = storage.child("photos").child("${userid}.jpg")
+        val imageRef = storage.child("photos2").child("${userid}.jpg")
         //val bitmap = (imageView as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         lateinit var uploadTask: UploadTask
@@ -145,7 +145,7 @@ object FirebaseImageManager {
                                             from: Picasso.LoadedFrom?
                 ) {
                     Timber.i("Guitar App onBitmapLoaded $bitmap")
-                    uploadImageToFirebase(userid, bitmap!!,updating)
+                    uploadGuitarImageToFirebase(userid, bitmap!!,updating)
                     imageView.setImageBitmap(bitmap)
                 }
 
