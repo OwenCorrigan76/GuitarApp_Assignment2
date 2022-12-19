@@ -12,28 +12,30 @@ These details include:
 + Location of guitar owner
 
 Below is a list of app features:
-+ Feature 1 - Add Guitar.
-This feature allows a user to choose a guitar make with a drop down menu. The model can be typed in.
-A date picker allows the user to add a purchase date and location can be added by clicking setLocation
-and moving a Google Maps marker to the desired location. An image can be uploaded and added to the guitar profile.
+## Feature 1 - Add Guitar
++ Choose a guitar make with a drop down menu. 
++ The model can be typed in.
++ A date picker allows the user to add a purchase date and location can be added by clicking setLocation and moving a Google Maps marker to the desired location. 
++ An image can be uploaded and added to the guitar profile.
 
-+ Feature 2 - Swipe to .....  
+## Feature 2 - List of Guitars  
 
-+ Feature 3 - Floating add...........
++Floating add...........
 
-+ Feature 4 - Update Nav Header image
+
+## Feature 3 - Navigation Drawer
++Floating add...........
++ Update Nave header image
++ Login image
+ 
+## Feature 4 - Update Nav Header image
 
 + Feature 5 - Useful Links
-
-## Setup requirements.
-This app is created in Android Studio. To run the app, a user must have a valid Google Maps API key. This is available at Google Developer Console :
-https://console.cloud.google.com/
 
 <br/>
 ## App Design.
 
 
-![][i1]
 ### Routing/Navigation.
 
 Below is a list of the set of links this app supports:
