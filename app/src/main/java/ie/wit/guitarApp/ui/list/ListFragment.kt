@@ -1,5 +1,6 @@
 package ie.wit.guitarApp.ui.list
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
@@ -103,6 +104,7 @@ class ListFragment : Fragment(), GuitarClickListener {
                 // Handle for example visibility of menu items
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_list, menu)
 
@@ -120,21 +122,21 @@ class ListFragment : Fragment(), GuitarClickListener {
                 }
 
 
-                /** Dark Mode */
+                /** Setting up Dark Mode */
                 val switch = menu.findItem(R.id.toggleGuitars) as MenuItem
                 switch.setActionView(R.layout.togglebutton_layout1)
                 val toggleMode: SwitchCompat =
                     switch.actionView!!.findViewById(R.id.toggleButton1)
                 toggleMode.isChecked = false
-
+                /** Toggle switch n yje menu */
                 toggleMode.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        toggleMode.text = "Disable dark Mode"
+                        toggleMode.text = "Dark Mode"
                         println("disable")
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                        toggleMode.text = "Enable dark mode"
+                        toggleMode.text = "Light Mode"
                         println("enable")
                     }
                 }
