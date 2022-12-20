@@ -35,7 +35,6 @@ Below is a list of app features:
 <br/>
 ## App Design.
 
--+
 ### Routing/Navigation.
 
 Below is a list of the set of links this app supports:
@@ -54,13 +53,16 @@ Below is a list of the set of links this app supports:
 ### 3 Add Guitar View
 <br/>
 
-### 4 Add Maps View
+## 4 About The App View
 <br/>
 
-### 5 Useful Links
+### 5 Add Maps View
 <br/>
 
-### 5 About The App View
+### 6 Useful Links
+<br/>
+
+### 7 About The App View
 <br/>
 
 ### Component catalogue.
