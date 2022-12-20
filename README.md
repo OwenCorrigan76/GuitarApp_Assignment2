@@ -92,8 +92,11 @@ Below is a list of app features:
 
 ### Known Bugs
 b1: Guitar image replaces user image when guitar image is uploaded
-b2: Google Maps markers not showing yet 
+<br/>
+b2: Google Maps markers not showing yet
+<br/>
 b3: Dark mode toggle switch needs reworking as it currently does not toggle on and off with a individual clicks
+<br/>
 b4: Enable user to edit the details in Guitar Detail page
 <br/>
 
