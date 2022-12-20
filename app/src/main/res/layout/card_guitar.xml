@@ -174,7 +174,7 @@
                 android:layout_height="130dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="6dp"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="-20dp"
                 android:contentDescription="@string/change_guitar_image" />
 
 
@@ -186,14 +186,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="29dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="145dp"
+                android:layout_marginEnd="115dp"
                 android:contentDescription="@string/app_name" />
 
             <TextView
                 android:id="@+id/message"
                 android:layout_width="300dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="34dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="145dp"
                 android:layout_marginEnd="355dp"
                 android:layout_toEndOf="@+id/valuation"

@@ -12,30 +12,32 @@ These details include:
 + Location of guitar owner
 
 Below is a list of app features:
-## Feature 1 - Add Guitar
+### Feature 1 - Add Guitar
 + Choose a guitar make with a drop down menu. 
 + The model can be typed in.
 + A date picker allows the user to add a purchase date and location can be added by clicking setLocation and moving a Google Maps marker to the desired location. 
 + An image can be uploaded and added to the guitar profile.
 
-## Feature 2 - List of Guitars  
+### Feature 2 - List of Guitars  
 
 +Floating add...........
 
 
-## Feature 3 - Navigation Drawer
+### Feature 3 - Navigation Drawer
 +Floating add...........
 + Update Nave header image
 + Login image
  
-## Feature 4 - Update Nav Header image
-
-+ Feature 5 - Useful Links
-
+### Feature 4 - Update Nav Header image
 <br/>
-## App Design.
 
-### Routing/Navigation.
+### Feature 5 - Useful Links
+<br/>
+
+### Feature 6 - Dark Mode
+<br/>
+
+
 
 Below is a list of the set of links this app supports:
 
@@ -53,7 +55,7 @@ Below is a list of the set of links this app supports:
 ### 3 Add Guitar View
 <br/>
 
-## 4 About The App View
+### 4 About The App View
 <br/>
 
 ### 5 Add Maps View
@@ -77,3 +79,4 @@ This app utilises Firebase authentication. To use the app, a user must link the 
 
 <br/>
 
+1: https://www.geeksforgeeks.org/how-to-create-a-dark-mode-for-a-custom-android-app-in-kotlin/

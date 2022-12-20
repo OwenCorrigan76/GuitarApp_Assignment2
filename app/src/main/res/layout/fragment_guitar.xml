@@ -192,6 +192,7 @@
       android:layout_weight="1"
       android:inputType="text"
       android:maxLength="25"
+      android:textColor="@color/black"
       android:maxLines="1"
       android:textAppearance="?android:attr/textAppearanceLarge"
       android:spinnerMode="dropdown"

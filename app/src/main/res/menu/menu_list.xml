@@ -7,12 +7,12 @@
         android:orderInCategory="100"
         android:title="@string/action_guitar"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/toggleGuitars"
-        android:title=""
-        app:actionLayout="@layout/togglebutton_layout"
-        app:showAsAction="always" />
 
+    <item
+        android:id="@+id/toggleDarkMode"
+        android:title=""
+        app:actionLayout="@layout/togglebutton_layout1"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/storeFragment"
         android:orderInCategory="100"
@@ -20,11 +20,10 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/toggleMode"
+        android:id="@+id/toggleGuitars"
         android:title=""
-        app:actionLayout="@layout/togglebutton_layout1"
-        app:showAsAction="ifRoom" />
-
+        app:actionLayout="@layout/togglebutton_layout"
+        app:showAsAction="always" />
 
 
 </menu>

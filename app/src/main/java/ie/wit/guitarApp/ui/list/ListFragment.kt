@@ -107,14 +107,11 @@ class ListFragment : Fragment(), GuitarClickListener {
             @SuppressLint("SetTextI18n")
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_list, menu)
-
                 val item = menu.findItem(R.id.toggleGuitars) as MenuItem
                 item.setActionView(R.layout.togglebutton_layout)
                 val toggleGuitars: SwitchCompat =
                     item.actionView!!.findViewById(R.id.toggleButton)
                 toggleGuitars.isChecked = false
-
-
 
                 toggleGuitars.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) listViewModel.loadAll()
@@ -122,8 +119,9 @@ class ListFragment : Fragment(), GuitarClickListener {
                 }
 
 
+
                 /** Setting up Dark Mode */
-                val switch = menu.findItem(R.id.toggleGuitars) as MenuItem
+                val switch = menu.findItem(R.id.toggleDarkMode) as MenuItem
                 switch.setActionView(R.layout.togglebutton_layout1)
                 val toggleMode: SwitchCompat =
                     switch.actionView!!.findViewById(R.id.toggleButton1)
