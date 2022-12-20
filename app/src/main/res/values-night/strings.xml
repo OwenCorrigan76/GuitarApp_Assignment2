@@ -1,0 +1,133 @@
+<resources>
+    <string name="app_name">Guitar Evaluation App</string>
+    <string name="addButton">Save</string>
+    <string name="amount"><u>Valuation €</u>.</string>
+    <string name="guitarsNotFound">No Guitars Found \nFirst Add a Guitar!</string>
+    <string name="guitarError">Error : Couldn\'t Add a Guitar...</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="action_guitar">Add Guitar</string>
+    <string name="action_list">Guitar List</string>
+    <string name="guitarDetails">Guitar Details</string>
+    <string name="make">Guitar Make :</string>
+    <string name="model">Guitar Model :</string>
+    <string name="date">Manufactured :</string>
+    <string name="valuation">Valuation :</string>
+    <string name="lat">Latitude :</string>
+    <string name="message">Longitude :</string>
+    <string name="lng">Longitude :</string>
+
+    <string name="action_share">Share</string>
+    <string name="action_send">Send</string>
+    <string name="action_maps">Maps</string>
+
+    <string name="locations_services">Location Services</string>
+
+    <string name="nav_header_title">Guitar Application</string>
+    <string name="nav_header_subtitle">voteforhomer@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="button_addGuitar">Add Guitar</string>
+    <string name="button_addImage">Add Image</string>
+    <string name="button_saveGuitar">Save Guitar</string>
+    <string name="dateButton">Add Date</string>
+    <string name="valueTitle">Input Value</string>
+    <string name="valueSubtitle">Evaluate Guitar</string>
+    <string name="hint_guitarMake">Guitar Make</string>
+    <string name="hint_guitarModel">Guitar Model</string>
+    <string name="hint_guitarDate">Manufacture Date</string>
+    <string name="action_about">About This App</string>
+    <string name="action_store">Useful Links</string>
+
+    <string name="aboutus_title">Guitar App!!</string>
+    <string name="aboutus_message">Guitar App\n\nFor adding and valuing guitars\n\n Please respect other users!!</string>
+    <string name="menu_addGuitar">Guitar Locations</string>
+    <string name="menu_saveGuitar">Save</string>
+    <string name="title_activity_login"> Signup/Login to Guitar Evaluation App</string>
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_cancelButton">Cancel</string>
+    <string name="menu_deleteButton">Delete</string>
+    <string name="menu_homeButton">Home</string>
+    <string name="title_activity_guitar_map">Added Guitar Markers </string>
+    <string name="select_guitar_image">Select guitar image</string>
+    <string name="change_guitar_image">Change Image</string>
+    <string name="button_picker">Manufacture Date</string>
+    <string name="button_location">Location</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_guitar_maps">Map of all Locations</string>
+    <string name="enter_guitar_make">Enter Make</string>
+    <string name="enter_guitar_model">Enter Model</string>
+    <string name="messageLoading">Please Wait while the Guitar Page is Loading...</string>
+    <string name="label_emailpassword">Email/Password Authentication</string>
+    <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="send_link">Send Link</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="loading">Loading…</string>
+    <string name="signed_in">Signed In</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="token_null">Token: null</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="firebase_user_management">Firebase User Management</string>
+    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+    <string name="emailpassword_title_text">Please Login Below</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="select_profile_image">Select Profile Image</string>
+    <string name="menu_save">Local Stores</string>
+    <string name="goog">Please go <a href="www.google.com">here</a></string>
+    <string name="hyperlink"><a href="https://www.geeksforgeeks.org/">greatguitars.org</a></string>
+    <string name="gMake">MAKE:</string>
+    <string name="gModel">MODEL:</string>
+    <string name="gDAte">DATE:</string>
+    <string name="text">Dark Mode</string>
+
+    <string-array name="guitar_make_list">
+        <item>Aria</item>
+        <item>Ampeg</item>
+        <item>Charvel</item>
+        <item>Cort</item>
+        <item>Dean</item>
+        <item>Danelectro</item>
+        <item>Epiphone</item>
+        <item>ESP</item>
+        <item>Fender</item>
+        <item>Framus</item>
+        <item>Freshman</item>
+        <item>Gibson</item>
+        <item>Godin</item>
+        <item>Gretch</item>
+        <item>Hofner</item>
+        <item>Hohner</item>
+        <item>Ibanez</item>
+        <item>Jackson</item>
+        <item>Kramer</item>
+        <item>Lowden</item>
+        <item>MusicMan</item>
+        <item>Ovation</item>
+        <item>Parker</item>
+        <item>PRS</item>
+        <item>Rickenbacker</item>
+        <item>Schecter</item>
+        <item>Squier</item>
+        <item>Suhr</item>
+        <item>Takamine</item>
+        <item>Taylor</item>
+        <item>Tanglewood</item>
+        <item>Warwick</item>
+        <item>Washburn</item>
+        <item>Yamaha</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+</resources>

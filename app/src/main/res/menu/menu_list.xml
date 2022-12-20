@@ -19,5 +19,12 @@
         android:title="@string/action_store"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/toggleMode"
+        android:title=""
+        app:actionLayout="@layout/togglebutton_layout1"
+        app:showAsAction="ifRoom" />
+
+
 
 </menu>

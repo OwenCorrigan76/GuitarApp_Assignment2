@@ -3,6 +3,7 @@ package ie.wit.guitarApp.ui.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -104,15 +105,38 @@ class ListFragment : Fragment(), GuitarClickListener {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_list, menu)
+
                 val item = menu.findItem(R.id.toggleGuitars) as MenuItem
                 item.setActionView(R.layout.togglebutton_layout)
                 val toggleGuitars: SwitchCompat =
                     item.actionView!!.findViewById(R.id.toggleButton)
                 toggleGuitars.isChecked = false
 
+
+
                 toggleGuitars.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) listViewModel.loadAll()
                     else listViewModel.load()
+                }
+
+
+                /** Dark Mode */
+                val switch = menu.findItem(R.id.toggleGuitars) as MenuItem
+                switch.setActionView(R.layout.togglebutton_layout1)
+                val toggleMode: SwitchCompat =
+                    switch.actionView!!.findViewById(R.id.toggleButton1)
+                toggleMode.isChecked = false
+
+                toggleMode.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        toggleMode.text = "Disable dark Mode"
+                        println("disable")
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        toggleMode.text = "Enable dark mode"
+                        println("enable")
+                    }
                 }
             }
 
@@ -169,7 +193,7 @@ class ListFragment : Fragment(), GuitarClickListener {
 
     override fun onResume() {
         super.onResume()
-        showLoader(loader, "Downloading Donations")
+        showLoader(loader, "Downloading Guitars")
         loggedInViewModel.liveFirebaseUser.observe(viewLifecycleOwner, Observer { firebaseUser ->
             if (firebaseUser != null) {
                 // update from the database

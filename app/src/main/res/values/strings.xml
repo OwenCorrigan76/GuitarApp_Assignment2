@@ -87,7 +87,7 @@
     <string name="gMake">MAKE:</string>
     <string name="gModel">MODEL:</string>
     <string name="gDAte">DATE:</string>
-
+    <string name="text">Light Mode</string>
 
     <string-array name="guitar_make_list">
         <item>Aria</item>

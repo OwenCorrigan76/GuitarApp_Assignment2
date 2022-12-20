@@ -41,6 +41,13 @@
                 android:icon="@android:drawable/ic_menu_revert"
                 android:onClick="signOut"
                 android:title="@string/sign_out" />
+
+            <item
+                android:id="@+id/toggleGuitars"
+                android:title="mode_toggle"
+                app:actionLayout="@layout/togglebutton_layout"
+                app:showAsAction="always" />
+
         </menu>
     </item>
 </menu>

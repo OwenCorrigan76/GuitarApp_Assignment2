@@ -41,6 +41,7 @@ class Home : AppCompatActivity() {
     private lateinit var intentLauncher: ActivityResultLauncher<Intent>
     val guitars = GuitarAppModel()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /** homeBinding binds to the main home layout through HomeBinding Class */
