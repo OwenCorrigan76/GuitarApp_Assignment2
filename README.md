@@ -28,59 +28,32 @@ Below is a list of app features:
 + The model can be typed in
 + A date picker allows the user to add a manufacture date
 + The user location can be added by clicking setLocation and moving a Google Maps marker to the desired latitude and longitude coordinates
-+ An image can be uploaded and added to the guitar profile.
++ An image can be uploaded and added to the guitar profile
++ The value can be added using a number picker
   <br/>
 
 ### Feature 2 - List of Guitars  
-+
-+Floating add...........
++ View a card with Valuation, Make, Model, Manufacture date, Lat + Lng details, and Images 
++ Floating add button allows the user to navigate to the Add Guitar page
++ If the user clicks on the card, they are brought to a report card that displays the details about the guitar
++ The image on the right displays the users Google account image if they are logged in with their Google account
++ The image on the left is the image of the guitar that the user has uploaded [b1]
++ Swipe left to delete feature 
++ Swipe right to edit feature
 
 <br/>
 
-### Feature 3 - Navigation Drawer
-+Floating add...........
-+ Update Nave header image
-+ Login image
-+ 
-  <br/>
-
-### Feature 4 - Update Nav Header image
+### Feature 3 - Useful Links
++ This page has useful URL links related to the guitars
+ 
 <br/>
 
-### Feature 5 - Useful Links
+### Feature 4 - About This App
++ A basic splash screen with an image and some text
 <br/>
 
-### Feature 6 - Dark Mode
-<br/>
-
-
-
-Below is a list of the set of links this app supports:
-
-<br/>
-
-### Views/Pages.
-<br/>
-
-### 1 Signup / Login
-<br/>
-
-### 2 Guitar List View
-<br/>
-
-### 3 Add Guitar View
-<br/>
-
-### 4 About The App View
-<br/>
-
-### 5 Add Maps View
-<br/>
-
-### 6 Useful Links
-<br/>
-
-### 7 About The App View
+### Feature 6 Guitar Locations
++ Display a Google Map with user location markers [b2]
 
 <br/>
 
@@ -96,8 +69,23 @@ Below is a list of the set of links this app supports:
 <br/>
 
 ### Nav Drawer Menu
-+
++ Click User Image to change profile image
 <br/>
+
+### Future Releases Fixes / Features
++ Move useful links to the nav drawer
++ Replace dark mode toggle with a button or move to nav drawer
++ Guitar Locations can display markers on a Google map to indicate users location (if desired)
++ Add audio feature to allow upload of wav / mp3 files
++ Improce About This App splashscreen
+
+### Known Bugs
+b1:
++ Guitar image replaces user image when guitar image is uploaded
+b2:
++ 
+b3:
++ Dark mode toggle switch needs reworking as it currently does not toggle on and off with a individual clicks
 
 
 1: https://www.geeksforgeeks.org/how-to-create-a-dark-mode-for-a-custom-android-app-in-kotlin/
