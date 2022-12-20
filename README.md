@@ -13,10 +13,9 @@ The user can:
 The user is first greeted with the login page. There are two login options:
 + Create an account with an email address and password
 + Sign in with a Google account
-
 <br/>
-Both methods utilise Firebase authentication at the back end. 
 
+Both methods utilise Firebase authentication at the back end.
 <br/>
 
 ## App Features
@@ -43,7 +42,7 @@ Below is a list of app features:
 <br/>
 
 ### Feature 3 - Useful Links
-+ This page has useful URL links related to the guitars
++ This page has useful URL links related to the guitars [l1]
 <br/>
 
 ### Feature 4 - About This App
@@ -54,24 +53,34 @@ Below is a list of app features:
 + Display a Google Map with user location markers [b2]
 <br/>
 
+### Feature 6 - Guitar Details
++ Display all the details regarding the individual guitar displayed in the clicked card [b4]
+  <br/>
+
 ## Navigation
 <br/>
 
-### Add Guitar Menu
+### Add Guitar Nav Bar Menu
 + Guitar List navigation can be accessed using the Vertical Ellipsis in the top right corner
 + Useful Links can also be accessed using the Vertical Ellipsis in the top right corner
 + Back arrow will bring the user back to the landing page which is the Guitar List page
 <br/>
 
-### Guitar List Menu
+### Guitar List Nav Bar Menu
 + Add Guitar navigation can be accessed using the Vertical Ellipsis in the top right corner
 + Useful Links can also be accessed using the Vertical Ellipsis in the top right corner
-+ Left toggle switch turns on and off dark mode '[1]' '[b3]'
-
++ Left toggle switch turns on and off dark mode [l2] [b3]
++ Right toggle switches from logged in user being displayed, to all users being displayed
++ Hamburger menus in top left corners reveals the nav drawer menu
 <br/>
 
 ### Nav Drawer Menu
 + Click User Image to change profile image
++ Add Guitar navigates the the Add Guitar page
++ Guitar List navigates to the Guitar List page
++ Guitar Locations navigates to all users location on Google maps [b2]
++ About This App navigates to the About This App splashscreen
++ Sign Out signs the user out of the app
 <br/>
 
 ### Future Releases Fixes / Features
@@ -79,15 +88,14 @@ Below is a list of app features:
 + Replace dark mode toggle with a button or move to nav drawer
 + Guitar Locations can display markers on a Google map to indicate users location (if desired)
 + Add audio feature to allow upload of wav / mp3 files
-+ Improce About This App splashscreen
++ Improve the About This App splashscreen
 
 ### Known Bugs
-b1:
-+ Guitar image replaces user image when guitar image is uploaded
-b2:
-+ 
-b3:
-+ Dark mode toggle switch needs reworking as it currently does not toggle on and off with a individual clicks
+b1: Guitar image replaces user image when guitar image is uploaded
+b2: Google Maps markers not showing yet 
+b3: Dark mode toggle switch needs reworking as it currently does not toggle on and off with a individual clicks
+b4: Enable user to edit the details in Guitar Detail page
 
-
-1: https://www.geeksforgeeks.org/how-to-create-a-dark-mode-for-a-custom-android-app-in-kotlin/
+### Referenced Video Tutorials
+l1: https://www.youtube.com/watch?v=tL9fCKC2lNA
+l2: https://www.geeksforgeeks.org/how-to-create-a-dark-mode-for-a-custom-android-app-in-kotlin/
