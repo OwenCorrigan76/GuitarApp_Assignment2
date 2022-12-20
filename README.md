@@ -58,13 +58,12 @@ Below is a list of app features:
   <br/>
 
 ## Navigation
-<br/>
 
 ### Add Guitar Nav Bar Menu
 + Guitar List navigation can be accessed using the Vertical Ellipsis in the top right corner
 + Useful Links can also be accessed using the Vertical Ellipsis in the top right corner
 + Back arrow will bring the user back to the landing page which is the Guitar List page
-<br/>
+
 
 ### Guitar List Nav Bar Menu
 + Add Guitar navigation can be accessed using the Vertical Ellipsis in the top right corner
@@ -72,7 +71,7 @@ Below is a list of app features:
 + Left toggle switch turns on and off dark mode [l2] [b3]
 + Right toggle switches from logged in user being displayed, to all users being displayed
 + Hamburger menus in top left corners reveals the nav drawer menu
-<br/>
+
 
 ### Nav Drawer Menu
 + Click User Image to change profile image
