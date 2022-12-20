@@ -10,12 +10,16 @@ The user can:
 + Add the location of the user
 
 ## Authentication.
-The user is first greeted with the login page. There is then two login options:
+The user is first greeted with the login page. There are two login options:
 + Create an account with an email address and password
 + Sign in with a Google account
-  <br/>
+
+<br/>
 Both methods utilise Firebase authentication at the back end. 
 
+<br/>
+
+## App Features.
 <br/>
 Below is a list of app features:
 ### Feature 1 - Add Guitar
@@ -25,16 +29,20 @@ Below is a list of app features:
 + The user location can be added by clicking setLocation and moving a Google Maps marker to the desired latitude and longitude coordinates
 + An image can be uploaded and added to the guitar profile.
   <br/>
+
 ### Feature 2 - List of Guitars  
 
 +Floating add...........
 
 <br/>
+
 ### Feature 3 - Navigation Drawer
 +Floating add...........
 + Update Nave header image
 + Login image
++ 
   <br/>
+
 ### Feature 4 - Update Nav Header image
 <br/>
 
