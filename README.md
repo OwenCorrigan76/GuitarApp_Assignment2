@@ -29,7 +29,7 @@ Below is a list of app features:
 + The user location can be added by clicking setLocation and moving a Google Maps marker to the desired latitude and longitude coordinates
 + An image can be uploaded and added to the guitar profile
 + AN estimated valuation of a guitar can be added using a number picker
-  <br/>
+
 
 ### Feature 2 - List of Guitars  
 + View a card with Valuation, Make, Model, Manufacture date, Lat + Lng details, and Images 
@@ -39,23 +39,23 @@ Below is a list of app features:
 + The image on the left is the image of the guitar that the user has uploaded [b1]
 + Swipe left to delete feature 
 + Swipe right to edit feature
-<br/>
+
 
 ### Feature 3 - Useful Links
 + This page has useful URL links related to the guitars [l1]
-<br/>
+
 
 ### Feature 4 - About This App
 + A basic splash screen with an image and some text
-<br/>
+
 
 ### Feature 5 - Guitar Locations
 + Display a Google Map with user location markers [b2]
-<br/>
+
 
 ### Feature 6 - Guitar Details
 + Display all the details regarding the individual guitar displayed in the clicked card [b4]
-<br/>
+  <br/>
 
 ## Navigation
 <br/>
