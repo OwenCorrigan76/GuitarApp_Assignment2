@@ -9,7 +9,7 @@ The user can:
 + Add a manufacture date
 + Add the location of the user
 
-## Authentication.
+## Authentication
 The user is first greeted with the login page. There are two login options:
 + Create an account with an email address and password
 + Sign in with a Google account
@@ -19,9 +19,10 @@ Both methods utilise Firebase authentication at the back end.
 
 <br/>
 
-## App Features.
+## App Features
 <br/>
 Below is a list of app features:
+
 ### Feature 1 - Add Guitar
 + Choose a guitar make with a drop down menu
 + The model can be typed in
@@ -31,7 +32,7 @@ Below is a list of app features:
   <br/>
 
 ### Feature 2 - List of Guitars  
-
++
 +Floating add...........
 
 <br/>
@@ -80,18 +81,23 @@ Below is a list of the set of links this app supports:
 <br/>
 
 ### 7 About The App View
-<br/>
-
-### Component catalogue.
 
 <br/>
 
-## Authentication.
-
-This app utilises Firebase authentication. To use the app, a user must link the app to a Firebase ...........
-+ Home
-
-
+## Navigation
 <br/>
+
+### Add Guitar Menu
++
+<br/>
+
+### Guitar List Menu
++
+<br/>
+
+### Nav Drawer Menu
++
+<br/>
+
 
 1: https://www.geeksforgeeks.org/how-to-create-a-dark-mode-for-a-custom-android-app-in-kotlin/
