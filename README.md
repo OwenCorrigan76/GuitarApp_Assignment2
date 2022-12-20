@@ -26,10 +26,10 @@ Below is a list of app features:
 ### Feature 1 - Add Guitar
 + Choose a guitar make with a drop down menu
 + The model can be typed in
-+ A date picker allows the user to add a manufacture date
++ A date picker allows the user to add the guitar's manufacture date
 + The user location can be added by clicking setLocation and moving a Google Maps marker to the desired latitude and longitude coordinates
 + An image can be uploaded and added to the guitar profile
-+ The value can be added using a number picker
++ AN estimated valuation of a guitar can be added using a number picker
   <br/>
 
 ### Feature 2 - List of Guitars  
@@ -40,32 +40,34 @@ Below is a list of app features:
 + The image on the left is the image of the guitar that the user has uploaded [b1]
 + Swipe left to delete feature 
 + Swipe right to edit feature
-
 <br/>
 
 ### Feature 3 - Useful Links
 + This page has useful URL links related to the guitars
- 
 <br/>
 
 ### Feature 4 - About This App
 + A basic splash screen with an image and some text
 <br/>
 
-### Feature 6 Guitar Locations
+### Feature 5 - Guitar Locations
 + Display a Google Map with user location markers [b2]
-
 <br/>
 
 ## Navigation
 <br/>
 
 ### Add Guitar Menu
-+
++ Guitar List navigation can be accessed using the Vertical Ellipsis in the top right corner
++ Useful Links can also be accessed using the Vertical Ellipsis in the top right corner
++ Back arrow will bring the user back to the landing page which is the Guitar List page
 <br/>
 
 ### Guitar List Menu
-+
++ Add Guitar navigation can be accessed using the Vertical Ellipsis in the top right corner
++ Useful Links can also be accessed using the Vertical Ellipsis in the top right corner
++ Left toggle switch turns on and off dark mode '[1]' '[b3]'
+
 <br/>
 
 ### Nav Drawer Menu
