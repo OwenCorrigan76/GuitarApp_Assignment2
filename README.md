@@ -55,7 +55,7 @@ Below is a list of app features:
 
 ### Feature 6 - Guitar Details
 + Display all the details regarding the individual guitar displayed in the clicked card [b4]
-  <br/>
+<br/>
 
 ## Navigation
 <br/>
@@ -95,7 +95,9 @@ b1: Guitar image replaces user image when guitar image is uploaded
 b2: Google Maps markers not showing yet 
 b3: Dark mode toggle switch needs reworking as it currently does not toggle on and off with a individual clicks
 b4: Enable user to edit the details in Guitar Detail page
+<br/>
 
 ### Referenced Video Tutorials
 l1: https://www.youtube.com/watch?v=tL9fCKC2lNA
+<br/>
 l2: https://www.geeksforgeeks.org/how-to-create-a-dark-mode-for-a-custom-android-app-in-kotlin/
