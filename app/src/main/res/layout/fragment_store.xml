@@ -72,7 +72,26 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761"
+        app:layout_constraintVertical_bias="0.749"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/linkText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:padding="20dp"
+        android:text="@string/hyperlink"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.872"
         tools:ignore="MissingConstraints" />
 
     <RelativeLayout
@@ -85,26 +104,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.931">
 
-
-     <!--   <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Enable dark mode"
-            android:textSize="20dp"
-            tools:ignore="UseSwitchCompatOrMaterialXml"/>-->
-
-       <!-- <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchCompat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/text"
-            android:textSize="20dp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="259dp" />-->
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
